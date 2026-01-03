@@ -1,13 +1,18 @@
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import FloralDecoration from './FloralDecoration';
 
 const Event = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+
   const events = [
     {
       title: 'Akad Nikah',
       date: 'Minggu, 15 Februari 2026',
       time: '08:00 - 09:00 WIB',
-      location: 'Masjid Al-Ikhlas',
-      address: 'Jl. Harmoni No. 123, Jakarta Pusat',
+      location: 'Villa AJ',
+      address:
+        'JJl. Raya Puncak KM 77 Leuwimalang, Kopo, Cipayung, Kabupaten Bogor, Jawa Barat 16750',
       description:
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
       icon: '🕌',
@@ -17,8 +22,9 @@ const Event = () => {
       title: 'Resepsi',
       date: 'Minggu, 15 Februari 2026',
       time: '11:00 - 15:00 WIB',
-      location: 'Gedung Serbaguna Melati',
-      address: 'Jl. Mawar Indah No. 456, Jakarta Selatan',
+      location: 'Villa AJ',
+      address:
+        'Jl. Raya Puncak KM 77 Leuwimalang, Kopo, Cipayung, Kabupaten Bogor, Jawa Barat 16750',
       description:
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
       icon: '🎉',
@@ -37,14 +43,45 @@ const Event = () => {
   return (
     <section
       id='event'
-      className='py-16 md:py-24 bg-gradient-to-br from-blue-50 via-white to-pink-50'
+      ref={sectionRef}
+      className='py-16 md:py-24 bg-gradient-to-br from-white via-pink-50 to-pink-100 relative overflow-hidden'
     >
-      <div className='section-container'>
+      {/* Floral SVG Decorations */}
+      <FloralDecoration
+        position='top-right'
+        variant='pink'
+        size='md'
+        opacity='opacity-40'
+      />
+      <FloralDecoration
+        position='bottom-left'
+        variant='blue'
+        size='sm'
+        opacity='opacity-30'
+      />
+
+      {/* Background decorative elements */}
+      <div className='absolute inset-0 opacity-20'>
+        <div className='absolute top-32 left-10 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
+        <div className='absolute bottom-32 right-10 w-48 h-48 bg-blue-200 rounded-full blur-3xl'></div>
+        <div className='absolute top-1/2 right-1/4 w-32 h-32 bg-pink-400 rounded-full blur-3xl'></div>
+      </div>
+
+      <div className='section-container relative z-10'>
         {/* Section Header */}
-        <div className='text-center mb-16 animate-slide-up'>
-          <h2 className='heading-primary'>Wedding Events</h2>
+        <div
+          className={`text-center mb-16 scroll-reveal ${
+            isVisible ? 'is-visible' : ''
+          }`}
+        >
+          <p className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
+            Save The Date
+          </p>
+          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
+            Wedding Events
+          </h2>
           <div className='w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
-          <p className='text-elegant text-lg max-w-2xl mx-auto'>
+          <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
             Kami dengan senang hati mengundang Anda untuk hadir dalam momen
             bahagia kami
           </p>
@@ -54,12 +91,11 @@ const Event = () => {
           {events.map((event, index) => (
             <div
               key={index}
-              className={`animate-slide-up bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
-                event.color === 'blue'
-                  ? 'border border-blue-100'
-                  : 'border border-pink-100'
-              }`}
-              style={{ animationDelay: `${index * 0.2}s` }}
+              className={`${
+                index === 0 ? 'scroll-reveal-left' : 'scroll-reveal-right'
+              } ${
+                isVisible ? `is-visible reveal-delay-${index + 2}` : ''
+              } bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-pink-200`}
             >
               {/* Event Header */}
               <div
@@ -135,10 +171,10 @@ const Event = () => {
                       <span className='text-lg'>📍</span>
                     </div>
                     <div>
-                      <h4 className='font-semibold text-blue-800 text-lg mb-1'>
+                      <h4 className='font-semibold text-pink-800 text-lg mb-1'>
                         {event.location}
                       </h4>
-                      <p className='text-blue-600 text-sm md:text-base leading-relaxed'>
+                      <p className='text-pink-600 text-sm md:text-base leading-relaxed'>
                         {event.address}
                       </p>
                     </div>
@@ -146,8 +182,10 @@ const Event = () => {
 
                   <button
                     onClick={() => openMaps(event.address)}
-                    className={`w-full mt-4 ${
-                      event.color === 'blue' ? 'btn-blue' : 'btn-pink'
+                    className={`w-full mt-4 py-3 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-[1.02] ${
+                      event.color === 'blue'
+                        ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                        : 'bg-pink-500 hover:bg-pink-600 text-white'
                     }`}
                   >
                     <span className='mr-2'>🗺️</span>
@@ -161,14 +199,15 @@ const Event = () => {
 
         {/* Important Notes */}
         <div
-          className='mt-16 animate-slide-up'
-          style={{ animationDelay: '0.4s' }}
+          className={`mt-16 scroll-reveal ${
+            isVisible ? 'is-visible reveal-delay-4' : ''
+          }`}
         >
-          <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-blue-100 max-w-3xl mx-auto'>
-            <h4 className='font-serif text-xl md:text-2xl text-blue-800 mb-4 text-center'>
+          <div className='bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-pink-200 max-w-3xl mx-auto'>
+            <h4 className='font-serif text-xl md:text-2xl text-pink-700 mb-4 text-center'>
               Catatan Penting
             </h4>
-            <div className='grid md:grid-cols-2 gap-4 text-sm md:text-base text-blue-600'>
+            <div className='grid md:grid-cols-2 gap-4 text-sm md:text-base text-pink-600'>
               <div className='flex items-start space-x-3'>
                 <span className='text-pink-500 text-lg flex-shrink-0'>⚠️</span>
                 <p>Harap datang tepat waktu untuk mengikuti rangkaian acara</p>
