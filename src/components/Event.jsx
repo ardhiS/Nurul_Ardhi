@@ -8,17 +8,15 @@ const Event = () => {
   // Google Maps embed URL for Villa AJ Puncak
   const mapsEmbedUrl =
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.9348386739025!2d106.90496067329335!3d-6.6549988650547665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c826194b1c35%3A0x3b65684f26bbb546!2sVilla%20AJ%20by%20Arkadia!5e0!3m2!1sid!2sid!4v1767525627206!5m2!1sid!2sid';
-  const mapsDirectionsUrl =
-    'https://www.google.com/maps/dir/?api=1&destination=-6.7,106.9&destination_place_id=Villa+AJ+Puncak+Bogor';
+  const mapsDirectionsUrl = 'https://maps.app.goo.gl/ro5G1QCaC35yLDCz6';
 
   const events = [
     {
       title: 'Akad Nikah',
       date: 'Minggu, 15 Februari 2026',
       time: '08:00 - 09:00 WIB',
-      location: 'Villa AJ',
-      address:
-        'JJl. Raya Puncak KM 77 Leuwimalang, Kopo, Cipayung, Kabupaten Bogor, Jawa Barat 16750',
+      location: 'Villa AJ by Arkadia',
+      address: 'Villa AJ by Arkadia',
       description:
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
       icon: '🕌',
@@ -28,9 +26,8 @@ const Event = () => {
       title: 'Resepsi',
       date: 'Minggu, 15 Februari 2026',
       time: '11:00 - 15:00 WIB',
-      location: 'Villa AJ',
-      address:
-        'Jl. Raya Puncak KM 77 Leuwimalang, Kopo, Cipayung, Kabupaten Bogor, Jawa Barat 16750',
+      location: 'Villa AJ by Arkadia',
+      address: 'Villa AJ by Arkadia',
       description:
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
       icon: '🎉',
@@ -236,7 +233,7 @@ const Event = () => {
             </h4>
             <div className='relative w-full h-64 md:h-80 rounded-xl overflow-hidden'>
               <iframe
-                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.3!2d106.93!3d-6.73!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c5e5a5a5a5a5%3A0x5a5a5a5a5a5a5a5a!2sVilla%20AJ!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid'
+                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.934795620348!2d106.90753559999999!3d-6.6550042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c826194b1c35%3A0x3b65684f26bbb546!2sVilla%20AJ%20by%20Arkadia!5e0!3m2!1sid!2sid!4v1767526388626!5m2!1sid!2sid'
                 className='absolute inset-0 w-full h-full border-0'
                 allowFullScreen=''
                 loading='lazy'
@@ -246,7 +243,7 @@ const Event = () => {
             </div>
             <div className='mt-4 text-center'>
               <a
-                href='https://www.google.com/maps/search/?api=1&query=Villa+AJ+Puncak+KM+77+Leuwimalang+Bogor'
+                href='https://maps.app.goo.gl/ro5G1QCaC35yLDCz6'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 min-h-[48px]'
