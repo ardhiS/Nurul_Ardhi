@@ -53,12 +53,12 @@ const Couple = () => {
         </div>
 
         {/* Couple Cards Grid */}
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 max-w-5xl mx-auto'>
+        <div className='flex flex-row gap-2 sm:gap-4 md:gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch'>
           {/* Bride Card */}
           <div
-            className={`scroll-reveal-left ${
+            className={`w-1/2 scroll-reveal-scale ${
               isVisible ? 'is-visible reveal-delay-2' : ''
-            } group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200`}
+            } group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-xl sm:rounded-2xl md:rounded-[2rem] shadow-[0_4px_20px_-6px_rgba(183,58,96,0.15)] md:shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200`}
           >
             {/* Subtle glow effect */}
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none'>
@@ -66,8 +66,8 @@ const Couple = () => {
             </div>
 
             {/* Photo Section */}
-            <div className='relative m-5 md:m-6 rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
-              <div className='aspect-[4/5] bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100'>
+            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
+              <div className='aspect-[3/4] sm:aspect-[4/5] bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100'>
                 <img
                   src='/images/nurul2.jpeg'
                   alt='Foto Mempelai Wanita'
@@ -80,42 +80,46 @@ const Couple = () => {
                 {/* Placeholder */}
                 <div className='absolute inset-0 bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100 hidden items-center justify-center'>
                   <div className='text-center'>
-                    <span className='text-6xl md:text-7xl block mb-2'>👰</span>
-                    <p className='text-pink-400 text-sm'>Tambahkan foto</p>
+                    <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
+                      👰
+                    </span>
+                    <p className='text-pink-400 text-xs sm:text-sm'>
+                      Tambahkan foto
+                    </p>
                   </div>
                 </div>
               </div>
               {/* Soft inner frame */}
-              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-2xl pointer-events-none'></div>
-              {/* Decorative Badge */}
-              <div className='absolute -bottom-3 right-6 w-14 h-14 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-300/40 border-4 border-white ring-2 ring-pink-200/50'>
-                <span className='text-xl'>💍</span>
+              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-lg sm:rounded-xl md:rounded-2xl pointer-events-none'></div>
+              {/* Decorative Badge - Pojok kanan bawah */}
+              <div className='absolute -bottom-1 -right-1 sm:bottom-1 sm:right-1 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-pink-200/50 z-10'>
+                <span className='text-sm sm:text-base md:text-xl lg:text-2xl'>
+                  💍
+                </span>
               </div>
             </div>
 
             {/* Info Section */}
-            <div className='px-6 md:px-8 pb-8 pt-4 text-center relative'>
-              <p className='text-pink-400 text-[0.7rem] font-semibold tracking-[0.2em] uppercase mb-3'>
+            <div className='px-2 sm:px-4 md:px-6 lg:px-8 pb-3 sm:pb-5 md:pb-8 pt-2 sm:pt-4 md:pt-6 text-center relative'>
+              <p className='text-pink-400 text-[0.5rem] sm:text-[0.6rem] md:text-[0.7rem] font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1 sm:mb-2 md:mb-3'>
                 Mempelai Wanita
               </p>
-              <h3 className='font-script text-3xl md:text-4xl text-pink-700 mb-2 leading-tight'>
+              <h3 className='font-script text-base sm:text-xl md:text-3xl lg:text-4xl text-pink-700 mb-1 sm:mb-2 leading-tight'>
                 Nurul Faizah Ulfah
               </h3>
-              <p className='text-pink-400 font-medium text-sm mb-5 tracking-wide'>
+              <p className='text-pink-400 font-medium text-[0.6rem] sm:text-xs md:text-sm mb-2 sm:mb-3 md:mb-5 tracking-wide'>
                 S.Pd
               </p>
-              <div className='w-16 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-5'></div>
-              <p className='text-pink-400/80 text-xs uppercase tracking-wider mb-1'>
+              <div className='w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-2 sm:mb-3 md:mb-5'></div>
+              <p className='text-pink-400/80 text-[0.5rem] sm:text-[0.6rem] md:text-xs uppercase tracking-wider mb-0.5 sm:mb-1'>
                 Putri dari
               </p>
-              <p className='font-serif font-medium text-pink-700 text-base mb-6'>
+              <p className='font-serif font-medium text-pink-700 text-[0.6rem] sm:text-xs md:text-sm lg:text-base mb-2 sm:mb-4 md:mb-6 leading-tight'>
                 Alm Bapa Upah & Ibu Siti Solihat
               </p>
-              <div className='bg-gradient-to-br from-pink-50 to-pink-100/50 rounded-xl p-5 border border-pink-100'>
-                <p className='text-pink-600/90 leading-relaxed text-sm italic font-light'>
-                  "Seorang guru yang mencintai seni dan alam. Percaya bahwa
-                  cinta sejati adalah ketika dua jiwa menemukan ketenangan dalam
-                  kebersamaan."
+              <div className='hidden sm:block bg-gradient-to-br from-pink-50 to-pink-100/50 rounded-lg md:rounded-xl p-2 sm:p-3 md:p-5 border border-pink-100'>
+                <p className='text-pink-600/90 leading-relaxed text-[0.6rem] sm:text-xs md:text-sm italic font-light'>
+                  "Seorang guru yang mencintai seni dan alam."
                 </p>
               </div>
             </div>
@@ -123,9 +127,9 @@ const Couple = () => {
 
           {/* Groom Card */}
           <div
-            className={`scroll-reveal-right ${
+            className={`w-1/2 scroll-reveal-scale ${
               isVisible ? 'is-visible reveal-delay-3' : ''
-            } group relative bg-gradient-to-b from-white via-white to-blue-50/50 rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(58,97,137,0.15)] border border-blue-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(58,97,137,0.25)] hover:border-blue-200`}
+            } group relative bg-gradient-to-b from-white via-white to-blue-50/50 rounded-xl sm:rounded-2xl md:rounded-[2rem] shadow-[0_4px_20px_-6px_rgba(58,97,137,0.15)] md:shadow-[0_8px_40px_-12px_rgba(58,97,137,0.15)] border border-blue-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(58,97,137,0.25)] hover:border-blue-200`}
           >
             {/* Subtle glow effect */}
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none'>
@@ -133,8 +137,8 @@ const Couple = () => {
             </div>
 
             {/* Photo Section */}
-            <div className='relative m-5 md:m-6 rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
-              <div className='aspect-[4/5] bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100'>
+            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
+              <div className='aspect-[3/4] sm:aspect-[4/5] bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100'>
                 <img
                   src='/images/ardhi.jpg'
                   alt='Foto Mempelai Pria'
@@ -147,42 +151,46 @@ const Couple = () => {
                 {/* Placeholder */}
                 <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100 hidden items-center justify-center'>
                   <div className='text-center'>
-                    <span className='text-6xl md:text-7xl block mb-2'>🤵</span>
-                    <p className='text-blue-400 text-sm'>Tambahkan foto</p>
+                    <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
+                      🤵
+                    </span>
+                    <p className='text-blue-400 text-xs sm:text-sm'>
+                      Tambahkan foto
+                    </p>
                   </div>
                 </div>
               </div>
               {/* Soft inner frame */}
-              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-2xl pointer-events-none'></div>
-              {/* Decorative Badge */}
-              <div className='absolute -bottom-3 left-6 w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-300/40 border-4 border-white ring-2 ring-blue-200/50'>
-                <span className='text-xl'>💍</span>
+              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-lg sm:rounded-xl md:rounded-2xl pointer-events-none'></div>
+              {/* Decorative Badge - Pojok kiri bawah */}
+              <div className='absolute -bottom-1 -left-1 sm:bottom-1 sm:left-1 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-blue-200/50 z-10'>
+                <span className='text-sm sm:text-base md:text-xl lg:text-2xl'>
+                  💍
+                </span>
               </div>
             </div>
 
             {/* Info Section */}
-            <div className='px-6 md:px-8 pb-8 pt-4 text-center relative'>
-              <p className='text-blue-400 text-[0.7rem] font-semibold tracking-[0.2em] uppercase mb-3'>
+            <div className='px-2 sm:px-4 md:px-6 lg:px-8 pb-3 sm:pb-5 md:pb-8 pt-2 sm:pt-4 md:pt-6 text-center relative'>
+              <p className='text-blue-400 text-[0.5rem] sm:text-[0.6rem] md:text-[0.7rem] font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1 sm:mb-2 md:mb-3'>
                 Mempelai Pria
               </p>
-              <h3 className='font-script text-3xl md:text-4xl text-blue-700 mb-2 leading-tight'>
+              <h3 className='font-script text-base sm:text-xl md:text-3xl lg:text-4xl text-blue-700 mb-1 sm:mb-2 leading-tight'>
                 Ardhi Sasongko
               </h3>
-              <p className='text-blue-400 font-medium text-sm mb-5 tracking-wide'>
+              <p className='text-blue-400 font-medium text-[0.6rem] sm:text-xs md:text-sm mb-2 sm:mb-3 md:mb-5 tracking-wide'>
                 S.Sos
               </p>
-              <div className='w-16 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent mx-auto mb-5'></div>
-              <p className='text-blue-400/80 text-xs uppercase tracking-wider mb-1'>
+              <div className='w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent mx-auto mb-2 sm:mb-3 md:mb-5'></div>
+              <p className='text-blue-400/80 text-[0.5rem] sm:text-[0.6rem] md:text-xs uppercase tracking-wider mb-0.5 sm:mb-1'>
                 Putra dari
               </p>
-              <p className='font-serif font-medium text-blue-700 text-base mb-6'>
-                Bapak Alm. Suparman & Ibu alm. Tuminem
+              <p className='font-serif font-medium text-blue-700 text-[0.6rem] sm:text-xs md:text-sm lg:text-base mb-2 sm:mb-4 md:mb-6 leading-tight'>
+                Bapak Alm. Suparman & Ibu Alm. Tuminem
               </p>
-              <div className='bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-xl p-5 border border-blue-100'>
-                <p className='text-blue-600/90 leading-relaxed text-sm italic font-light'>
-                  "Seorang Guru yang menyukai kehidupan dengan beram bentuk
-                  tantangan selin itu juga teknologi melekat pada moto hidupnya,
-                  jadilah orang jujur walaupun itu pahit"
+              <div className='hidden sm:block bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-lg md:rounded-xl p-2 sm:p-3 md:p-5 border border-blue-100'>
+                <p className='text-blue-600/90 leading-relaxed text-[0.6rem] sm:text-xs md:text-sm italic font-light'>
+                  "Jadilah orang jujur walaupun itu pahit."
                 </p>
               </div>
             </div>

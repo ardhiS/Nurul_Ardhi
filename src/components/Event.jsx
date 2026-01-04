@@ -7,7 +7,7 @@ const Event = () => {
 
   // Google Maps embed URL for Villa AJ Puncak
   const mapsEmbedUrl =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.0!2d106.9!3d-6.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVilla%20AJ%20Puncak!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid';
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.9348386739025!2d106.90496067329335!3d-6.6549988650547665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c826194b1c35%3A0x3b65684f26bbb546!2sVilla%20AJ%20by%20Arkadia!5e0!3m2!1sid!2sid!4v1767525627206!5m2!1sid!2sid';
   const mapsDirectionsUrl =
     'https://www.google.com/maps/dir/?api=1&destination=-6.7,106.9&destination_place_id=Villa+AJ+Puncak+Bogor';
 

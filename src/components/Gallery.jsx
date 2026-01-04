@@ -11,37 +11,37 @@ const Gallery = () => {
   const galleryImages = [
     {
       id: 1,
-      src: './photo/nurul.jpeg',
+      src: './photo/1.jpeg',
       alt: 'Foto pre-wedding Nurul dan Ardhi - Momen romantis',
       category: 'prewedding',
     },
     {
       id: 2,
-      src: './photo/nurul3.jpeg',
+      src: './photo/2.jpeg',
       alt: 'Foto pre-wedding Nurul dan Ardhi - Outdoor',
       category: 'prewedding',
     },
     {
       id: 3,
-      src: './photo/nurul4.jpeg',
+      src: './photo/3.jpeg',
       alt: 'Foto lamaran Nurul dan Ardhi',
       category: 'engagement',
     },
     {
       id: 4,
-      src: './photo/nurul5.jpeg',
+      src: './photo/4.jpeg',
       alt: 'Foto pre-wedding Nurul dan Ardhi - Studio',
       category: 'prewedding',
     },
     {
       id: 5,
-      src: './photo/nurul6.jpeg',
+      src: './photo/5.jpeg',
       alt: 'Foto lamaran Nurul dan Ardhi - Keluarga',
       category: 'engagement',
     },
     {
       id: 6,
-      src: './photo/nurul7.jpeg',
+      src: './photo/2.jpeg',
       alt: 'Foto pre-wedding Nurul dan Ardhi - Candid',
       category: 'prewedding',
     },
