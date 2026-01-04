@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
@@ -21,11 +21,37 @@ const RSVP = () => {
   const [wishFormData, setWishFormData] = useState({
     guestName: '',
     attendance: '',
+    guestCount: '1',
     wishMessage: '',
   });
   const [wishes, setWishes] = useState([]);
   const [wishErrors, setWishErrors] = useState({});
   const [isWishSubmitting, setIsWishSubmitting] = useState(false);
+
+  // Load wishes from localStorage on mount
+  useEffect(() => {
+    const savedWishes = localStorage.getItem('wedding-wishes');
+    if (savedWishes) {
+      try {
+        const parsed = JSON.parse(savedWishes);
+        // Convert timestamp strings back to Date objects
+        const wishesWithDates = parsed.map((wish) => ({
+          ...wish,
+          timestamp: new Date(wish.timestamp),
+        }));
+        setWishes(wishesWithDates);
+      } catch (e) {
+        console.error('Error loading wishes:', e);
+      }
+    }
+  }, []);
+
+  // Save wishes to localStorage whenever they change
+  useEffect(() => {
+    if (wishes.length > 0) {
+      localStorage.setItem('wedding-wishes', JSON.stringify(wishes));
+    }
+  }, [wishes]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +103,10 @@ const RSVP = () => {
         id: Date.now(),
         guestName: wishFormData.guestName.trim(),
         attendance: wishFormData.attendance,
+        guestCount:
+          wishFormData.attendance === 'hadir'
+            ? parseInt(wishFormData.guestCount)
+            : 0,
         wishMessage: wishFormData.wishMessage.trim(),
         timestamp: new Date(),
       };
@@ -88,6 +118,7 @@ const RSVP = () => {
       setWishFormData({
         guestName: '',
         attendance: '',
+        guestCount: '1',
         wishMessage: '',
       });
       setIsWishSubmitting(false);
@@ -197,252 +228,7 @@ const RSVP = () => {
       </div>
 
       <div className='section-container relative z-10'>
-        {/* Section Header */}
-        <div
-          className={`text-center mb-16 scroll-reveal ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <p className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
-            Konfirmasi Kehadiran
-          </p>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
-            RSVP
-          </h2>
-          <div className='w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
-          <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
-            Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan acara
-            dengan lebih baik
-          </p>
-        </div>
-
         <div className='max-w-2xl mx-auto'>
-          {/* RSVP Form */}
-          <div
-            className={`bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-pink-200 scroll-reveal ${
-              isVisible ? 'is-visible reveal-delay-2' : ''
-            }`}
-          >
-            <form onSubmit={handleSubmit} className='space-y-6'>
-              {/* Name Field */}
-              <div>
-                <label
-                  htmlFor='name'
-                  className='block text-pink-700 font-medium mb-2 text-sm md:text-base'
-                >
-                  Nama Lengkap *
-                </label>
-                <input
-                  type='text'
-                  id='name'
-                  name='name'
-                  required
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-pink-800 placeholder-pink-400'
-                  placeholder='Masukkan nama lengkap Anda'
-                />
-              </div>
-
-              {/* Email Field */}
-              <div>
-                <label
-                  htmlFor='email'
-                  className='block text-pink-700 font-medium mb-2 text-sm md:text-base'
-                >
-                  Email
-                </label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-pink-800 placeholder-pink-400'
-                  placeholder='email@example.com'
-                />
-              </div>
-
-              {/* Phone Field */}
-              <div>
-                <label
-                  htmlFor='phone'
-                  className='block text-pink-700 font-medium mb-2 text-sm md:text-base'
-                >
-                  No. WhatsApp
-                </label>
-                <input
-                  type='tel'
-                  id='phone'
-                  name='phone'
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-pink-800 placeholder-pink-400'
-                  placeholder='08123456789'
-                />
-              </div>
-
-              {/* Attendance Field */}
-              <div>
-                <label className='block text-pink-700 font-medium mb-3 text-sm md:text-base'>
-                  Konfirmasi Kehadiran *
-                </label>
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                  <label className='relative'>
-                    <input
-                      type='radio'
-                      name='attendance'
-                      value='hadir'
-                      required
-                      checked={formData.attendance === 'hadir'}
-                      onChange={handleInputChange}
-                      className='sr-only'
-                    />
-                    <div
-                      className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 text-center ${
-                        formData.attendance === 'hadir'
-                          ? 'border-pink-500 bg-pink-100 text-pink-700'
-                          : 'border-pink-200 bg-pink-50 text-pink-600 hover:border-pink-300'
-                      }`}
-                    >
-                      <span className='text-2xl mb-2 block'>✅</span>
-                      <span className='font-medium'>Ya, Saya Hadir</span>
-                    </div>
-                  </label>
-                  <label className='relative'>
-                    <input
-                      type='radio'
-                      name='attendance'
-                      value='tidak_hadir'
-                      required
-                      checked={formData.attendance === 'tidak_hadir'}
-                      onChange={handleInputChange}
-                      className='sr-only'
-                    />
-                    <div
-                      className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 text-center ${
-                        formData.attendance === 'tidak_hadir'
-                          ? 'border-blue-500 bg-blue-100 text-blue-700'
-                          : 'border-pink-200 bg-pink-50 text-pink-600 hover:border-pink-300'
-                      }`}
-                    >
-                      <span className='text-2xl mb-2 block'>❌</span>
-                      <span className='font-medium'>
-                        Maaf, Tidak Bisa Hadir
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              {/* Number of Guests */}
-              {formData.attendance === 'hadir' && (
-                <div>
-                  <label
-                    htmlFor='guests'
-                    className='block text-pink-700 font-medium mb-2 text-sm md:text-base'
-                  >
-                    Jumlah Tamu
-                  </label>
-                  <select
-                    id='guests'
-                    name='guests'
-                    value={formData.guests}
-                    onChange={handleInputChange}
-                    className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-pink-800'
-                  >
-                    <option value='1'>1 Orang</option>
-                    <option value='2'>2 Orang</option>
-                    <option value='3'>3 Orang</option>
-                    <option value='4'>4 Orang</option>
-                    <option value='5'>5+ Orang</option>
-                  </select>
-                </div>
-              )}
-
-              {/* Message Field */}
-              <div>
-                <label
-                  htmlFor='message'
-                  className='block text-pink-700 font-medium mb-2 text-sm md:text-base'
-                >
-                  Pesan & Doa
-                </label>
-                <textarea
-                  id='message'
-                  name='message'
-                  rows='4'
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-pink-800 placeholder-pink-400 resize-none'
-                  placeholder='Tuliskan pesan atau doa untuk mempelai...'
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type='submit'
-                disabled={isSubmitting}
-                className='w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-base md:text-lg py-4 px-6 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-medium shadow-lg'
-              >
-                {isSubmitting ? (
-                  <span className='flex items-center justify-center'>
-                    <svg
-                      className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                    >
-                      <circle
-                        className='opacity-25'
-                        cx='12'
-                        cy='12'
-                        r='10'
-                        stroke='currentColor'
-                        strokeWidth='4'
-                      ></circle>
-                      <path
-                        className='opacity-75'
-                        fill='currentColor'
-                        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                      ></path>
-                    </svg>
-                    Mengirim...
-                  </span>
-                ) : (
-                  'Kirim Konfirmasi'
-                )}
-              </button>
-            </form>
-          </div>
-
-          {/* Additional Info */}
-          <div
-            className={`mt-8 text-center scroll-reveal ${
-              isVisible ? 'is-visible reveal-delay-3' : ''
-            }`}
-          >
-            <div className='bg-white rounded-2xl p-6 shadow-lg border border-pink-200'>
-              <h4 className='font-serif text-lg text-pink-700 mb-3'>
-                Informasi Tambahan
-              </h4>
-              <div className='grid sm:grid-cols-2 gap-4 text-sm text-pink-600'>
-                <div className='flex items-center justify-center space-x-2'>
-                  <span className='text-pink-500'>📞</span>
-                  <span>Hubungi: 0812-3456-7890 (Nurul)</span>
-                </div>
-                <div className='flex items-center justify-center space-x-2'>
-                  <span className='text-pink-500'>📞</span>
-                  <span>Hubungi: 0812-9876-5432 (Ardhi)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ========================================
-              GUEST WISHES SECTION
-              Allows guests to leave congratulations
-              ======================================== */}
           <div
             className={`mt-16 scroll-reveal ${
               isVisible ? 'is-visible reveal-delay-4' : ''
@@ -544,6 +330,34 @@ const RSVP = () => {
                   )}
                 </div>
 
+                {/* Number of Guests - Only show if attending */}
+                {wishFormData.attendance === 'hadir' && (
+                  <div className='animate-fade-in'>
+                    <label
+                      htmlFor='guestCount'
+                      className='block text-pink-700 font-medium mb-2 text-sm'
+                    >
+                      Jumlah Tamu *
+                    </label>
+                    <select
+                      id='guestCount'
+                      name='guestCount'
+                      value={wishFormData.guestCount}
+                      onChange={handleWishInputChange}
+                      className='w-full px-4 py-3 bg-pink-50 border-2 border-pink-200 rounded-xl focus:ring-4 focus:ring-pink-100 focus:border-pink-400 outline-none transition-all duration-300 text-pink-800 min-h-[48px]'
+                    >
+                      <option value='1'>1 Orang</option>
+                      <option value='2'>2 Orang</option>
+                      <option value='3'>3 Orang</option>
+                      <option value='4'>4 Orang</option>
+                      <option value='5'>5 Orang</option>
+                    </select>
+                    <p className='text-pink-400 text-xs mt-1'>
+                      Termasuk Anda sendiri
+                    </p>
+                  </div>
+                )}
+
                 {/* Wish Message */}
                 <div>
                   <label
@@ -570,6 +384,29 @@ const RSVP = () => {
                       {wishErrors.wishMessage}
                     </p>
                   )}
+                </div>
+
+                {/* Additional Info */}
+                <div
+                  className={`mt-8 text-center scroll-reveal ${
+                    isVisible ? 'is-visible reveal-delay-3' : ''
+                  }`}
+                >
+                  <div className='bg-white rounded-2xl p-6 shadow-lg border border-pink-200'>
+                    <h4 className='font-serif text-lg text-pink-700 mb-3'>
+                      Informasi Tambahan
+                    </h4>
+                    <div className='grid sm:grid-cols-2 gap-4 text-sm text-pink-600'>
+                      <div className='flex items-center justify-center space-x-2'>
+                        <span className='text-pink-500'>📞</span>
+                        <span>Hubungi: 0812-3456-7890 (Nurul)</span>
+                      </div>
+                      <div className='flex items-center justify-center space-x-2'>
+                        <span className='text-pink-500'>📞</span>
+                        <span>Hubungi: 0812-9876-5432 (Ardhi)</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Submit Button */}
@@ -645,17 +482,25 @@ const RSVP = () => {
                             {wish.guestName}
                           </h5>
                           {/* Attendance Badge */}
-                          <span
-                            className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                              wish.attendance === 'hadir'
-                                ? 'bg-green-100 text-green-700'
-                                : 'bg-blue-100 text-blue-700'
-                            }`}
-                          >
-                            {wish.attendance === 'hadir'
-                              ? '✓ Hadir'
-                              : '○ Tidak Hadir'}
-                          </span>
+                          <div className='flex items-center gap-2 flex-wrap'>
+                            <span
+                              className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                                wish.attendance === 'hadir'
+                                  ? 'bg-green-100 text-green-700'
+                                  : 'bg-blue-100 text-blue-700'
+                              }`}
+                            >
+                              {wish.attendance === 'hadir'
+                                ? '✓ Hadir'
+                                : '○ Tidak Hadir'}
+                            </span>
+                            {wish.attendance === 'hadir' &&
+                              wish.guestCount > 0 && (
+                                <span className='inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-pink-100 text-pink-700'>
+                                  👥 {wish.guestCount} orang
+                                </span>
+                              )}
+                          </div>
                         </div>
                       </div>
                       {/* Timestamp */}

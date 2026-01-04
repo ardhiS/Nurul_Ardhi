@@ -13,7 +13,10 @@ const Hero = () => {
   };
 
   return (
-    <section className='relative min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-white to-pink-50 overflow-hidden'>
+    <header
+      id='hero'
+      className='hero-height relative flex items-center justify-center bg-gradient-to-b from-pink-50 via-white to-pink-50 overflow-hidden box-border'
+    >
       {/* Floral SVG Decorative - Top Left */}
       <svg
         className='absolute top-0 left-0 w-48 md:w-72 lg:w-96 pointer-events-none animate-ornament-drift'
@@ -65,14 +68,14 @@ const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <div className='section-container text-center relative z-10 px-4 py-8'>
+      <div className='section-container text-center relative z-10 px-4 py-2'>
         <div
           className={`transition-all duration-1000 ${
             isOpen ? 'animate-hero-reveal' : ''
           }`}
         >
           {/* Subtitle - Wedding Invitation */}
-          <div className='mb-6 opacity-0 animate-hero-reveal'>
+          <div className='mb-1 opacity-0 animate-hero-reveal'>
             <p className='text-pink-400 text-xs md:text-sm font-medium tracking-[0.3em] uppercase'>
               The Wedding Of
             </p>
@@ -94,13 +97,13 @@ const Hero = () => {
           </div>
 
           {/* Tagline */}
-          <p className='text-pink-500 text-sm md:text-base font-light tracking-widest uppercase mb-6 opacity-0 animate-hero-reveal [animation-delay:300ms]'>
+          <p className='text-pink-500 text-sm md:text-base font-light tracking-widest uppercase mb-1 opacity-0 animate-hero-reveal [animation-delay:300ms]'>
             We're Getting Married
           </p>
 
           {/* Romantic Quote with Divider */}
-          <div className='mb-8 opacity-0 animate-hero-reveal [animation-delay:450ms]'>
-            <div className='flex items-center justify-center gap-2 mb-3'>
+          <div className='mb-2 opacity-0 animate-hero-reveal [animation-delay:450ms]'>
+            <div className='flex items-center justify-center gap-2 mb-2'>
               <span className='w-8 h-px bg-pink-200'></span>
               <span className='text-pink-400 text-lg'>💍</span>
               <span className='w-8 h-px bg-pink-200'></span>
@@ -111,16 +114,20 @@ const Hero = () => {
           </div>
 
           {/* Date Card - Floating Animation */}
-          <div className='mb-10 opacity-0 animate-hero-reveal [animation-delay:600ms]'>
-            <div className='inline-block bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-xl shadow-pink-100/50 border border-pink-100 animate-hero-float'>
-              <p className='text-pink-500 text-xs md:text-sm font-medium tracking-widest uppercase mb-2'>
+          <div className='mb-5 opacity-0 animate-hero-reveal [animation-delay:600ms]'>
+            <div className='inline-block bg-white/95 backdrop-blur-sm rounded-2xl px-8 py-6 shadow-xl shadow-pink-200/50 border border-pink-100 animate-hero-float'>
+              <p className='text-pink-500 text-xs md:text-sm font-semibold tracking-widest uppercase mb-2'>
                 Save The Date
               </p>
-              <p className='font-serif text-2xl md:text-3xl text-pink-800 font-medium'>
+              <p className='font-serif text-2xl md:text-3xl text-pink-800 font-semibold'>
                 15 Februari 2026
               </p>
-              <p className='text-pink-400 text-xs md:text-sm mt-1'>
-                Minggu • 15:00 WIB
+              <p className='text-pink-600 text-sm md:text-base mt-1 font-medium'>
+                Minggu • 08:00 WIB
+              </p>
+              <div className='w-12 h-px bg-pink-200 mx-auto my-3'></div>
+              <p className='text-pink-500 text-xs md:text-sm'>
+                📍 Villa AJ, Puncak Bogor
               </p>
             </div>
           </div>
@@ -195,7 +202,7 @@ const Hero = () => {
           </div>
         </div>
       )}
-    </section>
+    </header>
   );
 };
 

@@ -6,6 +6,36 @@
    A romantic, elegant, and premium design system
    ========================================================================== */
 
+/* ========================================
+   MOBILE VIEWPORT HEIGHT FIX
+   Handles mobile browser address bar
+   ======================================== */
+:root {
+  --vh: 1vh; /* Fallback, will be overwritten by JS */
+}
+
+/* Hero section full viewport height - Mobile optimized */
+.hero-height {
+  /* Fallback for older browsers */
+  min-height: 100vh;
+  /* Modern viewport unit that accounts for mobile browser UI */
+  min-height: 100dvh;
+  /* JavaScript calculated height for maximum compatibility */
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Safe area padding for mobile navigation */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-pb {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  }
+}
+
 @theme {
   /* ========================================
      COLOR SYSTEM
@@ -739,4 +769,98 @@ a:focus-visible {
   outline: 2px solid var(--color-pink-500);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   COUNTDOWN ANIMATION
+   Subtle tick animation for number changes
+   ======================================== */
+
+@keyframes countdownTick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.countdown-tick {
+  animation: countdownTick 0.3s ease-out;
+}
+
+/* ========================================
+   SLIDE UP ANIMATION
+   For mobile navigation
+   ======================================== */
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+/* ========================================
+   TABULAR NUMS
+   Monospace numbers for countdown
+   ======================================== */
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================
+   SCREEN READER ONLY
+   Accessibility helper
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.sr-only:active {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ========================================
+   TOUCH FRIENDLY
+   Ensure minimum touch target sizes
+   ======================================== */
+
+@media (pointer: coarse) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
 }

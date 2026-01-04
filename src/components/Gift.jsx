@@ -24,23 +24,6 @@ const Gift = () => {
         },
       ],
     },
-    {
-      type: 'E-Wallet',
-      accounts: [
-        {
-          bank: 'GoPay',
-          accountNumber: '081234567890',
-          accountName: 'Nurul Faizah Ulfah',
-          logo: '💳',
-        },
-        {
-          bank: 'OVO',
-          accountNumber: '081987654321',
-          accountName: 'Ardhi Sasongko',
-          logo: '💰',
-        },
-      ],
-    },
   ];
 
   const copyToClipboard = (accountNumber, bankName) => {

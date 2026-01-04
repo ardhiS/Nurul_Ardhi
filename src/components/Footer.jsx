@@ -4,8 +4,18 @@ import FloralDecoration from './FloralDecoration';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className='bg-gradient-to-br from-pink-700 via-pink-800 to-pink-900 text-pink-100 py-12 relative overflow-hidden'>
+    <footer
+      className='bg-gradient-to-br from-pink-700 via-pink-800 to-pink-900 text-pink-100 py-12 relative overflow-hidden'
+      role='contentinfo'
+    >
       {/* Floral SVG Decorations - White variant for dark background */}
       <FloralDecoration
         position='top-left'
@@ -88,48 +98,35 @@ const Footer = () => {
             </div>
 
             {/* Quick Links */}
-            <div className='flex space-x-6 text-sm'>
+            <nav
+              className='flex space-x-6 text-sm'
+              aria-label='Quick navigation'
+            >
               <button
-                onClick={() =>
-                  document
-                    .getElementById('hero')
-                    .scrollIntoView({ behavior: 'smooth' })
-                }
-                className='text-pink-200 hover:text-white transition-colors duration-300'
+                onClick={() => scrollToSection('hero')}
+                className='text-pink-200 hover:text-white transition-colors duration-300 min-h-[44px] flex items-center'
               >
                 Home
               </button>
               <button
-                onClick={() =>
-                  document
-                    .getElementById('couple')
-                    .scrollIntoView({ behavior: 'smooth' })
-                }
-                className='text-pink-200 hover:text-white transition-colors duration-300'
+                onClick={() => scrollToSection('couple')}
+                className='text-pink-200 hover:text-white transition-colors duration-300 min-h-[44px] flex items-center'
               >
                 Couple
               </button>
               <button
-                onClick={() =>
-                  document
-                    .getElementById('event')
-                    .scrollIntoView({ behavior: 'smooth' })
-                }
-                className='text-pink-200 hover:text-white transition-colors duration-300'
+                onClick={() => scrollToSection('event')}
+                className='text-pink-200 hover:text-white transition-colors duration-300 min-h-[44px] flex items-center'
               >
                 Event
               </button>
               <button
-                onClick={() =>
-                  document
-                    .getElementById('rsvp')
-                    .scrollIntoView({ behavior: 'smooth' })
-                }
-                className='text-pink-200 hover:text-white transition-colors duration-300'
+                onClick={() => scrollToSection('rsvp')}
+                className='text-pink-200 hover:text-white transition-colors duration-300 min-h-[44px] flex items-center'
               >
                 RSVP
               </button>
-            </div>
+            </nav>
           </div>
         </div>
 

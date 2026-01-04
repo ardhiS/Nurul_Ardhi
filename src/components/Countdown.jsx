@@ -10,11 +10,13 @@ const Countdown = () => {
     minutes: 0,
     seconds: 0,
   });
+  const [isEnded, setIsEnded] = useState(false);
+  const [prevTimeLeft, setPrevTimeLeft] = useState(null);
 
   const weddingDate = new Date('2026-02-15T08:00:00').getTime();
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
 
@@ -26,35 +28,48 @@ const Countdown = () => {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        setPrevTimeLeft(timeLeft);
         setTimeLeft({ days, hours, minutes, seconds });
+        setIsEnded(false);
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsEnded(true);
       }
-    }, 1000);
+    };
+
+    // Initial calculation
+    calculateTimeLeft();
+
+    // Only set interval if event hasn't ended
+    const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
   }, [weddingDate]);
 
   const timeUnits = [
     {
+      key: 'days',
       value: timeLeft.days,
       label: 'Hari',
       bgColor: 'bg-blue-500',
       textColor: 'text-blue-50',
     },
     {
+      key: 'hours',
       value: timeLeft.hours,
       label: 'Jam',
       bgColor: 'bg-pink-400',
       textColor: 'text-pink-50',
     },
     {
+      key: 'minutes',
       value: timeLeft.minutes,
       label: 'Menit',
       bgColor: 'bg-blue-400',
       textColor: 'text-blue-50',
     },
     {
+      key: 'seconds',
       value: timeLeft.seconds,
       label: 'Detik',
       bgColor: 'bg-pink-300',
@@ -107,37 +122,62 @@ const Countdown = () => {
         </div>
 
         {/* Countdown Timer */}
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto'>
-          {timeUnits.map((unit, index) => (
-            <div
-              key={index}
-              className={`text-center relative scroll-reveal-scale ${
-                isVisible ? `is-visible reveal-delay-${index + 1}` : ''
-              }`}
-            >
-              <div
-                className={`${unit.bgColor} rounded-3xl shadow-2xl p-6 md:p-8 mb-4 transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
-              >
-                {/* Decorative corner elements */}
-                <div className='absolute top-0 right-0 w-16 h-16 bg-white/20 rounded-full -translate-y-8 translate-x-8'></div>
-                <div className='absolute bottom-0 left-0 w-12 h-12 bg-white/20 rounded-full translate-y-6 -translate-x-6'></div>
+        {isEnded ? (
+          /* Event Has Started Message */
+          <div className='text-center scroll-reveal is-visible'>
+            <div className='bg-white/20 backdrop-blur-sm rounded-3xl p-8 md:p-12 max-w-2xl mx-auto border border-white/30'>
+              <div className='text-6xl md:text-7xl mb-6'>🎉</div>
+              <h3 className='font-serif text-3xl md:text-4xl text-white mb-4'>
+                Hari Bahagia Telah Tiba!
+              </h3>
+              <p className='text-pink-100 text-lg'>
+                Terima kasih telah menjadi bagian dari momen indah kami
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto'>
+            {timeUnits.map((unit, index) => {
+              const hasChanged =
+                prevTimeLeft && prevTimeLeft[unit.key] !== unit.value;
+              return (
+                <div
+                  key={unit.key}
+                  className={`text-center relative scroll-reveal-scale ${
+                    isVisible ? `is-visible reveal-delay-${index + 1}` : ''
+                  }`}
+                >
+                  <div
+                    className={`${unit.bgColor} rounded-3xl shadow-2xl p-6 md:p-8 mb-4 transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
+                  >
+                    {/* Decorative corner elements */}
+                    <div className='absolute top-0 right-0 w-16 h-16 bg-white/20 rounded-full -translate-y-8 translate-x-8'></div>
+                    <div className='absolute bottom-0 left-0 w-12 h-12 bg-white/20 rounded-full translate-y-6 -translate-x-6'></div>
 
-                <div className='relative z-10'>
-                  <div
-                    className={`text-4xl md:text-5xl lg:text-6xl font-bold ${unit.textColor} mb-2 font-mono`}
-                  >
-                    {unit.value.toString().padStart(2, '0')}
-                  </div>
-                  <div
-                    className={`text-sm md:text-base font-medium ${unit.textColor} opacity-90 uppercase tracking-wide`}
-                  >
-                    {unit.label}
+                    <div className='relative z-10'>
+                      <div
+                        className={`text-4xl md:text-5xl lg:text-6xl font-bold ${
+                          unit.textColor
+                        } mb-2 font-mono tabular-nums transition-transform duration-300 ${
+                          hasChanged ? 'countdown-tick' : ''
+                        }`}
+                        aria-live='polite'
+                        aria-atomic='true'
+                      >
+                        {unit.value.toString().padStart(2, '0')}
+                      </div>
+                      <div
+                        className={`text-sm md:text-base font-medium ${unit.textColor} opacity-90 uppercase tracking-wide`}
+                      >
+                        {unit.label}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Wedding Date Reminder */}
         <div

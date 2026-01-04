@@ -3,66 +3,33 @@ import React, { useState, useEffect, useRef } from 'react';
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef(null);
 
   // Sample audio URL (in real app, use actual wedding music)
   const audioSrc = './music/akad.mp3';
 
   useEffect(() => {
-    // Show music player immediately
-    setShowPlayer(true);
+    // Show music player after a short delay
+    const showTimer = setTimeout(() => {
+      setShowPlayer(true);
+    }, 1000);
 
-    // Try to autoplay music
-    const tryAutoplay = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setHasInteracted(true);
-          })
-          .catch((error) => {
-            console.log('Autoplay prevented, waiting for user interaction');
-          });
-      }
-    };
-
-    // Try autoplay after a short delay
-    const timer = setTimeout(tryAutoplay, 500);
-
-    // Listen for first user interaction to enable audio
-    const handleFirstInteraction = () => {
-      if (!hasInteracted && audioRef.current) {
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setHasInteracted(true);
-          })
-          .catch(console.error);
-      }
-    };
-
-    // Add interaction listeners
-    document.addEventListener('click', handleFirstInteraction, { once: true });
-    document.addEventListener('touchstart', handleFirstInteraction, {
-      once: true,
-    });
-    document.addEventListener('scroll', handleFirstInteraction, { once: true });
-
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('touchstart', handleFirstInteraction);
-      document.removeEventListener('scroll', handleFirstInteraction);
-    };
+    return () => clearTimeout(showTimer);
   }, []);
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.loop = true;
       audioRef.current.volume = 0.3;
+
+      // Handle audio loaded
+      const handleCanPlay = () => setIsLoaded(true);
+      audioRef.current.addEventListener('canplaythrough', handleCanPlay);
+
+      return () => {
+        audioRef.current?.removeEventListener('canplaythrough', handleCanPlay);
+      };
     }
   }, []);
 
@@ -70,20 +37,22 @@ const MusicPlayer = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        // Handle autoplay restrictions
-        audioRef.current.play().catch((error) => {
-          console.log('Autoplay was prevented:', error);
-          // You could show a user message here about clicking to enable music
-        });
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch((error) => {
+            console.log('Audio playback failed:', error);
+          });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   const handleAudioError = () => {
     console.log('Audio failed to load');
     setIsPlaying(false);
+    setIsLoaded(false);
   };
 
   if (!showPlayer) {
@@ -91,16 +60,21 @@ const MusicPlayer = () => {
   }
 
   return (
-    <div className='fixed bottom-6 right-6 z-50 animate-fade-in'>
+    <div
+      className='fixed bottom-6 right-6 z-50 animate-fade-in'
+      role='complementary'
+      aria-label='Pemutar musik'
+    >
       <div className='bg-white/95 backdrop-blur-md rounded-full shadow-xl border border-pink-200 p-1.5'>
         <button
           onClick={toggleMusic}
-          className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${
+          className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 min-w-[48px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 ${
             isPlaying
-              ? 'bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-lg'
-              : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+              ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
+              : 'bg-pink-50 text-pink-600 hover:bg-pink-100'
           }`}
-          aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          aria-label={isPlaying ? 'Pause musik' : 'Putar musik'}
+          aria-pressed={isPlaying}
         >
           {isPlaying ? (
             <div className='flex items-end space-x-0.5 h-5'>
@@ -145,18 +119,18 @@ const MusicPlayer = () => {
         </button>
       </div>
 
-      {/* Audio Element */}
+      {/* Audio Element - No autoplay */}
       <audio
         ref={audioRef}
         src={audioSrc}
         onError={handleAudioError}
-        preload='none'
+        preload='metadata'
       />
 
-      {/* Music Status Indicator - Compact for mobile */}
+      {/* Playing indicator */}
       {isPlaying && (
-        <div className='absolute -top-2 -left-2 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-white shadow-md flex items-center justify-center'>
-          <div className='w-2 h-2 bg-white rounded-full animate-ping'></div>
+        <div className='absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-sm flex items-center justify-center'>
+          <span className='sr-only'>Musik sedang diputar</span>
         </div>
       )}
     </div>
