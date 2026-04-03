@@ -124,10 +124,10 @@ const Hero = ({ onOpenInvitation }) => {
                 Save The Date
               </p>
               <p className='font-serif text-2xl md:text-3xl text-pink-800 font-semibold'>
-                15 Februari 2026
+                11 April 2026
               </p>
               <p className='text-pink-600 text-sm md:text-base mt-1 font-medium'>
-                Minggu • 08:00 WIB
+                Sabtu • 08:00 WIB
               </p>
               <div className='w-12 h-px bg-pink-200 mx-auto my-3'></div>
               <p className='text-pink-500 text-xs md:text-sm'>

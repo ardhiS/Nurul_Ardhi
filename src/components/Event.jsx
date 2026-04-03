@@ -13,7 +13,7 @@ const Event = () => {
   const events = [
     {
       title: 'Akad Nikah',
-      date: 'Minggu, 15 Februari 2026',
+      date: 'Sabtu, 11 April 2026',
       time: '08:00 - 09:00 WIB',
       location: 'Villa AJ by Arkadia',
       address: 'Villa AJ by Arkadia',
@@ -24,7 +24,7 @@ const Event = () => {
     },
     {
       title: 'Resepsi',
-      date: 'Minggu, 15 Februari 2026',
+      date: 'Sabtu, 11 April 2026',
       time: '11:00 - 15:00 WIB',
       location: 'Villa AJ by Arkadia',
       address: 'Villa AJ by Arkadia',
@@ -40,7 +40,7 @@ const Event = () => {
     window.open(
       `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
       '_blank',
-      'noopener,noreferrer'
+      'noopener,noreferrer',
     );
   };
 

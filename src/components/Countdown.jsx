@@ -13,7 +13,7 @@ const Countdown = () => {
   const [isEnded, setIsEnded] = useState(false);
   const [prevTimeLeft, setPrevTimeLeft] = useState(null);
 
-  const weddingDate = new Date('2026-02-15T08:00:00').getTime();
+  const weddingDate = new Date('2026-04-11T08:00:00').getTime();
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -23,7 +23,7 @@ const Countdown = () => {
       if (distance > 0) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
         );
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -192,10 +192,10 @@ const Countdown = () => {
             </h3>
             <div className='text-white mb-4'>
               <p className='text-xl md:text-2xl font-semibold mb-2'>
-                15 Februari 2026
+                11 April 2026
               </p>
               <p className='text-pink-100 text-base md:text-lg'>
-                Minggu • 08:00 WIB
+                Sabtu • 08:00 WIB
               </p>
             </div>
             <div className='w-20 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent mx-auto'></div>

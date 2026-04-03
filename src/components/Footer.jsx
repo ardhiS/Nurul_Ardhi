@@ -37,9 +37,7 @@ const Footer = () => {
             <h3 className='font-script text-3xl md:text-4xl text-white mb-2'>
               Nurul & Ardhi
             </h3>
-            <p className='text-pink-200 text-sm md:text-base'>
-              15 Februari 2026
-            </p>
+            <p className='text-pink-200 text-sm md:text-base'>11 April 2026</p>
           </div>
 
           {/* Decorative Line */}
