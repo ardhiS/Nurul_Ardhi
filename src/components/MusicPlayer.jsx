@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const MusicPlayer = () => {
+const MusicPlayer = ({ shouldAutoPlay = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,6 +32,18 @@ const MusicPlayer = () => {
       };
     }
   }, []);
+
+  // Auto-play when invitation is opened
+  useEffect(() => {
+    if (shouldAutoPlay && audioRef.current && !isPlaying) {
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((error) => {
+          console.log('Autoplay blocked:', error);
+        });
+    }
+  }, [shouldAutoPlay]);
 
   const toggleMusic = () => {
     if (audioRef.current) {

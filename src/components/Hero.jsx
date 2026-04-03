@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
-const Hero = () => {
+const Hero = ({ onOpenInvitation }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenInvitation = () => {
     setIsOpen(true);
+    // Trigger auto-play music via parent callback
+    if (onOpenInvitation) {
+      onOpenInvitation();
+    }
     // Smooth scroll to next section
     const nextSection = document.getElementById('couple');
     if (nextSection) {

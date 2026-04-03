@@ -7,43 +7,79 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
-  // Sample gallery images (in real app, these would be actual image URLs)
+  // Gallery images - 12 photos
   const galleryImages = [
     {
       id: 1,
       src: './photo/1.jpeg',
-      alt: 'Foto pre-wedding Nurul dan Ardhi - Momen romantis',
+      alt: 'Foto Nurul dan Ardhi - 1',
       category: 'prewedding',
     },
     {
       id: 2,
       src: './photo/2.jpeg',
-      alt: 'Foto pre-wedding Nurul dan Ardhi - Outdoor',
+      alt: 'Foto Nurul dan Ardhi - 2',
       category: 'prewedding',
     },
     {
       id: 3,
       src: './photo/3.jpeg',
-      alt: 'Foto lamaran Nurul dan Ardhi',
-      category: 'engagement',
+      alt: 'Foto Nurul dan Ardhi - 3',
+      category: 'prewedding',
     },
     {
       id: 4,
       src: './photo/4.jpeg',
-      alt: 'Foto pre-wedding Nurul dan Ardhi - Studio',
+      alt: 'Foto Nurul dan Ardhi - 4',
       category: 'prewedding',
     },
     {
       id: 5,
       src: './photo/5.jpeg',
-      alt: 'Foto lamaran Nurul dan Ardhi - Keluarga',
-      category: 'engagement',
+      alt: 'Foto Nurul dan Ardhi - 5',
+      category: 'prewedding',
     },
     {
       id: 6,
-      src: './photo/2.jpeg',
-      alt: 'Foto pre-wedding Nurul dan Ardhi - Candid',
+      src: './photo/6.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 6',
       category: 'prewedding',
+    },
+    {
+      id: 7,
+      src: './photo/7.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 7',
+      category: 'engagement',
+    },
+    {
+      id: 8,
+      src: './photo/8.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 8',
+      category: 'engagement',
+    },
+    {
+      id: 9,
+      src: './photo/9.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 9',
+      category: 'engagement',
+    },
+    {
+      id: 10,
+      src: './photo/10.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 10',
+      category: 'engagement',
+    },
+    {
+      id: 11,
+      src: './photo/11.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 11',
+      category: 'engagement',
+    },
+    {
+      id: 12,
+      src: './photo/12.jpeg',
+      alt: 'Foto Nurul dan Ardhi - 12',
+      category: 'engagement',
     },
   ];
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Hero from './components/Hero';
 import Couple from './components/Couple';
 import Event from './components/Event';
@@ -11,6 +11,12 @@ import MusicPlayer from './components/MusicPlayer';
 import Navigation from './components/Navigation';
 
 function App() {
+  const [isInvitationOpened, setIsInvitationOpened] = useState(false);
+
+  const handleOpenInvitation = () => {
+    setIsInvitationOpened(true);
+  };
+
   return (
     <div className='App'>
       {/* Skip to main content link for accessibility */}
@@ -26,7 +32,7 @@ function App() {
 
       {/* Main Content */}
       <main>
-        <Hero />
+        <Hero onOpenInvitation={handleOpenInvitation} />
         <Couple />
         <Event />
         <Countdown />
@@ -39,7 +45,7 @@ function App() {
       <Footer />
 
       {/* Music Player */}
-      <MusicPlayer />
+      <MusicPlayer shouldAutoPlay={isInvitationOpened} />
     </div>
   );
 }

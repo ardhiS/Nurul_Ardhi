@@ -66,33 +66,35 @@ const Couple = () => {
             </div>
 
             {/* Photo Section */}
-            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
-              <div className='aspect-[3/4] sm:aspect-[4/5] bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100'>
-                <img
-                  src='/images/nurul2.jpeg'
-                  alt='Foto Mempelai Wanita'
-                  className='w-full h-full object-cover object-top'
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                {/* Placeholder */}
-                <div className='absolute inset-0 bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100 hidden items-center justify-center'>
-                  <div className='text-center'>
-                    <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
-                      👰
-                    </span>
-                    <p className='text-pink-400 text-xs sm:text-sm'>
-                      Tambahkan foto
-                    </p>
+            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 flex justify-center'>
+              <div className='relative w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] border-4 border-pink-200/50'>
+                <div className='w-full h-full bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100'>
+                  <img
+                    src='/images/nurul-2.jpeg'
+                    alt='Foto Mempelai Wanita'
+                    className='w-full h-full object-cover object-[center_73%]'
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  {/* Placeholder */}
+                  <div className='absolute inset-0 bg-gradient-to-br from-pink-100 via-pink-50 to-cream-100 hidden items-center justify-center'>
+                    <div className='text-center'>
+                      <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
+                        👰
+                      </span>
+                      <p className='text-pink-400 text-xs sm:text-sm'>
+                        Tambahkan foto
+                      </p>
+                    </div>
                   </div>
                 </div>
+                {/* Soft inner frame */}
+                <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-full pointer-events-none'></div>
               </div>
-              {/* Soft inner frame */}
-              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-lg sm:rounded-xl md:rounded-2xl pointer-events-none'></div>
               {/* Decorative Badge - Pojok kanan bawah */}
-              <div className='absolute -bottom-1 -right-1 sm:bottom-1 sm:right-1 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-pink-200/50 z-10'>
+              <div className='absolute bottom-0 right-1/4 sm:right-1/4 md:right-1/4 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-pink-200/50 z-10'>
                 <span className='text-sm sm:text-base md:text-xl lg:text-2xl'>
                   💍
                 </span>
@@ -137,33 +139,35 @@ const Couple = () => {
             </div>
 
             {/* Photo Section */}
-            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]'>
-              <div className='aspect-[3/4] sm:aspect-[4/5] bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100'>
-                <img
-                  src='/images/ardhi.jpg'
-                  alt='Foto Mempelai Pria'
-                  className='w-full h-full object-cover object-top'
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                {/* Placeholder */}
-                <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100 hidden items-center justify-center'>
-                  <div className='text-center'>
-                    <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
-                      🤵
-                    </span>
-                    <p className='text-blue-400 text-xs sm:text-sm'>
-                      Tambahkan foto
-                    </p>
+            <div className='relative m-2 sm:m-3 md:m-5 lg:m-6 flex justify-center'>
+              <div className='relative w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] border-4 border-blue-200/50'>
+                <div className='w-full h-full bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100'>
+                  <img
+                    src='/images/ardhi-2.jpeg'
+                    alt='Foto Mempelai Pria'
+                    className='w-full h-full object-cover object-[center_50%] scale-110'
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  {/* Placeholder */}
+                  <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-cream-100 hidden items-center justify-center'>
+                    <div className='text-center'>
+                      <span className='text-4xl sm:text-5xl md:text-7xl block mb-2'>
+                        🤵
+                      </span>
+                      <p className='text-blue-400 text-xs sm:text-sm'>
+                        Tambahkan foto
+                      </p>
+                    </div>
                   </div>
                 </div>
+                {/* Soft inner frame */}
+                <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-full pointer-events-none'></div>
               </div>
-              {/* Soft inner frame */}
-              <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-lg sm:rounded-xl md:rounded-2xl pointer-events-none'></div>
               {/* Decorative Badge - Pojok kiri bawah */}
-              <div className='absolute -bottom-1 -left-1 sm:bottom-1 sm:left-1 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-blue-200/50 z-10'>
+              <div className='absolute bottom-0 left-1/4 sm:left-1/4 md:left-1/4 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-400/50 border-2 sm:border-3 md:border-4 border-white ring-1 sm:ring-2 ring-blue-200/50 z-10'>
                 <span className='text-sm sm:text-base md:text-xl lg:text-2xl'>
                   💍
                 </span>

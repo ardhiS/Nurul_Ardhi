@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
+import { supabase } from '../lib/supabase';
 
 const RSVP = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
@@ -27,31 +28,37 @@ const RSVP = () => {
   const [wishes, setWishes] = useState([]);
   const [wishErrors, setWishErrors] = useState({});
   const [isWishSubmitting, setIsWishSubmitting] = useState(false);
+  const [isLoadingWishes, setIsLoadingWishes] = useState(true);
 
-  // Load wishes from localStorage on mount
+  // Load wishes from Supabase on mount
   useEffect(() => {
-    const savedWishes = localStorage.getItem('wedding-wishes');
-    if (savedWishes) {
+    const fetchWishes = async () => {
       try {
-        const parsed = JSON.parse(savedWishes);
-        // Convert timestamp strings back to Date objects
-        const wishesWithDates = parsed.map((wish) => ({
-          ...wish,
-          timestamp: new Date(wish.timestamp),
+        const { data, error } = await supabase
+          .from('wishes')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        const wishesWithDates = data.map((wish) => ({
+          id: wish.id,
+          guestName: wish.guest_name,
+          attendance: wish.attendance,
+          guestCount: wish.guest_count,
+          wishMessage: wish.wish_message,
+          timestamp: new Date(wish.created_at),
         }));
         setWishes(wishesWithDates);
-      } catch (e) {
-        console.error('Error loading wishes:', e);
+      } catch (error) {
+        console.error('Error fetching wishes:', error);
+      } finally {
+        setIsLoadingWishes(false);
       }
-    }
-  }, []);
+    };
 
-  // Save wishes to localStorage whenever they change
-  useEffect(() => {
-    if (wishes.length > 0) {
-      localStorage.setItem('wedding-wishes', JSON.stringify(wishes));
-    }
-  }, [wishes]);
+    fetchWishes();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,27 +98,39 @@ const RSVP = () => {
   };
 
   // Handle wish form submission
-  const handleWishSubmit = (e) => {
+  const handleWishSubmit = async (e) => {
     e.preventDefault();
     if (!validateWishForm()) return;
 
     setIsWishSubmitting(true);
 
-    // Simulate submission delay for better UX
-    setTimeout(() => {
-      const newWish = {
-        id: Date.now(),
-        guestName: wishFormData.guestName.trim(),
-        attendance: wishFormData.attendance,
-        guestCount:
-          wishFormData.attendance === 'hadir'
-            ? parseInt(wishFormData.guestCount)
-            : 0,
-        wishMessage: wishFormData.wishMessage.trim(),
-        timestamp: new Date(),
-      };
+    try {
+      const { data, error } = await supabase
+        .from('wishes')
+        .insert([
+          {
+            guest_name: wishFormData.guestName.trim(),
+            attendance: wishFormData.attendance,
+            guest_count:
+              wishFormData.attendance === 'hadir'
+                ? parseInt(wishFormData.guestCount)
+                : 0,
+            wish_message: wishFormData.wishMessage.trim(),
+          },
+        ])
+        .select();
+
+      if (error) throw error;
 
       // Add new wish to the list (newest first)
+      const newWish = {
+        id: data[0].id,
+        guestName: data[0].guest_name,
+        attendance: data[0].attendance,
+        guestCount: data[0].guest_count,
+        wishMessage: data[0].wish_message,
+        timestamp: new Date(data[0].created_at),
+      };
       setWishes((prev) => [newWish, ...prev]);
 
       // Reset form
@@ -121,8 +140,12 @@ const RSVP = () => {
         guestCount: '1',
         wishMessage: '',
       });
+    } catch (error) {
+      console.error('Error submitting wish:', error);
+      alert('Gagal mengirim ucapan. Silakan coba lagi.');
+    } finally {
       setIsWishSubmitting(false);
-    }, 500);
+    }
   };
 
   // Format timestamp for display
