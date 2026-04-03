@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
 import Navigation from './components/Navigation';
 
+// nandain doang
 function App() {
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
 
