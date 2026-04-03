@@ -51,29 +51,29 @@ const Countdown = () => {
       key: 'days',
       value: timeLeft.days,
       label: 'Hari',
-      bgColor: 'bg-blue-500',
-      textColor: 'text-blue-50',
+      bgColor: 'bg-accent-500',
+      textColor: 'text-white',
     },
     {
       key: 'hours',
       value: timeLeft.hours,
       label: 'Jam',
-      bgColor: 'bg-pink-400',
-      textColor: 'text-pink-50',
+      bgColor: 'bg-pink-500',
+      textColor: 'text-white',
     },
     {
       key: 'minutes',
       value: timeLeft.minutes,
       label: 'Menit',
-      bgColor: 'bg-blue-400',
-      textColor: 'text-blue-50',
+      bgColor: 'bg-accent-600',
+      textColor: 'text-white',
     },
     {
       key: 'seconds',
       value: timeLeft.seconds,
       label: 'Detik',
-      bgColor: 'bg-pink-300',
-      textColor: 'text-pink-50',
+      bgColor: 'bg-pink-400',
+      textColor: 'text-white',
     },
   ];
 
@@ -101,7 +101,7 @@ const Countdown = () => {
       <div className='absolute inset-0 opacity-20'>
         <div className='absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl'></div>
         <div className='absolute bottom-10 right-10 w-48 h-48 bg-pink-200 rounded-full blur-2xl'></div>
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-200 rounded-full blur-3xl'></div>
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent-300 rounded-full blur-3xl'></div>
       </div>
 
       <div className='section-container relative z-10'>

@@ -12,6 +12,47 @@
    ======================================== */
 :root {
   --vh: 1vh; /* Fallback, will be overwritten by JS */
+
+  /* ==============================================
+     WEDDING COLOR PALETTE - EDIT COLORS HERE!
+     Change these values to update entire website
+     ============================================== */
+
+  /* Primary Colors - Maroon/Burgundy */
+  --wedding-primary-50: #fdf2f4;
+  --wedding-primary-100: #fce7eb;
+  --wedding-primary-200: #f9d0d9;
+  --wedding-primary-300: #f4a9ba;
+  --wedding-primary-400: #ec7a95;
+  --wedding-primary-500: #e04d70;
+  --wedding-primary-600: #cd2d56;
+  --wedding-primary-700: #c52c55; /* Main maroon */
+  --wedding-primary-800: #8c1d3d;
+  --wedding-primary-900: #781c38;
+  --wedding-primary-950: #42091a;
+
+  /* Accent Colors - Sky Blue (matching photo background) */
+  --wedding-accent-50: #e6f4ff;
+  --wedding-accent-100: #bae0ff;
+  --wedding-accent-200: #91caff;
+  --wedding-accent-300: #69b3ff;
+  --wedding-accent-400: #4096ff;
+  --wedding-accent-500: #2d75b8; /* Main sky blue */
+  --wedding-accent-600: #0a7ae6;
+  --wedding-accent-700: #0064cc;
+  --wedding-accent-800: #004eb3;
+  --wedding-accent-900: #003d99;
+
+  /* Background Colors - Cream/Ivory */
+  --wedding-bg-light: #fffef8;
+  --wedding-bg-base: #fdf8f0;
+  --wedding-bg-warm: #f5ebe0;
+  --wedding-bg-muted: #ede4d8;
+
+  /* Text Colors */
+  --wedding-text-dark: #3d2314;
+  --wedding-text-muted: #5c4033;
+  --wedding-text-light: #8b7355;
 }
 
 /* Hero section full viewport height - Mobile optimized */
@@ -29,6 +70,43 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ========================================
+   CUSTOM SCROLLBAR - Wedding Theme Colors
+   ======================================== */
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wedding-primary-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--wedding-primary-500) 0%,
+    var(--wedding-primary-700) 100%
+  );
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    var(--wedding-primary-600) 0%,
+    var(--wedding-primary-800) 100%
+  );
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--wedding-primary-600) var(--wedding-primary-100);
+}
+
 /* Safe area padding for mobile navigation */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .safe-area-pb {
@@ -38,39 +116,75 @@ html {
 
 @theme {
   /* ========================================
-     COLOR SYSTEM
-     Primary: Soft Pink (70%) | Secondary: Elegant Blue (30%)
+     COLOR SYSTEM - Using CSS Variables
+     Primary: Maroon (70%) | Accent: Gold (30%)
      ======================================== */
 
-  /* Primary - Soft Pink Palette (70% usage) */
-  --color-pink-50: #fef7f9;
-  --color-pink-100: #fdeef3;
-  --color-pink-200: #fbd5e3;
-  --color-pink-300: #f8b4cd;
-  --color-pink-400: #f28bb0;
-  --color-pink-500: #e86a93;
-  --color-pink-600: #d64d78;
-  --color-pink-700: #b73a60;
-  --color-pink-800: #983350;
-  --color-pink-900: #7f2e45;
+  /* Primary - Maroon Palette (uses CSS variables) */
+  --color-primary-50: var(--wedding-primary-50);
+  --color-primary-100: var(--wedding-primary-100);
+  --color-primary-200: var(--wedding-primary-200);
+  --color-primary-300: var(--wedding-primary-300);
+  --color-primary-400: var(--wedding-primary-400);
+  --color-primary-500: var(--wedding-primary-500);
+  --color-primary-600: var(--wedding-primary-600);
+  --color-primary-700: var(--wedding-primary-700);
+  --color-primary-800: var(--wedding-primary-800);
+  --color-primary-900: var(--wedding-primary-900);
+  --color-primary-950: var(--wedding-primary-950);
 
-  /* Secondary - Elegant Blue Palette (30% usage) */
-  --color-blue-50: #f5f8fc;
-  --color-blue-100: #e8eff8;
-  --color-blue-200: #d1dfef;
-  --color-blue-300: #a8c5e2;
-  --color-blue-400: #7aa7d1;
-  --color-blue-500: #5a8fc0;
-  --color-blue-600: #4576a8;
-  --color-blue-700: #3a6189;
-  --color-blue-800: #345170;
-  --color-blue-900: #2e455e;
+  /* Accent - Gold Palette */
+  --color-accent-50: var(--wedding-accent-50);
+  --color-accent-100: var(--wedding-accent-100);
+  --color-accent-200: var(--wedding-accent-200);
+  --color-accent-300: var(--wedding-accent-300);
+  --color-accent-400: var(--wedding-accent-400);
+  --color-accent-500: var(--wedding-accent-500);
+  --color-accent-600: var(--wedding-accent-600);
+  --color-accent-700: var(--wedding-accent-700);
+  --color-accent-800: var(--wedding-accent-800);
+  --color-accent-900: var(--wedding-accent-900);
 
-  /* Neutral - Warm Tones */
-  --color-cream-50: #fffefb;
-  --color-cream-100: #fefcf6;
-  --color-cream-200: #fdf8ec;
-  --color-cream-300: #f9f1dd;
+  /* Background - Cream/Ivory */
+  --color-background-light: var(--wedding-bg-light);
+  --color-background-base: var(--wedding-bg-base);
+  --color-background-warm: var(--wedding-bg-warm);
+  --color-background-muted: var(--wedding-bg-muted);
+
+  /* Text Colors */
+  --color-text-dark: var(--wedding-text-dark);
+  --color-text-muted: var(--wedding-text-muted);
+  --color-text-light: var(--wedding-text-light);
+
+  /* Legacy Pink (mapped to Primary for compatibility) */
+  --color-pink-50: var(--wedding-primary-50);
+  --color-pink-100: var(--wedding-primary-100);
+  --color-pink-200: var(--wedding-primary-200);
+  --color-pink-300: var(--wedding-primary-300);
+  --color-pink-400: var(--wedding-primary-400);
+  --color-pink-500: var(--wedding-primary-500);
+  --color-pink-600: var(--wedding-primary-600);
+  --color-pink-700: var(--wedding-primary-700);
+  --color-pink-800: var(--wedding-primary-800);
+  --color-pink-900: var(--wedding-primary-900);
+
+  /* Legacy Blue (mapped to Accent for compatibility) */
+  --color-blue-50: var(--wedding-accent-50);
+  --color-blue-100: var(--wedding-accent-100);
+  --color-blue-200: var(--wedding-accent-200);
+  --color-blue-300: var(--wedding-accent-300);
+  --color-blue-400: var(--wedding-accent-400);
+  --color-blue-500: var(--wedding-accent-500);
+  --color-blue-600: var(--wedding-accent-600);
+  --color-blue-700: var(--wedding-accent-700);
+  --color-blue-800: var(--wedding-accent-800);
+  --color-blue-900: var(--wedding-accent-900);
+
+  /* Neutral - Warm Tones (Cream) */
+  --color-cream-50: var(--wedding-bg-light);
+  --color-cream-100: var(--wedding-bg-base);
+  --color-cream-200: var(--wedding-bg-warm);
+  --color-cream-300: var(--wedding-bg-muted);
   --color-cream-400: #f3e5c8;
   --color-cream-500: #e8d5ae;
 
@@ -117,11 +231,11 @@ html {
      SHADOW SYSTEM
      Soft, layered shadows for depth
      ======================================== */
-  --shadow-soft: 0 2px 8px -2px rgb(127 46 69 / 0.08);
-  --shadow-card: 0 4px 20px -4px rgb(127 46 69 / 0.12);
-  --shadow-elevated: 0 12px 40px -8px rgb(127 46 69 / 0.18);
-  --shadow-glow-pink: 0 8px 30px -4px rgb(232 106 147 / 0.25);
-  --shadow-glow-blue: 0 8px 30px -4px rgb(90 143 192 / 0.2);
+  --shadow-soft: 0 2px 8px -2px rgb(120 28 56 / 0.08);
+  --shadow-card: 0 4px 20px -4px rgb(120 28 56 / 0.12);
+  --shadow-elevated: 0 12px 40px -8px rgb(120 28 56 / 0.18);
+  --shadow-glow-primary: 0 8px 30px -4px rgb(169 31 68 / 0.25);
+  --shadow-glow-accent: 0 8px 30px -4px rgb(24 144 255 / 0.25);
 
   /* ========================================
      BORDER RADIUS

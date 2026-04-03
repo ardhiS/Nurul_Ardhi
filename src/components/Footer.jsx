@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <footer
-      className='bg-gradient-to-br from-pink-700 via-pink-800 to-pink-900 text-pink-100 py-12 relative overflow-hidden'
+      className='bg-gradient-to-br from-pink-700 via-pink-800 to-pink-900 text-pink-100 pt-12 pb-28 md:pb-12 relative overflow-hidden'
       role='contentinfo'
     >
       {/* Floral SVG Decorations - White variant for dark background */}
@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
 
           {/* Decorative Line */}
-          <div className='w-32 h-0.5 bg-gradient-to-r from-transparent via-blue-300 to-transparent mx-auto mb-6'></div>
+          <div className='w-32 h-0.5 bg-gradient-to-r from-transparent via-accent-400 to-transparent mx-auto mb-6'></div>
 
           {/* Thank You Message */}
           <div className='max-w-2xl mx-auto mb-8'>
@@ -55,21 +55,21 @@ const Footer = () => {
           <div className='flex justify-center space-x-6 mb-8'>
             <a
               href='#'
-              className='w-12 h-12 bg-pink-600 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
+              className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
               aria-label='Instagram'
             >
               <span className='text-xl'>📷</span>
             </a>
             <a
               href='#'
-              className='w-12 h-12 bg-pink-600 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
+              className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
               aria-label='Facebook'
             >
               <span className='text-xl'>👥</span>
             </a>
             <a
               href='#'
-              className='w-12 h-12 bg-pink-600 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
+              className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
               aria-label='WhatsApp'
             >
               <span className='text-xl'>💬</span>

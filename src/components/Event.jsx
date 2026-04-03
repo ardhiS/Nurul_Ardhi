@@ -20,7 +20,7 @@ const Event = () => {
       description:
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
       icon: '🕌',
-      color: 'blue',
+      color: 'gold',
     },
     {
       title: 'Resepsi',
@@ -31,7 +31,7 @@ const Event = () => {
       description:
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
       icon: '🎉',
-      color: 'pink',
+      color: 'maroon',
     },
   ];
 
@@ -67,7 +67,7 @@ const Event = () => {
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
         <div className='absolute top-32 left-10 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
-        <div className='absolute bottom-32 right-10 w-48 h-48 bg-blue-200 rounded-full blur-3xl'></div>
+        <div className='absolute bottom-32 right-10 w-48 h-48 bg-accent-300 rounded-full blur-3xl'></div>
         <div className='absolute top-1/2 right-1/4 w-32 h-32 bg-pink-400 rounded-full blur-3xl'></div>
       </div>
 
@@ -104,9 +104,9 @@ const Event = () => {
               {/* Event Header */}
               <div
                 className={`bg-gradient-to-r ${
-                  event.color === 'blue'
-                    ? 'from-blue-400 to-blue-500'
-                    : 'from-pink-400 to-pink-500'
+                  event.color === 'gold'
+                    ? 'from-accent-500 to-accent-600'
+                    : 'from-pink-500 to-pink-600'
                 } p-6 text-white text-center relative overflow-hidden`}
               >
                 <div className='absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16'></div>
@@ -128,16 +128,16 @@ const Event = () => {
                 <div className='mb-6'>
                   <div
                     className={`inline-flex items-center px-4 py-2 rounded-full mb-3 ${
-                      event.color === 'blue'
-                        ? 'bg-blue-50 border border-blue-200'
+                      event.color === 'gold'
+                        ? 'bg-accent-50 border border-accent-200'
                         : 'bg-pink-50 border border-pink-200'
                     }`}
                   >
                     <span className='text-lg mr-2'>📅</span>
                     <span
                       className={`font-medium text-sm md:text-base ${
-                        event.color === 'blue'
-                          ? 'text-blue-700'
+                        event.color === 'gold'
+                          ? 'text-accent-700'
                           : 'text-pink-700'
                       }`}
                     >
@@ -146,16 +146,16 @@ const Event = () => {
                   </div>
                   <div
                     className={`inline-flex items-center px-4 py-2 rounded-full ml-2 ${
-                      event.color === 'blue'
-                        ? 'bg-blue-50 border border-blue-200'
+                      event.color === 'gold'
+                        ? 'bg-accent-50 border border-accent-200'
                         : 'bg-pink-50 border border-pink-200'
                     }`}
                   >
                     <span className='text-lg mr-2'>⏰</span>
                     <span
                       className={`font-medium text-sm md:text-base ${
-                        event.color === 'blue'
-                          ? 'text-blue-700'
+                        event.color === 'gold'
+                          ? 'text-accent-700'
                           : 'text-pink-700'
                       }`}
                     >
@@ -169,7 +169,7 @@ const Event = () => {
                   <div className='flex items-start space-x-3 mb-3'>
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        event.color === 'blue' ? 'bg-blue-100' : 'bg-pink-100'
+                        event.color === 'gold' ? 'bg-accent-100' : 'bg-pink-100'
                       }`}
                     >
                       <span className='text-lg'>📍</span>
@@ -187,8 +187,8 @@ const Event = () => {
                   <button
                     onClick={() => openMaps(event.address)}
                     className={`w-full mt-4 py-3.5 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                      event.color === 'blue'
-                        ? 'bg-blue-500 hover:bg-blue-600 text-white focus:ring-blue-400'
+                      event.color === 'gold'
+                        ? 'bg-accent-500 hover:bg-accent-600 text-white focus:ring-accent-400'
                         : 'bg-pink-500 hover:bg-pink-600 text-white focus:ring-pink-400'
                     }`}
                     aria-label={`Buka lokasi ${event.location} di Google Maps`}
@@ -274,26 +274,89 @@ const Event = () => {
             isVisible ? 'is-visible reveal-delay-4' : ''
           }`}
         >
-          <div className='bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-pink-200 max-w-3xl mx-auto'>
-            <h4 className='font-serif text-xl md:text-2xl text-pink-700 mb-4 text-center'>
-              Catatan Penting
-            </h4>
-            <div className='grid md:grid-cols-2 gap-4 text-sm md:text-base text-pink-600'>
-              <div className='flex items-start space-x-3'>
-                <span className='text-pink-500 text-lg flex-shrink-0'>⚠️</span>
-                <p>Harap datang tepat waktu untuk mengikuti rangkaian acara</p>
+          <div className='bg-gradient-to-br from-pink-50 to-blue-50 rounded-3xl p-8 md:p-10 shadow-lg border border-pink-200 max-w-3xl mx-auto'>
+            <div className='text-center mb-8'>
+              <span className='inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full mb-4 shadow-lg'>
+                <svg
+                  className='w-8 h-8 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                  />
+                </svg>
+              </span>
+              <h4 className='font-serif text-xl md:text-2xl text-pink-700'>
+                Catatan Penting
+              </h4>
+            </div>
+            <div className='grid md:grid-cols-3 gap-4 md:gap-6'>
+              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
+                <span className='w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
+                  <svg
+                    className='w-7 h-7 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
+                  </svg>
+                </span>
+                <p className='text-pink-700 text-sm md:text-base font-medium'>
+                  Harap datang tepat waktu untuk mengikuti rangkaian acara
+                </p>
               </div>
-              <div className='flex items-start space-x-3'>
-                <span className='text-pink-500 text-lg flex-shrink-0'>👗</span>
-                <p>Dress code: Formal/semi formal, hindari warna putih</p>
+
+              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
+                <span className='w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
+                  <svg
+                    className='w-7 h-7 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'
+                    />
+                  </svg>
+                </span>
+                <p className='text-pink-700 text-sm md:text-base font-medium'>
+                  Kehadiran Anda adalah hadiah terindah bagi kami
+                </p>
               </div>
-              <div className='flex items-start space-x-3'>
-                <span className='text-pink-500 text-lg flex-shrink-0'>🎁</span>
-                <p>Kehadiran Anda adalah hadiah terindah bagi kami</p>
-              </div>
-              <div className='flex items-start space-x-3'>
-                <span className='text-pink-500 text-lg flex-shrink-0'>📱</span>
-                <p>Konfirmasi kehadiran melalui RSVP di bawah</p>
+
+              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow md:col-span-1 col-span-full md:mx-0 mx-auto md:w-full w-full max-w-xs'>
+                <span className='w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
+                  <svg
+                    className='w-7 h-7 text-white'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
+                  </svg>
+                </span>
+                <p className='text-pink-700 text-sm md:text-base font-medium'>
+                  Konfirmasi kehadiran melalui RSVP di bawah
+                </p>
               </div>
             </div>
           </div>

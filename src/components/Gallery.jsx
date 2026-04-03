@@ -120,7 +120,7 @@ const Gallery = () => {
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
         <div className='absolute top-20 left-20 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
-        <div className='absolute bottom-20 right-20 w-48 h-48 bg-blue-200 rounded-full blur-3xl'></div>
+        <div className='absolute bottom-20 right-20 w-48 h-48 bg-accent-300 rounded-full blur-3xl'></div>
         <div className='absolute top-1/2 right-1/3 w-32 h-32 bg-pink-400 rounded-full blur-3xl'></div>
       </div>
 
@@ -247,7 +247,7 @@ const Gallery = () => {
               </a>
               <a
                 href='#'
-                className='w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110'
+                className='w-10 h-10 bg-accent-500 hover:bg-accent-600 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110'
                 aria-label='Facebook'
               >
                 <span className='text-sm'>👥</span>

@@ -201,7 +201,7 @@ const RSVP = () => {
         {/* Background decorative elements */}
         <div className='absolute inset-0 opacity-20'>
           <div className='absolute top-20 right-20 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
-          <div className='absolute bottom-20 left-20 w-48 h-48 bg-blue-200 rounded-full blur-3xl'></div>
+          <div className='absolute bottom-20 left-20 w-48 h-48 bg-accent-300 rounded-full blur-3xl'></div>
         </div>
 
         <div className='section-container relative z-10'>
@@ -246,7 +246,7 @@ const RSVP = () => {
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
         <div className='absolute top-20 right-20 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
-        <div className='absolute bottom-20 left-20 w-48 h-48 bg-blue-200 rounded-full blur-3xl'></div>
+        <div className='absolute bottom-20 left-20 w-48 h-48 bg-accent-300 rounded-full blur-3xl'></div>
         <div className='absolute top-1/2 left-1/4 w-32 h-32 bg-pink-400 rounded-full blur-3xl'></div>
       </div>
 
@@ -337,7 +337,7 @@ const RSVP = () => {
                       <div
                         className={`p-3 border-2 rounded-xl text-center transition-all duration-300 ${
                           wishFormData.attendance === 'tidak_hadir'
-                            ? 'border-blue-500 bg-blue-100 text-blue-700'
+                            ? 'border-gray-500 bg-gray-100 text-gray-700'
                             : 'border-pink-200 bg-pink-50 text-pink-600 hover:border-pink-300'
                         }`}
                       >
@@ -422,11 +422,11 @@ const RSVP = () => {
                     <div className='grid sm:grid-cols-2 gap-4 text-sm text-pink-600'>
                       <div className='flex items-center justify-center space-x-2'>
                         <span className='text-pink-500'>📞</span>
-                        <span>Hubungi: 0812-3456-7890 (Nurul)</span>
+                        <span>Hubungi: 0881-0116-15486 (Nurul)</span>
                       </div>
                       <div className='flex items-center justify-center space-x-2'>
                         <span className='text-pink-500'>📞</span>
-                        <span>Hubungi: 0812-9876-5432 (Ardhi)</span>
+                        <span>Hubungi: 0812-9892-4977 (Ardhi)</span>
                       </div>
                     </div>
                   </div>
@@ -510,7 +510,7 @@ const RSVP = () => {
                               className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                                 wish.attendance === 'hadir'
                                   ? 'bg-green-100 text-green-700'
-                                  : 'bg-blue-100 text-blue-700'
+                                  : 'bg-gray-100 text-gray-600'
                               }`}
                             >
                               {wish.attendance === 'hadir'

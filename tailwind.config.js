@@ -4,42 +4,87 @@ export default {
   theme: {
     extend: {
       /* ========================================
-         LUXURY WEDDING COLOR SYSTEM
-         Primary: Soft Pink (70%) | Secondary: Elegant Blue (30%)
+         WEDDING COLOR SYSTEM - Using CSS Variables
+         Change colors in index.css :root to update entire site!
+         Primary: Maroon (70%) | Accent: Gold (30%)
          ======================================== */
       colors: {
-        // Primary - Soft Pink (70% usage)
-        pink: {
-          50: '#fef7f9',
-          100: '#fdeef3',
-          200: '#fbd5e3',
-          300: '#f8b4cd',
-          400: '#f28bb0',
-          500: '#e86a93',
-          600: '#d64d78',
-          700: '#b73a60',
-          800: '#983350',
-          900: '#7f2e45',
+        // Primary - Maroon (references CSS variables)
+        primary: {
+          50: 'var(--wedding-primary-50)',
+          100: 'var(--wedding-primary-100)',
+          200: 'var(--wedding-primary-200)',
+          300: 'var(--wedding-primary-300)',
+          400: 'var(--wedding-primary-400)',
+          500: 'var(--wedding-primary-500)',
+          600: 'var(--wedding-primary-600)',
+          700: 'var(--wedding-primary-700)',
+          800: 'var(--wedding-primary-800)',
+          900: 'var(--wedding-primary-900)',
+          950: 'var(--wedding-primary-950)',
+          DEFAULT: 'var(--wedding-primary-700)',
         },
-        // Secondary - Elegant Blue (30% usage)
+        // Accent - Gold (references CSS variables)
+        accent: {
+          50: 'var(--wedding-accent-50)',
+          100: 'var(--wedding-accent-100)',
+          200: 'var(--wedding-accent-200)',
+          300: 'var(--wedding-accent-300)',
+          400: 'var(--wedding-accent-400)',
+          500: 'var(--wedding-accent-500)',
+          600: 'var(--wedding-accent-600)',
+          700: 'var(--wedding-accent-700)',
+          800: 'var(--wedding-accent-800)',
+          900: 'var(--wedding-accent-900)',
+          DEFAULT: 'var(--wedding-accent-500)',
+        },
+        // Background - Cream/Ivory
+        background: {
+          light: 'var(--wedding-bg-light)',
+          base: 'var(--wedding-bg-base)',
+          warm: 'var(--wedding-bg-warm)',
+          muted: 'var(--wedding-bg-muted)',
+          DEFAULT: 'var(--wedding-bg-base)',
+        },
+        // Text colors
+        text: {
+          dark: 'var(--wedding-text-dark)',
+          muted: 'var(--wedding-text-muted)',
+          light: 'var(--wedding-text-light)',
+          DEFAULT: 'var(--wedding-text-dark)',
+        },
+        // Legacy pink (mapped to primary for backward compatibility)
+        pink: {
+          50: 'var(--wedding-primary-50)',
+          100: 'var(--wedding-primary-100)',
+          200: 'var(--wedding-primary-200)',
+          300: 'var(--wedding-primary-300)',
+          400: 'var(--wedding-primary-400)',
+          500: 'var(--wedding-primary-500)',
+          600: 'var(--wedding-primary-600)',
+          700: 'var(--wedding-primary-700)',
+          800: 'var(--wedding-primary-800)',
+          900: 'var(--wedding-primary-900)',
+        },
+        // Legacy blue (mapped to accent for backward compatibility)
         blue: {
-          50: '#f5f8fc',
-          100: '#e8eff8',
-          200: '#d1dfef',
-          300: '#a8c5e2',
-          400: '#7aa7d1',
-          500: '#5a8fc0',
-          600: '#4576a8',
-          700: '#3a6189',
-          800: '#345170',
-          900: '#2e455e',
+          50: 'var(--wedding-accent-50)',
+          100: 'var(--wedding-accent-100)',
+          200: 'var(--wedding-accent-200)',
+          300: 'var(--wedding-accent-300)',
+          400: 'var(--wedding-accent-400)',
+          500: 'var(--wedding-accent-500)',
+          600: 'var(--wedding-accent-600)',
+          700: 'var(--wedding-accent-700)',
+          800: 'var(--wedding-accent-800)',
+          900: 'var(--wedding-accent-900)',
         },
         // Neutral - Warm Cream tones
         cream: {
-          50: '#fffefb',
-          100: '#fefcf6',
-          200: '#fdf8ec',
-          300: '#f9f1dd',
+          50: 'var(--wedding-bg-light)',
+          100: 'var(--wedding-bg-base)',
+          200: 'var(--wedding-bg-warm)',
+          300: 'var(--wedding-bg-muted)',
           400: '#f3e5c8',
           500: '#e8d5ae',
         },
@@ -66,11 +111,13 @@ export default {
 
       /* Box shadows */
       boxShadow: {
-        soft: '0 2px 8px -2px rgb(127 46 69 / 0.08)',
-        card: '0 4px 20px -4px rgb(127 46 69 / 0.12)',
-        elevated: '0 12px 40px -8px rgb(127 46 69 / 0.18)',
-        'glow-pink': '0 8px 30px -4px rgb(232 106 147 / 0.25)',
-        'glow-blue': '0 8px 30px -4px rgb(90 143 192 / 0.2)',
+        soft: '0 2px 8px -2px rgb(120 28 56 / 0.08)',
+        card: '0 4px 20px -4px rgb(120 28 56 / 0.12)',
+        elevated: '0 12px 40px -8px rgb(120 28 56 / 0.18)',
+        'glow-primary': '0 8px 30px -4px rgb(169 31 68 / 0.25)',
+        'glow-accent': '0 8px 30px -4px rgb(24 144 255 / 0.25)',
+        'glow-pink': '0 8px 30px -4px rgb(169 31 68 / 0.25)',
+        'glow-blue': '0 8px 30px -4px rgb(24 144 255 / 0.25)',
       },
 
       /* Animation - Global luxury easing */

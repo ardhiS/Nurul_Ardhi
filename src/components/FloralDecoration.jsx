@@ -26,13 +26,13 @@ const FloralDecoration = ({
     lg: 'w-64 md:w-96 lg:w-[28rem]',
   };
 
-  // Color variants
+  // Color variants - Maroon/Gold theme
   const colors = {
     pink: {
-      primary: '#ec4899',
-      secondary: '#f472b6',
-      tertiary: '#fbcfe8',
-      center: '#fce7f3',
+      primary: '#a91f44', // Maroon
+      secondary: '#cd2d56', // Lighter maroon
+      tertiary: '#f4a9ba', // Very light maroon
+      center: '#fdf2f4', // Cream pink
     },
     white: {
       primary: 'rgba(255,255,255,0.4)',
@@ -41,10 +41,22 @@ const FloralDecoration = ({
       center: 'rgba(255,255,255,0.5)',
     },
     blue: {
-      primary: '#5a8fc0',
-      secondary: '#7aa7d1',
-      tertiary: '#d1dfef',
-      center: '#e8eff8',
+      primary: '#1890ff', // Sky blue
+      secondary: '#0a7ae6', // Darker blue
+      tertiary: '#91caff', // Light blue
+      center: '#e6f4ff', // Cream blue
+    },
+    gold: {
+      primary: '#1890ff', // Sky blue (changed from gold)
+      secondary: '#0a7ae6', // Darker blue
+      tertiary: '#91caff', // Light blue
+      center: '#e6f4ff', // Cream blue
+    },
+    maroon: {
+      primary: '#a91f44', // Maroon
+      secondary: '#cd2d56', // Lighter maroon
+      tertiary: '#f4a9ba', // Very light maroon
+      center: '#fdf2f4', // Cream pink
     },
   };
 
