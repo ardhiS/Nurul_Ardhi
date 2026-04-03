@@ -13,7 +13,7 @@ const Gift = () => {
         {
           bank: 'BSI',
           accountNumber: '7213153557',
-          accountName: 'Nurul Faijah Ulfah',
+          accountName: 'Nurul Faizah Ulfah',
           logo: '🏧',
         },
       ],

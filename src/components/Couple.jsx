@@ -113,7 +113,7 @@ const Couple = () => {
                 Putri dari
               </p>
               <p className='font-serif font-medium text-pink-700 text-sm md:text-sm mb-4 md:mb-5 leading-tight'>
-                Alm Bapa Upah & Ibu Siti Solihat
+                Alm Bapak Upah & Ibu Siti Solihat
               </p>
               <div className='bg-gradient-to-br from-pink-50 to-pink-100/50 rounded-lg md:rounded-xl p-3 md:p-4 border border-pink-100'>
                 <p className='text-pink-600/90 leading-relaxed text-sm md:text-sm italic font-light'>
