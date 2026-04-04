@@ -8,10 +8,17 @@ export default defineConfig({
     // Optimize chunk splitting
     rollupOptions: {
       output: {
-        manualChunks: {
+        manualChunks(id) {
           // Separate vendor chunks
-          vendor: ['react', 'react-dom'],
-          supabase: ['@supabase/supabase-js'],
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) {
+              return 'vendor-react';
+            }
+            if (id.includes('@supabase')) {
+              return 'supabase';
+            }
+            return 'vendor';
+          }
         },
       },
     },
