@@ -9,7 +9,7 @@ const LoveStory = () => {
     {
       id: 1,
       title: 'Awal Pertemuan',
-      date: '2023',
+      date: '2024',
       icon: '💫',
       description:
         'Di dunia yang luas ini, kami percaya bahwa tidak ada pertemuan yang benar-benar kebetulan. Bukan karena bertemu lalu berjodoh, tapi karena berjodoh maka kami dipertemukan. Tuhan mempertemukan dua hati pada waktu yang tepat dengan cara yang sederhana, namun bermakna.',
@@ -18,7 +18,7 @@ const LoveStory = () => {
     {
       id: 2,
       title: 'Menjalin Kedekatan',
-      date: '2024',
+      date: '2025',
       icon: '💕',
       description:
         'Hari demi hari, kami belajar saling mengenal. Bukan hanya tentang bahagia, tetapi juga tentang perbedaan, luka, dan doa. Karena cinta bukan tentang kesempurnaan, melainkan tentang saling bertahan dan melengkapi.',
@@ -27,7 +27,7 @@ const LoveStory = () => {
     {
       id: 3,
       title: 'Lamaran',
-      date: '2025',
+      date: '2026',
       icon: '💍',
       description:
         'Dengan keyakinan yang semakin kuat dan restu dari keluarga, kami mengikat sebuah janji dalam tunangan sebagai langkah serius menuju masa depan bersama.',
