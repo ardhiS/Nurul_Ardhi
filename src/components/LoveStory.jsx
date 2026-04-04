@@ -12,7 +12,7 @@ const LoveStory = () => {
       date: '2024',
       icon: '💫',
       description:
-        'Di dunia yang luas ini, kami percaya bahwa tidak ada pertemuan yang benar-benar kebetulan. Bukan karena bertemu lalu berjodoh, tapi karena berjodoh maka kami dipertemukan. Tuhan mempertemukan dua hati pada waktu yang tepat dengan cara yang sederhana, namun bermakna.',
+        'Dipertemukan di sekolah tempat kami bekerja, kami percaya ini bukan kebetulan. Sebagai guru, kami berbagi panggilan yang sama untuk mendidik. Percakapan santai tentang pelajaran dan siswa menjadi awal dari hubungan yang bermakna. Tuhan mempertemukan dua hati pada waktu yang tepat.',
       color: 'pink',
     },
     {
@@ -21,7 +21,7 @@ const LoveStory = () => {
       date: '2025',
       icon: '💕',
       description:
-        'Hari demi hari, kami belajar saling mengenal. Bukan hanya tentang bahagia, tetapi juga tentang perbedaan, luka, dan doa. Karena cinta bukan tentang kesempurnaan, melainkan tentang saling bertahan dan melengkapi.',
+        'Hari demi hari, kami belajar saling mengenal dan saling mendukung dalam tantangan mengajar. Di tengah beban profesi sebagai guru, kami menemukan kekuatan dalam satu sama lain. Curahan hati tentang murid-murid dan impian masa depan memperkuat ikatan kami. Cinta bukan tentang kesempurnaan, melainkan tentang saling bertahan dan melengkapi.',
       color: 'rose',
     },
     {
@@ -30,7 +30,7 @@ const LoveStory = () => {
       date: '2026',
       icon: '💍',
       description:
-        'Dengan keyakinan yang semakin kuat dan restu dari keluarga, kami mengikat sebuah janji dalam tunangan sebagai langkah serius menuju masa depan bersama.',
+        'Dengan keyakinan yang semakin kuat dan restu dari keluarga, kami memutuskan untuk melangkah ke tahap serius. Komitmen kami bukan hanya sebagai pasangan, tetapi juga sebagai mitra yang berbagi visi untuk terus memberi inspirasi dan kasih sayang-baik di kelas maupun dalam rumah tangga.',
       color: 'pink',
     },
     {
@@ -39,7 +39,7 @@ const LoveStory = () => {
       date: '11 April 2026',
       icon: '💒',
       description:
-        'Kini, dengan niat yang sama dan doa yang menyertai, kami memilih untuk menyempurnakan perjalanan ini dalam ikatan suci pernikahan. Sebagai awal baru untuk berbagi hidup, tumbuh, dan menua bersama.',
+        'Dari guru yang saling mendukung, kami menjadi pasangan hidup. Kini kami memilih untuk menyempurnakan perjalanan ini dalam ikatan suci pernikahan. Dengan hati penuh kasih sayang, kami memulai rumah tangga sebagai awal baru untuk berbagi hidup, tumbuh, dan menua bersama.',
       color: 'rose',
     },
   ];
