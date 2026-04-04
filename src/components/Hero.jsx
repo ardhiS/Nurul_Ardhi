@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Hero = ({ onOpenInvitation }) => {
+const Hero = ({ onOpenInvitation, guestName }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenInvitation = () => {
@@ -135,6 +135,18 @@ const Hero = ({ onOpenInvitation }) => {
               </p>
             </div>
           </div>
+
+          {/* Guest Name Display */}
+          {guestName && (
+            <div className='mb-4 opacity-0 animate-hero-reveal [animation-delay:650ms]'>
+              <p className='text-pink-500 text-xs md:text-sm font-medium tracking-wide mb-1'>
+                Kepada Bapak/Ibu/Saudara/i
+              </p>
+              <p className='text-pink-700 text-lg md:text-xl font-semibold'>
+                {guestName}
+              </p>
+            </div>
+          )}
 
           {/* CTA Button */}
           {!isOpen && (

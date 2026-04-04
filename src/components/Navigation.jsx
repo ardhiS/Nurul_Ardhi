@@ -9,6 +9,7 @@ const Navigation = () => {
     { id: 'hero', label: 'Home', icon: '🏠' },
     { id: 'couple', label: 'Mempelai', icon: '💑' },
     { id: 'event', label: 'Acara', icon: '📅' },
+    { id: 'love-story', label: 'Kisah', icon: '💕' },
     { id: 'gallery', label: 'Galeri', icon: '📷' },
     { id: 'rsvp', label: 'RSVP', icon: '💌' },
     { id: 'gift', label: 'Hadiah', icon: '🎁' },
@@ -85,7 +86,7 @@ const Navigation = () => {
       >
         <div className='bg-white/95 backdrop-blur-md border-t border-pink-100 shadow-[0_-4px_20px_-4px_rgba(127,46,69,0.15)] px-2 py-2 safe-area-pb animate-slide-up'>
           <ul className='flex items-center justify-around'>
-            {navItems.slice(0, 5).map((item) => (
+            {navItems.slice(0, 6).map((item) => (
               <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}

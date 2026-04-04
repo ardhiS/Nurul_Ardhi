@@ -14,7 +14,7 @@ const Event = () => {
     {
       title: 'Akad Nikah',
       date: 'Sabtu, 11 April 2026',
-      time: '08:00 - 09:00 WIB',
+      time: '09:00 - 10:00 WIB',
       location: 'Villa AJ by Arkadia',
       address: 'Villa AJ by Arkadia',
       description:
@@ -25,7 +25,7 @@ const Event = () => {
     {
       title: 'Resepsi',
       date: 'Sabtu, 11 April 2026',
-      time: '11:00 - 15:00 WIB',
+      time: '10:00 - Selesai',
       location: 'Villa AJ by Arkadia',
       address: 'Villa AJ by Arkadia',
       description:

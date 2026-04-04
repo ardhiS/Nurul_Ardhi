@@ -31,6 +31,20 @@ const Footer = () => {
       />
 
       <div className='section-container relative z-10'>
+        {/* Closing Islamic Greeting */}
+        <div className='text-center mb-8'>
+          <div className='bg-pink-600/30 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto border border-pink-500/30'>
+            <p className='text-pink-100 text-sm md:text-base leading-relaxed mb-3'>
+              Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila
+              Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas
+              kehadiran dan doa restunya, kami mengucapkan terima kasih.
+            </p>
+            <h3 className='font-serif text-2xl md:text-3xl text-white'>
+              Wassalamu'alaikum Wr. Wb.
+            </h3>
+          </div>
+        </div>
+
         {/* Main Footer Content */}
         <div className='text-center mb-8'>
           <div className='mb-6'>

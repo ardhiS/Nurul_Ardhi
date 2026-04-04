@@ -33,6 +33,52 @@ const Couple = () => {
       </div>
 
       <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
+        {/* Bismillah & Islamic Greeting */}
+        <div
+          className={`text-center mb-8 scroll-reveal ${
+            isVisible ? 'is-visible' : ''
+          }`}
+        >
+          <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto shadow-lg border border-pink-100'>
+            {/* Bismillah with Arabic Calligraphy */}
+            <div className='mb-4'>
+              <svg
+                className='w-48 md:w-64 mx-auto mb-2'
+                viewBox='0 0 200 60'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <text
+                  x='50%'
+                  y='50%'
+                  dominantBaseline='middle'
+                  textAnchor='middle'
+                  className='fill-pink-600'
+                  style={{
+                    fontFamily: "'Amiri', 'Traditional Arabic', serif",
+                    fontSize: '28px',
+                    fontWeight: '400',
+                  }}
+                >
+                  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+                </text>
+              </svg>
+              <p className='text-pink-500 text-xs md:text-sm font-light italic mb-4'>
+                Dengan Nama Allah Yang Maha Pengasih lagi Maha Penyayang
+              </p>
+              <div className='w-16 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-4'></div>
+            </div>
+
+            <h3 className='font-serif text-2xl md:text-3xl text-pink-700 mb-3'>
+              Assalamu'alaikum Wr. Wb.
+            </h3>
+            <p className='text-pink-600 text-sm md:text-base leading-relaxed'>
+              Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i
+              serta kerabat sekalian untuk menghadiri acara pernikahan kami.
+            </p>
+          </div>
+        </div>
+
         {/* Section Header */}
         <div
           className={`text-center mb-12 md:mb-16 scroll-reveal ${

@@ -268,6 +268,33 @@ const RSVP = () => {
               </p>
             </div>
 
+            {/* Attendance Counter */}
+            {wishes.length > 0 && (
+              <div className='flex justify-center gap-4 mb-8'>
+                <div className='bg-green-50 border border-green-200 rounded-xl px-6 py-4 text-center min-w-[120px] shadow-sm'>
+                  <div className='text-2xl md:text-3xl font-bold text-green-600'>
+                    {wishes.filter((w) => w.attendance === 'hadir').length}
+                  </div>
+                  <div className='text-green-600 text-sm font-medium flex items-center justify-center gap-1'>
+                    <span>✅</span>
+                    <span>Hadir</span>
+                  </div>
+                </div>
+                <div className='bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 text-center min-w-[120px] shadow-sm'>
+                  <div className='text-2xl md:text-3xl font-bold text-gray-600'>
+                    {
+                      wishes.filter((w) => w.attendance === 'tidak_hadir')
+                        .length
+                    }
+                  </div>
+                  <div className='text-gray-600 text-sm font-medium flex items-center justify-center gap-1'>
+                    <span>🙏</span>
+                    <span>Tidak Hadir</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Wish Form */}
             <div className='bg-white rounded-2xl shadow-lg p-6 border border-pink-200 mb-8'>
               <form onSubmit={handleWishSubmit} className='space-y-5'>
