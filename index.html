@@ -43,7 +43,14 @@
     />
 
     <title>Undangan Pernikahan - Nurul & Ardhi | 11 April 2026</title>
-  </head>
+
+    <!-- Preload above-the-fold components for faster loading -->
+    <!-- Hero: Sync load (no preload needed) -->
+    <link rel="modulepreload" href="/src/components/Couple.jsx" />
+    <link rel="modulepreload" href="/src/components/Event.jsx" />
+    <link rel="modulepreload" href="/src/components/Countdown.jsx" />
+    <!-- Gallery often seen early in scroll, so preload it -->
+    <link rel="modulepreload" href="/src/components/Gallery.jsx" />
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

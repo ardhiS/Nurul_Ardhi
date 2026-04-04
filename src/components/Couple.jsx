@@ -100,10 +100,10 @@ const Couple = () => {
 
         {/* Couple Cards Grid */}
         <div className='flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch'>
-          {/* Bride Card */}
+          {/* Bride Card - Entrance from Left */}
           <div
             className={`w-full md:w-1/2 scroll-reveal-scale ${
-              isVisible ? 'is-visible reveal-delay-2' : ''
+              isVisible ? 'is-visible reveal-delay-2 animate-entrance-left' : ''
             } group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200`}
           >
             {/* Subtle glow effect */}
@@ -169,10 +169,12 @@ const Couple = () => {
             </div>
           </div>
 
-          {/* Groom Card */}
+          {/* Groom Card - Entrance from Right */}
           <div
             className={`w-full md:w-1/2 scroll-reveal-scale ${
-              isVisible ? 'is-visible reveal-delay-3' : ''
+              isVisible
+                ? 'is-visible reveal-delay-3 animate-entrance-right'
+                : ''
             } group relative bg-gradient-to-b from-white via-white to-accent-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(24,144,255,0.15)] border border-accent-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(24,144,255,0.25)] hover:border-accent-200`}
           >
             {/* Subtle glow effect */}

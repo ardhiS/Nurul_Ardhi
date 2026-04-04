@@ -1,12 +1,13 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import Hero from './components/Hero';
-import Couple from './components/Couple';
-import Event from './components/Event';
-import Countdown from './components/Countdown';
 import Navigation from './components/Navigation';
 import MusicPlayer from './components/MusicPlayer';
+import PrefetchBoundary from './components/PrefetchBoundary';
+import Hero from './components/Hero'; // Sync import - Hero loads immediately
 
-// Lazy load below-the-fold components for better performance
+// Lazy load below-the-fold components with preload hints for above-the-fold
+const Couple = lazy(() => import('./components/Couple'));
+const Event = lazy(() => import('./components/Event'));
+const Countdown = lazy(() => import('./components/Countdown'));
 const LoveStory = lazy(() => import('./components/LoveStory'));
 const Gallery = lazy(() => import('./components/Gallery'));
 const RSVP = lazy(() => import('./components/RSVP'));
@@ -57,25 +58,48 @@ function App() {
 
       {/* Main Content */}
       <main>
+        {/* Hero - Sync load (immediate display) */}
         <Hero onOpenInvitation={handleOpenInvitation} guestName={guestName} />
-        <Couple />
-        <Event />
-        <Countdown />
+
+        {/* Above-the-fold components with preload */}
         <Suspense fallback={<SectionLoader />}>
-          <LoveStory />
+          <Couple />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
-          <Gallery />
+          <Event />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
-          <RSVP />
+          <Countdown />
         </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <Gift />
-        </Suspense>
+
+        {/* Below-the-fold components with smart prefetch */}
+        <PrefetchBoundary
+          Component={LoveStory}
+          sectionId='love-story'
+          prefetchDistance={500}
+          fallback={<SectionLoader />}
+        />
+        <PrefetchBoundary
+          Component={Gallery}
+          sectionId='gallery'
+          prefetchDistance={500}
+          fallback={<SectionLoader />}
+        />
+        <PrefetchBoundary
+          Component={RSVP}
+          sectionId='rsvp'
+          prefetchDistance={500}
+          fallback={<SectionLoader />}
+        />
+        <PrefetchBoundary
+          Component={Gift}
+          sectionId='gift'
+          prefetchDistance={500}
+          fallback={<SectionLoader />}
+        />
       </main>
 
-      {/* Footer */}
+      {/* Footer - Standard lazy load */}
       <Suspense fallback={<SectionLoader />}>
         <Footer />
       </Suspense>
