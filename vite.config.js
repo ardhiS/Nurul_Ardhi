@@ -22,14 +22,8 @@ export default defineConfig({
         },
       },
     },
-    // Minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.log in production
-        drop_debugger: true,
-      },
-    },
+    // Minification using esbuild (built-in, no terser needed)
+    minify: 'esbuild',
     // CSS code splitting
     cssCodeSplit: true,
     // Target modern browsers for smaller bundle
