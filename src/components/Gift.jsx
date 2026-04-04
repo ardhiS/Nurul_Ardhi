@@ -293,7 +293,7 @@ const Gift = () => {
             "Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fi khair"
           </p>
           <p className='text-pink-500 text-base mt-2'>
-            Semoga Allah memberkahi kalian berdua dan menyatukan kalian dalam
+            Semoga Allah memberkahi kami berdua dan menyatukan kami dalam
             kebaikan
           </p>
         </div>

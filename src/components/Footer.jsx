@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import FloralDecoration from './FloralDecoration';
 
 const Footer = () => {
@@ -68,25 +69,22 @@ const Footer = () => {
           {/* Social Media Links */}
           <div className='flex justify-center space-x-6 mb-8'>
             <a
-              href='#'
+              href='https://www.instagram.com/ardhi_sasongko/'
+              target='_blank'
+              rel='noopener noreferrer'
               className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
               aria-label='Instagram'
             >
-              <span className='text-xl'>📷</span>
+              <FaInstagram className='text-xl text-white' />
             </a>
             <a
-              href='#'
-              className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
-              aria-label='Facebook'
-            >
-              <span className='text-xl'>👥</span>
-            </a>
-            <a
-              href='#'
+              href='https://wa.me/6281298924977'
+              target='_blank'
+              rel='noopener noreferrer'
               className='w-12 h-12 bg-pink-600 hover:bg-accent-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:shadow-lg'
               aria-label='WhatsApp'
             >
-              <span className='text-xl'>💬</span>
+              <FaWhatsapp className='text-xl text-white' />
             </a>
           </div>
 

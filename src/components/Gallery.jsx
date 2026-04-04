@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
@@ -240,18 +241,22 @@ const Gallery = () => {
             </p>
             <div className='flex justify-center space-x-4'>
               <a
-                href='#'
+                href='https://www.instagram.com/ardhi_sasongko/'
+                target='_blank'
+                rel='noopener noreferrer'
                 className='w-10 h-10 bg-pink-500 hover:bg-pink-600 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110'
                 aria-label='Instagram'
               >
-                <span className='text-sm'>📷</span>
+                <FaInstagram className='w-5 h-5' />
               </a>
               <a
-                href='#'
-                className='w-10 h-10 bg-accent-500 hover:bg-accent-600 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110'
-                aria-label='Facebook'
+                href='https://wa.me/6281298924977'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110'
+                aria-label='WhatsApp'
               >
-                <span className='text-sm'>👥</span>
+                <FaWhatsapp className='w-5 h-5' />
               </a>
             </div>
           </div>

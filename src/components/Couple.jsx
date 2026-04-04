@@ -228,7 +228,7 @@ const Couple = () => {
                 Putra dari
               </p>
               <p className='font-serif font-medium text-accent-700 text-sm md:text-sm mb-4 md:mb-5 leading-tight'>
-                Bapak Alm. Suparman & Ibu Alm. Tuminem
+                Alm. Bapak Suparman & Alm. Ibu Tuminem
               </p>
               <div className='bg-gradient-to-br from-accent-50 to-accent-100/50 rounded-lg md:rounded-xl p-3 md:p-4 border border-accent-100'>
                 <p className='text-accent-700/90 leading-relaxed text-sm md:text-sm italic font-light'>

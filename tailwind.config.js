@@ -135,6 +135,8 @@ export default {
 
       animation: {
         'fade-in': 'fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+        'fade-in-delayed':
+          'fadeInDelayed 0.8s cubic-bezier(0.4, 0, 0.2, 1) 900ms forwards',
         'slide-up': 'slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
         float: 'float 6s ease-in-out infinite',
         'float-slow': 'floatSlow 4s ease-in-out infinite',
@@ -148,6 +150,10 @@ export default {
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeInDelayed: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
