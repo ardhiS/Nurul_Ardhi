@@ -1,15 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Hero from './components/Hero';
 import Couple from './components/Couple';
 import Event from './components/Event';
 import Countdown from './components/Countdown';
-import Gallery from './components/Gallery';
-import LoveStory from './components/LoveStory';
-import RSVP from './components/RSVP';
-import Gift from './components/Gift';
-import Footer from './components/Footer';
-import MusicPlayer from './components/MusicPlayer';
 import Navigation from './components/Navigation';
+import MusicPlayer from './components/MusicPlayer';
+
+// Lazy load below-the-fold components for better performance
+const LoveStory = lazy(() => import('./components/LoveStory'));
+const Gallery = lazy(() => import('./components/Gallery'));
+const RSVP = lazy(() => import('./components/RSVP'));
+const Gift = lazy(() => import('./components/Gift'));
+const Footer = lazy(() => import('./components/Footer'));
+
+// Loading fallback component
+const SectionLoader = () => (
+  <div className='py-16 flex items-center justify-center'>
+    <div className='animate-pulse flex flex-col items-center'>
+      <div className='w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin'></div>
+      <p className='mt-4 text-pink-400 text-sm'>Memuat...</p>
+    </div>
+  </div>
+);
 
 // nandain doang
 function App() {
@@ -49,14 +61,24 @@ function App() {
         <Couple />
         <Event />
         <Countdown />
-        <LoveStory />
-        <Gallery />
-        <RSVP />
-        <Gift />
+        <Suspense fallback={<SectionLoader />}>
+          <LoveStory />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Gallery />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <RSVP />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Gift />
+        </Suspense>
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Suspense fallback={<SectionLoader />}>
+        <Footer />
+      </Suspense>
 
       {/* Music Player */}
       <MusicPlayer shouldAutoPlay={isInvitationOpened} />

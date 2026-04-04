@@ -1,22 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 import { supabase } from '../lib/supabase';
 
 const RSVP = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
-
-  // RSVP form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    attendance: '',
-    guests: '1',
-    message: '',
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Guest wishes/messages state
   const [wishFormData, setWishFormData] = useState({
@@ -60,29 +48,24 @@ const RSVP = () => {
     fetchWishes();
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // Handle wish form input changes
-  const handleWishInputChange = (e) => {
+  // Handle wish form input changes - memoized
+  const handleWishInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setWishFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
     // Clear error when user starts typing
-    if (wishErrors[name]) {
-      setWishErrors((prev) => ({ ...prev, [name]: '' }));
-    }
-  };
+    setWishErrors((prev) => {
+      if (prev[name]) {
+        return { ...prev, [name]: '' };
+      }
+      return prev;
+    });
+  }, []);
 
-  // Validate wish form
-  const validateWishForm = () => {
+  // Validate wish form - memoized
+  const validateWishForm = useCallback(() => {
     const errors = {};
     if (!wishFormData.guestName.trim()) {
       errors.guestName = 'Nama harus diisi';
@@ -95,61 +78,68 @@ const RSVP = () => {
     }
     setWishErrors(errors);
     return Object.keys(errors).length === 0;
-  };
+  }, [
+    wishFormData.guestName,
+    wishFormData.attendance,
+    wishFormData.wishMessage,
+  ]);
 
   // Handle wish form submission
-  const handleWishSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateWishForm()) return;
+  const handleWishSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (!validateWishForm()) return;
 
-    setIsWishSubmitting(true);
+      setIsWishSubmitting(true);
 
-    try {
-      const { data, error } = await supabase
-        .from('wishes')
-        .insert([
-          {
-            guest_name: wishFormData.guestName.trim(),
-            attendance: wishFormData.attendance,
-            guest_count:
-              wishFormData.attendance === 'hadir'
-                ? parseInt(wishFormData.guestCount)
-                : 0,
-            wish_message: wishFormData.wishMessage.trim(),
-          },
-        ])
-        .select();
+      try {
+        const { data, error } = await supabase
+          .from('wishes')
+          .insert([
+            {
+              guest_name: wishFormData.guestName.trim(),
+              attendance: wishFormData.attendance,
+              guest_count:
+                wishFormData.attendance === 'hadir'
+                  ? parseInt(wishFormData.guestCount)
+                  : 0,
+              wish_message: wishFormData.wishMessage.trim(),
+            },
+          ])
+          .select();
 
-      if (error) throw error;
+        if (error) throw error;
 
-      // Add new wish to the list (newest first)
-      const newWish = {
-        id: data[0].id,
-        guestName: data[0].guest_name,
-        attendance: data[0].attendance,
-        guestCount: data[0].guest_count,
-        wishMessage: data[0].wish_message,
-        timestamp: new Date(data[0].created_at),
-      };
-      setWishes((prev) => [newWish, ...prev]);
+        // Add new wish to the list (newest first)
+        const newWish = {
+          id: data[0].id,
+          guestName: data[0].guest_name,
+          attendance: data[0].attendance,
+          guestCount: data[0].guest_count,
+          wishMessage: data[0].wish_message,
+          timestamp: new Date(data[0].created_at),
+        };
+        setWishes((prev) => [newWish, ...prev]);
 
-      // Reset form
-      setWishFormData({
-        guestName: '',
-        attendance: '',
-        guestCount: '1',
-        wishMessage: '',
-      });
-    } catch (error) {
-      console.error('Error submitting wish:', error);
-      alert('Gagal mengirim ucapan. Silakan coba lagi.');
-    } finally {
-      setIsWishSubmitting(false);
-    }
-  };
+        // Reset form
+        setWishFormData({
+          guestName: '',
+          attendance: '',
+          guestCount: '1',
+          wishMessage: '',
+        });
+      } catch (error) {
+        console.error('Error submitting wish:', error);
+        alert('Gagal mengirim ucapan. Silakan coba lagi.');
+      } finally {
+        setIsWishSubmitting(false);
+      }
+    },
+    [validateWishForm, wishFormData],
+  );
 
-  // Format timestamp for display
-  const formatTimestamp = (date) => {
+  // Format timestamp for display - memoized
+  const formatTimestamp = useCallback((date) => {
     const now = new Date();
     const diff = now - date;
     const minutes = Math.floor(diff / 60000);
@@ -166,62 +156,16 @@ const RSVP = () => {
       month: 'long',
       year: 'numeric',
     });
-  };
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitted(true);
-      setIsSubmitting(false);
-
-      // Reset form after showing success
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          attendance: '',
-          guests: '1',
-          message: '',
-        });
-      }, 3000);
-    }, 2000);
-  };
-
-  if (isSubmitted) {
-    return (
-      <section
-        id='rsvp'
-        className='py-16 md:py-24 bg-gradient-to-br from-pink-50 via-white to-pink-100 relative overflow-hidden'
-      >
-        {/* Background decorative elements */}
-        <div className='absolute inset-0 opacity-20'>
-          <div className='absolute top-20 right-20 w-64 h-64 bg-pink-300 rounded-full blur-3xl'></div>
-          <div className='absolute bottom-20 left-20 w-48 h-48 bg-accent-300 rounded-full blur-3xl'></div>
-        </div>
-
-        <div className='section-container relative z-10'>
-          <div className='max-w-2xl mx-auto text-center scroll-reveal is-visible'>
-            <div className='bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-pink-200'>
-              <div className='text-6xl mb-6'>🎉</div>
-              <h3 className='font-serif text-3xl text-pink-700 mb-4'>
-                Terima Kasih!
-              </h3>
-              <p className='text-pink-600 text-lg mb-6'>
-                Konfirmasi kehadiran Anda telah berhasil dikirim. Kami sangat
-                menantikan kehadiran Anda di hari bahagia kami.
-              </p>
-              <div className='w-20 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto'></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Memoized attendance counts
+  const attendanceCounts = useMemo(
+    () => ({
+      attending: wishes.filter((w) => w.attendance === 'hadir').length,
+      notAttending: wishes.filter((w) => w.attendance === 'tidak_hadir').length,
+    }),
+    [wishes],
+  );
 
   return (
     <section
@@ -273,7 +217,7 @@ const RSVP = () => {
               <div className='flex justify-center gap-4 mb-8'>
                 <div className='bg-green-50 border border-green-200 rounded-xl px-6 py-4 text-center min-w-[120px] shadow-sm'>
                   <div className='text-2xl md:text-3xl font-bold text-green-600'>
-                    {wishes.filter((w) => w.attendance === 'hadir').length}
+                    {attendanceCounts.attending}
                   </div>
                   <div className='text-green-600 text-sm font-medium flex items-center justify-center gap-1'>
                     <span>✅</span>
@@ -282,10 +226,7 @@ const RSVP = () => {
                 </div>
                 <div className='bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 text-center min-w-[120px] shadow-sm'>
                   <div className='text-2xl md:text-3xl font-bold text-gray-600'>
-                    {
-                      wishes.filter((w) => w.attendance === 'tidak_hadir')
-                        .length
-                    }
+                    {attendanceCounts.notAttending}
                   </div>
                   <div className='text-gray-600 text-sm font-medium flex items-center justify-center gap-1'>
                     <span>🙏</span>

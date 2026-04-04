@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 /**
  * Reusable Floral SVG Decoration Component
@@ -91,4 +91,4 @@ const FloralDecoration = ({
   );
 };
 
-export default FloralDecoration;
+export default memo(FloralDecoration);

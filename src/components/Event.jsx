@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, memo } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
@@ -21,6 +21,9 @@ const Event = () => {
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
       icon: '🕌',
       color: 'gold',
+      // For calendar
+      startDateTime: '2026-04-11T09:00:00',
+      endDateTime: '2026-04-11T10:00:00',
     },
     {
       title: 'Resepsi',
@@ -32,17 +35,66 @@ const Event = () => {
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
       icon: '🎉',
       color: 'maroon',
+      // For calendar
+      startDateTime: '2026-04-11T10:00:00',
+      endDateTime: '2026-04-11T15:00:00',
     },
   ];
 
-  const openMaps = (address) => {
+  const openMaps = useCallback((address) => {
     const encodedAddress = encodeURIComponent(address);
     window.open(
       `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
       '_blank',
       'noopener,noreferrer',
     );
-  };
+  }, []);
+
+  // Add to Google Calendar
+  const addToGoogleCalendar = useCallback((event) => {
+    const startDate = event.startDateTime
+      .replace(/[-:]/g, '')
+      .replace('T', 'T');
+    const endDate = event.endDateTime.replace(/[-:]/g, '').replace('T', 'T');
+
+    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+      `Pernikahan Nurul & Ardhi - ${event.title}`,
+    )}&dates=${startDate.replace('T', 'T')}00/${endDate.replace('T', 'T')}00&details=${encodeURIComponent(
+      event.description,
+    )}&location=${encodeURIComponent(event.location)}&ctz=Asia/Jakarta`;
+
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }, []);
+
+  // Download ICS file for other calendars
+  const downloadICS = useCallback((event) => {
+    const formatDateForICS = (dateStr) => {
+      return dateStr.replace(/[-:]/g, '');
+    };
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nurul & Ardhi Wedding//ID
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Jakarta:${formatDateForICS(event.startDateTime)}
+DTEND;TZID=Asia/Jakarta:${formatDateForICS(event.endDateTime)}
+SUMMARY:Pernikahan Nurul & Ardhi - ${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], {
+      type: 'text/calendar;charset=utf-8',
+    });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `wedding-nurul-ardhi-${event.title.toLowerCase().replace(' ', '-')}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  }, []);
 
   return (
     <section
@@ -215,6 +267,26 @@ const Event = () => {
                     </svg>
                     <span>Buka di Google Maps</span>
                   </button>
+
+                  {/* Add to Calendar Buttons */}
+                  <div className='flex gap-2 mt-3'>
+                    <button
+                      onClick={() => addToGoogleCalendar(event)}
+                      className='flex-1 py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 bg-pink-100 hover:bg-pink-200 text-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-1'
+                      aria-label={`Tambahkan ${event.title} ke Google Calendar`}
+                    >
+                      <span>📅</span>
+                      <span>Google Calendar</span>
+                    </button>
+                    <button
+                      onClick={() => downloadICS(event)}
+                      className='flex-1 py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-1'
+                      aria-label={`Download file kalender untuk ${event.title}`}
+                    >
+                      <span>⬇️</span>
+                      <span>Unduh .ics</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -366,4 +438,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default memo(Event);
