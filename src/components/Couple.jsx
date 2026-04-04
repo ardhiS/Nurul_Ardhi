@@ -32,18 +32,18 @@ const Couple = () => {
         <div className='absolute top-1/2 left-1/2 w-32 h-32 bg-pink-400 rounded-full blur-3xl'></div>
       </div>
 
-      <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
+      <div className='max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 relative z-10'>
         {/* Bismillah & Islamic Greeting */}
         <div
-          className={`text-center mb-8 scroll-reveal ${
+          className={`text-center mb-6 sm:mb-8 scroll-reveal ${
             isVisible ? 'is-visible' : ''
           }`}
         >
-          <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto shadow-lg border border-pink-100'>
+          <div className='bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-2xl p-3 sm:p-4 md:p-6 max-w-2xl mx-auto shadow-md sm:shadow-lg border border-pink-100'>
             {/* Bismillah with Arabic Calligraphy */}
-            <div className='mb-4'>
+            <div className='mb-2 sm:mb-3 md:mb-4'>
               <svg
-                className='w-48 md:w-64 mx-auto mb-2'
+                className='w-32 sm:w-40 md:w-48 lg:w-64 mx-auto mb-1 sm:mb-2'
                 viewBox='0 0 200 60'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
@@ -63,16 +63,16 @@ const Couple = () => {
                   بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
                 </text>
               </svg>
-              <p className='text-pink-500 text-xs md:text-sm font-light italic mb-4'>
+              <p className='text-pink-500 text-[10px] sm:text-xs md:text-sm font-light italic mb-2 sm:mb-3 md:mb-4'>
                 Dengan Nama Allah Yang Maha Pengasih lagi Maha Penyayang
               </p>
-              <div className='w-16 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-4'></div>
+              <div className='w-12 sm:w-14 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-2 sm:mb-3 md:mb-4'></div>
             </div>
 
-            <h3 className='font-serif text-2xl md:text-3xl text-pink-700 mb-3'>
+            <h3 className='font-serif text-lg sm:text-xl md:text-3xl text-pink-700 mb-2 sm:mb-2 md:mb-3'>
               Assalamu'alaikum Wr. Wb.
             </h3>
-            <p className='text-pink-600 text-sm md:text-base leading-relaxed'>
+            <p className='text-pink-600 text-xs sm:text-sm md:text-base leading-relaxed'>
               Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i
               serta kerabat sekalian untuk menghadiri acara pernikahan kami.
             </p>
