@@ -39,27 +39,22 @@ const Couple = () => {
           <div className='bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-2xl p-3 sm:p-4 md:p-6 max-w-2xl mx-auto shadow-md sm:shadow-lg border border-pink-100'>
             {/* Bismillah with Arabic Calligraphy */}
             <div data-reveal='fade' data-delay='1' className='mb-2 sm:mb-3 md:mb-4'>
-              <svg
-                className='w-32 sm:w-40 md:w-48 lg:w-64 mx-auto mb-1 sm:mb-2'
-                viewBox='0 0 200 60'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <text
-                  x='50%'
-                  y='50%'
-                  dominantBaseline='middle'
-                  textAnchor='middle'
-                  className='fill-pink-600'
+              <div className='w-full overflow-hidden'>
+                <p
+                  className='text-pink-600 text-center mb-1 sm:mb-2 leading-relaxed'
                   style={{
-                    fontFamily: "'Amiri', 'Traditional Arabic', serif",
-                    fontSize: '28px',
+                    fontFamily: "'Amiri', 'Traditional Arabic', 'Scheherazade New', serif",
+                    fontSize: 'clamp(1rem, 5.5vw, 1.75rem)',
                     fontWeight: '400',
+                    direction: 'rtl',
+                    unicodeBidi: 'embed',
+                    letterSpacing: '0.03em',
+                    lineHeight: '2',
                   }}
                 >
                   بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-                </text>
-              </svg>
+                </p>
+              </div>
               <p className='text-pink-500 text-[10px] sm:text-xs md:text-sm font-light italic mb-2 sm:mb-3 md:mb-4'>
                 Dengan Nama Allah Yang Maha Pengasih lagi Maha Penyayang
               </p>

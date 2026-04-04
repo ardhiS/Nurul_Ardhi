@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
+// Static data moved outside to avoid re-creation on every render
+const navItems = [
+  { id: 'hero', label: 'Home', icon: '🏠' },
+  { id: 'couple', label: 'Mempelai', icon: '💑' },
+  { id: 'event', label: 'Acara', icon: '📅' },
+  { id: 'love-story', label: 'Kisah', icon: '💕' },
+  { id: 'gallery', label: 'Galeri', icon: '📷' },
+  { id: 'rsvp', label: 'RSVP', icon: '💌' },
+  { id: 'gift', label: 'Hadiah', icon: '🎁' },
+];
+
+// Pre-compute reversed section IDs once (module-level)
+const sectionIdsReversed = [...navItems.map((item) => item.id)].reverse();
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navItems = [
-    { id: 'hero', label: 'Home', icon: '🏠' },
-    { id: 'couple', label: 'Mempelai', icon: '💑' },
-    { id: 'event', label: 'Acara', icon: '📅' },
-    { id: 'love-story', label: 'Kisah', icon: '💕' },
-    { id: 'gallery', label: 'Galeri', icon: '📷' },
-    { id: 'rsvp', label: 'RSVP', icon: '💌' },
-    { id: 'gift', label: 'Hadiah', icon: '🎁' },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       // Check if scrolled past hero
       setIsScrolled(window.scrollY > 100);
 
-      // Determine active section
-      const sections = navItems.map((item) => item.id);
-      for (const sectionId of sections.reverse()) {
+      // Determine active section using pre-computed reversed array (no mutation)
+      for (const sectionId of sectionIdsReversed) {
         const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -36,7 +39,7 @@ const Navigation = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, []); // navItems is stable (module-level), no deps needed
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);

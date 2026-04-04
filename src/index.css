@@ -402,94 +402,6 @@ html {
   }
 }
 
-@layer utilities {
-  /* Scroll reveal base classes */
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  .scroll-reveal.is-visible {
-    animation: scrollReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Scroll reveal child - for staggered elements */
-  .scroll-reveal-child {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  .scroll-reveal-child.is-visible {
-    animation: scrollRevealChild 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Directional variants */
-  .scroll-reveal-left {
-    opacity: 0;
-    transform: translateX(-24px);
-  }
-
-  .scroll-reveal-left.is-visible {
-    animation: scrollRevealLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  .scroll-reveal-right {
-    opacity: 0;
-    transform: translateX(24px);
-  }
-
-  .scroll-reveal-right.is-visible {
-    animation: scrollRevealRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Scale variant */
-  .scroll-reveal-scale {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  .scroll-reveal-scale.is-visible {
-    animation: scrollRevealScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Animation delay utilities for staggering */
-  .reveal-delay-1 {
-    animation-delay: 100ms;
-  }
-  .reveal-delay-2 {
-    animation-delay: 200ms;
-  }
-  .reveal-delay-3 {
-    animation-delay: 300ms;
-  }
-  .reveal-delay-4 {
-    animation-delay: 400ms;
-  }
-  .reveal-delay-5 {
-    animation-delay: 500ms;
-  }
-  .reveal-delay-6 {
-    animation-delay: 600ms;
-  }
-  .reveal-delay-7 {
-    animation-delay: 700ms;
-  }
-  .reveal-delay-8 {
-    animation-delay: 800ms;
-  }
-
-  /* Entrance animations for couple cards */
-  .animate-entrance-left {
-    animation: entranceLeft 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.3s;
-  }
-
-  .animate-entrance-right {
-    animation: entranceRight 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.3s;
-  }
-}
-
 /* Entrance animation from left */
 @keyframes entranceLeft {
   0% {
@@ -522,15 +434,6 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .scroll-reveal,
-  .scroll-reveal-child,
-  .scroll-reveal-left,
-  .scroll-reveal-right,
-  .scroll-reveal-scale {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
 
@@ -942,26 +845,6 @@ a:focus-visible {
 }
 
 /* ========================================
-   SLIDE UP ANIMATION
-   For mobile navigation
-   ======================================== */
-
-@keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out forwards;
-}
-
-/* ========================================
    TABULAR NUMS
    Monospace numbers for countdown
    ======================================== */
@@ -1104,88 +987,4 @@ a:focus-visible {
   }
 }
 
-/* ========================================
-   LEGACY SCROLL REVEAL ANIMATIONS
-   Kept for backward compatibility
-   ======================================== */
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-80px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(80px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes zoomInSmooth {
-  0% {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeInUpZoom {
-  0% {
-    opacity: 0;
-    transform: translateY(60px) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.scroll-reveal-fade-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.scroll-reveal-slide-left {
-  animation: slideInLeft 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.scroll-reveal-slide-right {
-  animation: slideInRight 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.scroll-reveal-zoom {
-  animation: zoomInSmooth 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.scroll-reveal-fade-up-zoom {
-  animation: fadeInUpZoom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.scroll-reveal-delay-1 { animation-delay: 0.1s; }
-.scroll-reveal-delay-2 { animation-delay: 0.2s; }
-.scroll-reveal-delay-3 { animation-delay: 0.3s; }
-.scroll-reveal-delay-4 { animation-delay: 0.4s; }
-.scroll-reveal-delay-5 { animation-delay: 0.5s; }

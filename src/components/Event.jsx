@@ -155,11 +155,17 @@ END:VCALENDAR`;
                 <div className='absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16'></div>
                 <div className='absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12'></div>
                 <div className='relative z-10'>
-                  <div className='mb-3 flex justify-center'>
+                  <div className='mb-4 flex justify-center'>
                     {event.icon === 'mosque' ? (
-                      <FaBuilding className='w-10 h-10 text-white/90' />
+                      /* Akad Nikah — frosted white circle, glow warna accent biru theme */
+                      <div className='w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/40 shadow-[0_0_28px_rgba(45,117,184,0.5)]'>
+                        <FaBuilding className='w-9 h-9 text-white drop-shadow-md' />
+                      </div>
                     ) : (
-                      <FaRing className='w-10 h-10 text-white/90' />
+                      /* Resepsi — frosted white circle, glow warna primary maroon theme */
+                      <div className='w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/40 shadow-[0_0_28px_rgba(205,45,86,0.5)]'>
+                        <FaRing className='w-9 h-9 text-white drop-shadow-md' />
+                      </div>
                     )}
                   </div>
                   <h3 className='font-serif text-2xl md:text-3xl font-semibold mb-2'>

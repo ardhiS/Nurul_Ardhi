@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
+// Stable constant outside component — prevents useEffect from re-running every render
+const WEDDING_DATE_MS = new Date('2026-04-11T08:00:00').getTime();
+
 const Countdown = () => {
   const sectionRef = useRef(null);
   useAutoReveal(sectionRef);
@@ -15,12 +18,10 @@ const Countdown = () => {
   const [isEnded, setIsEnded] = useState(false);
   const [prevTimeLeft, setPrevTimeLeft] = useState(null);
 
-  const weddingDate = new Date('2026-04-11T08:00:00').getTime();
-
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
-      const distance = weddingDate - now;
+      const distance = WEDDING_DATE_MS - now;
 
       if (distance > 0) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -42,7 +43,7 @@ const Countdown = () => {
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
-  }, [weddingDate]);
+  }, []); // WEDDING_DATE_MS is a stable module-level constant
 
   const timeUnits = [
     {

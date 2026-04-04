@@ -3,10 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 const MusicPlayer = ({ shouldAutoPlay = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef(null);
 
-  // Sample audio URL (in real app, use actual wedding music)
   const audioSrc = './music/akad.mp3';
 
   useEffect(() => {
@@ -22,14 +20,6 @@ const MusicPlayer = ({ shouldAutoPlay = false }) => {
     if (audioRef.current) {
       audioRef.current.loop = true;
       audioRef.current.volume = 0.3;
-
-      // Handle audio loaded
-      const handleCanPlay = () => setIsLoaded(true);
-      audioRef.current.addEventListener('canplaythrough', handleCanPlay);
-
-      return () => {
-        audioRef.current?.removeEventListener('canplaythrough', handleCanPlay);
-      };
     }
   }, []);
 
@@ -62,9 +52,7 @@ const MusicPlayer = ({ shouldAutoPlay = false }) => {
   };
 
   const handleAudioError = () => {
-    console.log('Audio failed to load');
     setIsPlaying(false);
-    setIsLoaded(false);
   };
 
   if (!showPlayer) {
