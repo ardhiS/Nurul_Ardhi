@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 /**
  * Custom hook for scroll-based reveal animations
@@ -68,6 +68,80 @@ export const useStaggeredReveal = (
   };
 
   return { ref, isVisible, getChildDelay };
+};
+
+/**
+ * Hook that auto-attaches scroll reveal to all [data-reveal] children
+ * Uses a single IntersectionObserver for all elements — very performant
+ * Each element animates independently when it enters the viewport
+ * Also watches for dynamically-added elements via MutationObserver
+ */
+export const useAutoReveal = (containerRef) => {
+  useEffect(() => {
+    const container = containerRef?.current;
+    if (!container) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      container.querySelectorAll('[data-reveal]').forEach((el) => {
+        el.classList.add('revealed');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px',
+      }
+    );
+
+    // Observe a single element if not already revealed
+    const observeElement = (el) => {
+      if (!el.classList.contains('revealed')) {
+        observer.observe(el);
+      }
+    };
+
+    // Initial scan: observe all [data-reveal] children
+    const timer = requestAnimationFrame(() => {
+      container.querySelectorAll('[data-reveal]').forEach(observeElement);
+    });
+
+    // Watch for dynamically-added [data-reveal] elements (e.g., async data)
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType !== Node.ELEMENT_NODE) continue;
+          // Check the node itself
+          if (node.hasAttribute?.('data-reveal')) {
+            observeElement(node);
+          }
+          // Check its children
+          node.querySelectorAll?.('[data-reveal]')?.forEach(observeElement);
+        }
+      }
+    });
+
+    mutationObserver.observe(container, { childList: true, subtree: true });
+
+    return () => {
+      cancelAnimationFrame(timer);
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [containerRef]);
 };
 
 export default useScrollReveal;

@@ -1,9 +1,10 @@
-import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useRef } from 'react';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
 const Couple = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
 
   return (
     <section
@@ -34,14 +35,10 @@ const Couple = () => {
 
       <div className='max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 relative z-10'>
         {/* Bismillah & Islamic Greeting */}
-        <div
-          className={`text-center mb-6 sm:mb-8 scroll-reveal ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
+        <div data-reveal='zoom-up' className='text-center mb-6 sm:mb-8'>
           <div className='bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-2xl p-3 sm:p-4 md:p-6 max-w-2xl mx-auto shadow-md sm:shadow-lg border border-pink-100'>
             {/* Bismillah with Arabic Calligraphy */}
-            <div className='mb-2 sm:mb-3 md:mb-4'>
+            <div data-reveal='fade' data-delay='1' className='mb-2 sm:mb-3 md:mb-4'>
               <svg
                 className='w-32 sm:w-40 md:w-48 lg:w-64 mx-auto mb-1 sm:mb-2'
                 viewBox='0 0 200 60'
@@ -69,10 +66,10 @@ const Couple = () => {
               <div className='w-12 sm:w-14 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto mb-2 sm:mb-3 md:mb-4'></div>
             </div>
 
-            <h3 className='font-serif text-lg sm:text-xl md:text-3xl text-pink-700 mb-2 sm:mb-2 md:mb-3'>
+            <h3 data-reveal='fade-up' data-delay='2' className='font-serif text-lg sm:text-xl md:text-3xl text-pink-700 mb-2 sm:mb-2 md:mb-3'>
               Assalamu'alaikum Wr. Wb.
             </h3>
-            <p className='text-pink-600 text-xs sm:text-sm md:text-base leading-relaxed'>
+            <p data-reveal='fade-up' data-delay='3' className='text-pink-600 text-xs sm:text-sm md:text-base leading-relaxed'>
               Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i
               serta kerabat sekalian untuk menghadiri acara pernikahan kami.
             </p>
@@ -80,19 +77,15 @@ const Couple = () => {
         </div>
 
         {/* Section Header */}
-        <div
-          className={`text-center mb-12 md:mb-16 scroll-reveal-fade-up-zoom ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <p className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
+        <div className='text-center mb-12 md:mb-16'>
+          <p data-reveal='fade-up' className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
             We're Getting Married
           </p>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
+          <h2 data-reveal='fade-up' data-delay='1' className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             The Happy Couple
           </h2>
-          <div className='w-24 h-1 bg-linear-to-r from-pink-300 via-pink-500 to-pink-300 mx-auto mb-4 rounded-full'></div>
-          <p className='text-pink-600 text-base md:text-lg max-w-2xl mx-auto'>
+          <div data-reveal='zoom' data-delay='2' className='w-24 h-1 bg-linear-to-r from-pink-300 via-pink-500 to-pink-300 mx-auto mb-4 rounded-full'></div>
+          <p data-reveal='fade-up' data-delay='3' className='text-pink-600 text-base md:text-lg max-w-2xl mx-auto'>
             Dua hati yang bersatu dalam cinta, siap memulai perjalanan hidup
             bersama
           </p>
@@ -102,9 +95,9 @@ const Couple = () => {
         <div className='flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch'>
           {/* Bride Card - Slide in from Left */}
           <div
-            className={`w-full md:w-1/2 scroll-reveal-slide-left scroll-reveal-delay-1 ${
-              isVisible ? 'is-visible' : ''
-            } group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200`}
+            data-reveal='fade-left'
+            data-delay='1'
+            className='w-full md:w-1/2 group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200'
           >
             {/* Subtle glow effect */}
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none'>
@@ -137,7 +130,7 @@ const Couple = () => {
                 {/* Soft inner frame */}
                 <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-full pointer-events-none'></div>
               </div>
-              {/* Decorative Badge - Pojok kanan bawah */}
+              {/* Decorative Badge */}
               <div className='absolute bottom-0 right-1/4 w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-pink-400/50 border-4 border-white ring-2 ring-pink-200/50 z-10'>
                 <span className='text-lg md:text-xl'>💍</span>
               </div>
@@ -171,9 +164,9 @@ const Couple = () => {
 
           {/* Groom Card - Slide in from Right */}
           <div
-            className={`w-full md:w-1/2 scroll-reveal-slide-right scroll-reveal-delay-2 ${
-              isVisible ? 'is-visible' : ''
-            } group relative bg-gradient-to-b from-white via-white to-accent-50/30 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(10,122,230,0.1)] border border-accent-100/50 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(10,122,230,0.15)] hover:border-accent-200`}
+            data-reveal='fade-right'
+            data-delay='3'
+            className='w-full md:w-1/2 group relative bg-gradient-to-b from-white via-white to-accent-50/30 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(10,122,230,0.1)] border border-accent-100/50 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(10,122,230,0.15)] hover:border-accent-200'
           >
             {/* Subtle glow effect */}
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none'>
@@ -206,7 +199,7 @@ const Couple = () => {
                 {/* Soft inner frame */}
                 <div className='absolute inset-0 ring-1 ring-inset ring-white/40 rounded-full pointer-events-none'></div>
               </div>
-              {/* Decorative Badge - Pojok kiri bawah */}
+              {/* Decorative Badge */}
               <div className='absolute bottom-0 left-1/4 w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-accent-400 to-accent-500 rounded-full flex items-center justify-center shadow-lg shadow-accent-400/50 border-4 border-white ring-2 ring-accent-200/50 z-10'>
                 <span className='text-lg md:text-xl'>💍</span>
               </div>
@@ -240,31 +233,23 @@ const Couple = () => {
         </div>
 
         {/* Heart Connector - Center */}
-        <div
-          className={`flex justify-center my-8 md:my-12 scroll-reveal-scale ${
-            isVisible ? 'is-visible reveal-delay-4' : ''
-          }`}
-        >
+        <div data-reveal='zoom' data-delay='2' className='flex justify-center my-8 md:my-12'>
           <div className='w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-xl animate-hero-float'>
             <span className='text-2xl md:text-3xl'>💕</span>
           </div>
         </div>
 
         {/* Love Quote */}
-        <div
-          className={`text-center scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-5' : ''
-          }`}
-        >
+        <div data-reveal='zoom-up' data-duration='slow' className='text-center'>
           <div className='bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl p-6 md:p-10 max-w-3xl mx-auto shadow-xl'>
-            <div className='text-pink-200 text-4xl mb-4'>❝</div>
-            <blockquote className='font-script text-xl md:text-2xl lg:text-3xl text-white mb-4 leading-relaxed'>
+            <div data-reveal='fade-down' data-delay='2' className='text-pink-200 text-4xl mb-4'>❝</div>
+            <blockquote data-reveal='fade-up' data-delay='3' className='font-script text-xl md:text-2xl lg:text-3xl text-white mb-4 leading-relaxed'>
               Dan di antara tanda-tanda-Nya ialah Dia menciptakan untukmu
               isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan
               merasa tenteram kepadanya
             </blockquote>
-            <div className='w-16 h-0.5 bg-pink-300 mx-auto mb-4'></div>
-            <cite className='text-pink-200 font-medium text-sm md:text-base'>
+            <div data-reveal='zoom' data-delay='4' className='w-16 h-0.5 bg-pink-300 mx-auto mb-4'></div>
+            <cite data-reveal='fade-up' data-delay='5' className='text-pink-200 font-medium text-sm md:text-base'>
               QS. Ar-Rum: 21
             </cite>
           </div>

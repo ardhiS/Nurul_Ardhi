@@ -1,9 +1,10 @@
-import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useRef } from 'react';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
 const LoveStory = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
 
   const loveStoryTimeline = [
     {
@@ -51,18 +52,8 @@ const LoveStory = () => {
       className='py-12 sm:py-16 md:py-24 bg-linear-to-br from-pink-50 via-white to-rose-50 relative overflow-hidden'
     >
       {/* Floral SVG Decorations */}
-      <FloralDecoration
-        position='top-right'
-        variant='pink'
-        size='md'
-        opacity='opacity-30'
-      />
-      <FloralDecoration
-        position='bottom-left'
-        variant='pink'
-        size='sm'
-        opacity='opacity-25'
-      />
+      <FloralDecoration position='top-right' variant='pink' size='md' opacity='opacity-30' />
+      <FloralDecoration position='bottom-left' variant='pink' size='sm' opacity='opacity-25' />
 
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
@@ -73,19 +64,15 @@ const LoveStory = () => {
 
       <div className='section-container relative z-10'>
         {/* Section Header */}
-        <div
-          className={`text-center mb-8 sm:mb-10 lg:mb-16 scroll-reveal-fade-up-zoom px-3 sm:px-0 ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <p className='text-pink-500 text-[10px] sm:text-xs font-medium tracking-widest uppercase mb-1.5 sm:mb-2'>
+        <div className='text-center mb-8 sm:mb-10 lg:mb-16 px-3 sm:px-0'>
+          <p data-reveal='fade-up' className='text-pink-500 text-[10px] sm:text-xs font-medium tracking-widest uppercase mb-1.5 sm:mb-2'>
             Our Journey
           </p>
-          <h2 className='text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-serif font-semibold text-pink-800 mb-2 sm:mb-3'>
+          <h2 data-reveal='fade-up' data-delay='1' className='text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-serif font-semibold text-pink-800 mb-2 sm:mb-3'>
             Love Story
           </h2>
-          <div className='w-16 sm:w-20 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-2 sm:mb-3'></div>
-          <p className='text-pink-600 text-xs sm:text-sm lg:text-lg max-w-2xl mx-auto leading-relaxed'>
+          <div data-reveal='zoom' data-delay='2' className='w-16 sm:w-20 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-2 sm:mb-3'></div>
+          <p data-reveal='fade-up' data-delay='3' className='text-pink-600 text-xs sm:text-sm lg:text-lg max-w-2xl mx-auto leading-relaxed'>
             Perjalanan cinta yang membawa kami ke hari bahagia ini
           </p>
         </div>
@@ -99,13 +86,9 @@ const LoveStory = () => {
             {loveStoryTimeline.map((story, index) => (
               <div
                 key={story.id}
-                className={`relative flex flex-col lg:flex-row items-start lg:items-center mb-6 sm:mb-10 last:mb-0 scroll-reveal-fade-up ${
-                  index % 2 === 0
-                    ? 'scroll-reveal-slide-left'
-                    : 'scroll-reveal-slide-right'
-                } scroll-reveal-delay-${Math.min(index + 1, 5)} ${
-                  isVisible ? 'is-visible' : ''
-                }`}
+                data-reveal={index % 2 === 0 ? 'fade-left' : 'fade-right'}
+                data-delay={String(Math.min(index + 1, 5))}
+                className='relative flex flex-col lg:flex-row items-start lg:items-center mb-6 sm:mb-10 last:mb-0'
               >
                 {/* Timeline Dot */}
                 <div className='absolute left-0 sm:left-1 lg:left-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-lg border-3 sm:border-4 border-pink-300 flex items-center justify-center transform -translate-x-1/2 z-10 transition-all duration-300 hover:scale-110 hover:border-pink-500 shrink-0'>
@@ -161,14 +144,10 @@ const LoveStory = () => {
         </div>
 
         {/* Closing Quote */}
-        <div
-          className={`text-center mt-8 sm:mt-10 lg:mt-16 scroll-reveal-fade-up-zoom px-3 sm:px-4 ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
+        <div data-reveal='zoom-up' data-duration='slow' className='text-center mt-8 sm:mt-10 lg:mt-16 px-3 sm:px-4'>
           <div className='bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-2xl p-3 sm:p-5 lg:p-8 max-w-2xl mx-auto shadow-md lg:shadow-lg border border-pink-100'>
-            <span className='text-2xl sm:text-3xl mb-2 sm:mb-3 block'>💕</span>
-            <p className='text-pink-700 text-xs sm:text-sm lg:text-lg italic font-serif leading-relaxed'>
+            <span data-reveal='zoom' data-delay='1' className='text-2xl sm:text-3xl mb-2 sm:mb-3 block'>💕</span>
+            <p data-reveal='fade-up' data-delay='2' className='text-pink-700 text-xs sm:text-sm lg:text-lg italic font-serif leading-relaxed'>
               "Tidak ada yang spesial dalam cerita kami. Tapi kami sangat
               spesial untuk satu sama lain. Dan kami bersyukur, dipertemukan
               Allah di waktu terbaik."

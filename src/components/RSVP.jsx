@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 import { supabase } from '../lib/supabase';
 
 const RSVP = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
 
-  // Guest wishes/messages state
   const [wishFormData, setWishFormData] = useState({
     guestName: '',
     attendance: '',
@@ -18,7 +18,6 @@ const RSVP = () => {
   const [isWishSubmitting, setIsWishSubmitting] = useState(false);
   const [isLoadingWishes, setIsLoadingWishes] = useState(true);
 
-  // Load wishes from Supabase on mount
   useEffect(() => {
     const fetchWishes = async () => {
       try {
@@ -48,14 +47,12 @@ const RSVP = () => {
     fetchWishes();
   }, []);
 
-  // Handle wish form input changes - memoized
   const handleWishInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setWishFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     setWishErrors((prev) => {
       if (prev[name]) {
         return { ...prev, [name]: '' };
@@ -64,7 +61,6 @@ const RSVP = () => {
     });
   }, []);
 
-  // Validate wish form - memoized
   const validateWishForm = useCallback(() => {
     const errors = {};
     if (!wishFormData.guestName.trim()) {
@@ -84,7 +80,6 @@ const RSVP = () => {
     wishFormData.wishMessage,
   ]);
 
-  // Handle wish form submission
   const handleWishSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -110,7 +105,6 @@ const RSVP = () => {
 
         if (error) throw error;
 
-        // Add new wish to the list (newest first)
         const newWish = {
           id: data[0].id,
           guestName: data[0].guest_name,
@@ -121,7 +115,6 @@ const RSVP = () => {
         };
         setWishes((prev) => [newWish, ...prev]);
 
-        // Reset form
         setWishFormData({
           guestName: '',
           attendance: '',
@@ -138,7 +131,6 @@ const RSVP = () => {
     [validateWishForm, wishFormData],
   );
 
-  // Format timestamp for display - memoized
   const formatTimestamp = useCallback((date) => {
     const now = new Date();
     const diff = now - date;
@@ -158,7 +150,6 @@ const RSVP = () => {
     });
   }, []);
 
-  // Memoized attendance counts
   const attendanceCounts = useMemo(
     () => ({
       attending: wishes.filter((w) => w.attendance === 'hadir').length,
@@ -174,18 +165,8 @@ const RSVP = () => {
       className='py-16 md:py-24 bg-gradient-to-br from-pink-50 via-white to-pink-100 relative overflow-hidden'
     >
       {/* Floral SVG Decorations */}
-      <FloralDecoration
-        position='top-left'
-        variant='pink'
-        size='md'
-        opacity='opacity-40'
-      />
-      <FloralDecoration
-        position='bottom-right'
-        variant='pink'
-        size='md'
-        opacity='opacity-40'
-      />
+      <FloralDecoration position='top-left' variant='pink' size='md' opacity='opacity-40' />
+      <FloralDecoration position='bottom-right' variant='pink' size='md' opacity='opacity-40' />
 
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
@@ -196,25 +177,21 @@ const RSVP = () => {
 
       <div className='section-container relative z-10'>
         <div className='max-w-2xl mx-auto'>
-          <div
-            className={`mt-16 scroll-reveal-fade-up-zoom ${
-              isVisible ? 'is-visible' : ''
-            }`}
-          >
+          <div className='mt-16'>
             {/* Section Header */}
             <div className='text-center mb-8'>
-              <h3 className='text-2xl md:text-3xl font-serif font-semibold text-pink-800 mb-2'>
+              <h3 data-reveal='fade-up' className='text-2xl md:text-3xl font-serif font-semibold text-pink-800 mb-2'>
                 Ucapan & Doa
               </h3>
-              <div className='w-16 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-3'></div>
-              <p className='text-pink-600 text-sm md:text-base'>
+              <div data-reveal='zoom' data-delay='1' className='w-16 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-3'></div>
+              <p data-reveal='fade-up' data-delay='2' className='text-pink-600 text-sm md:text-base'>
                 Berikan ucapan dan doa terbaik untuk kedua mempelai
               </p>
             </div>
 
             {/* Attendance Counter */}
             {wishes.length > 0 && (
-              <div className='flex justify-center gap-4 mb-8'>
+              <div data-reveal='zoom-up' className='flex justify-center gap-4 mb-8'>
                 <div className='bg-green-50 border border-green-200 rounded-xl px-6 py-4 text-center min-w-[120px] shadow-sm'>
                   <div className='text-2xl md:text-3xl font-bold text-green-600'>
                     {attendanceCounts.attending}
@@ -237,10 +214,10 @@ const RSVP = () => {
             )}
 
             {/* Wish Form */}
-            <div className='bg-white rounded-2xl shadow-lg p-6 border border-pink-200 mb-8'>
+            <div data-reveal='fade-up' data-delay='1' className='bg-white rounded-2xl shadow-lg p-6 border border-pink-200 mb-8'>
               <form onSubmit={handleWishSubmit} className='space-y-5'>
                 {/* Guest Name */}
-                <div>
+                <div data-reveal='fade-up' data-delay='2'>
                   <label
                     htmlFor='guestName'
                     className='block text-pink-700 font-medium mb-2 text-sm'
@@ -268,7 +245,7 @@ const RSVP = () => {
                 </div>
 
                 {/* Attendance Status */}
-                <div>
+                <div data-reveal='fade-up' data-delay='3'>
                   <label className='block text-pink-700 font-medium mb-2 text-sm'>
                     Status Kehadiran *
                   </label>
@@ -321,7 +298,7 @@ const RSVP = () => {
                   )}
                 </div>
 
-                {/* Number of Guests - Only show if attending */}
+                {/* Number of Guests */}
                 {wishFormData.attendance === 'hadir' && (
                   <div className='animate-fade-in'>
                     <label
@@ -350,7 +327,7 @@ const RSVP = () => {
                 )}
 
                 {/* Wish Message */}
-                <div>
+                <div data-reveal='fade-up' data-delay='4'>
                   <label
                     htmlFor='wishMessage'
                     className='block text-pink-700 font-medium mb-2 text-sm'
@@ -378,11 +355,7 @@ const RSVP = () => {
                 </div>
 
                 {/* Additional Info */}
-                <div
-                  className={`mt-8 text-center scroll-reveal ${
-                    isVisible ? 'is-visible reveal-delay-3' : ''
-                  }`}
-                >
+                <div data-reveal='fade-up' data-delay='5' className='mt-8 text-center'>
                   <div className='bg-white rounded-2xl p-6 shadow-lg border border-pink-200'>
                     <h4 className='font-serif text-lg text-pink-700 mb-3'>
                       Informasi Tambahan
@@ -414,19 +387,8 @@ const RSVP = () => {
                         fill='none'
                         viewBox='0 0 24 24'
                       >
-                        <circle
-                          className='opacity-25'
-                          cx='12'
-                          cy='12'
-                          r='10'
-                          stroke='currentColor'
-                          strokeWidth='4'
-                        ></circle>
-                        <path
-                          className='opacity-75'
-                          fill='currentColor'
-                          d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                        ></path>
+                        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+                        <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
                       </svg>
                       Mengirim...
                     </span>
@@ -443,8 +405,7 @@ const RSVP = () => {
             {/* Wishes List */}
             <div className='space-y-4'>
               {wishes.length === 0 ? (
-                /* Empty State */
-                <div className='bg-gradient-to-br from-pink-50 to-white rounded-2xl p-8 border border-pink-100 text-center'>
+                <div data-reveal='fade-up' className='bg-gradient-to-br from-pink-50 to-white rounded-2xl p-8 border border-pink-100 text-center'>
                   <div className='text-5xl mb-4'>💝</div>
                   <p className='text-pink-600 font-medium mb-1'>
                     Belum ada ucapan
@@ -455,16 +416,15 @@ const RSVP = () => {
                   </p>
                 </div>
               ) : (
-                /* Wishes Cards */
-                wishes.map((wish) => (
+                wishes.map((wish, index) => (
                   <div
                     key={wish.id}
+                    data-reveal='fade-up'
+                    data-delay={String(Math.min(index + 1, 3))}
                     className='bg-white rounded-2xl p-5 shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300'
                   >
-                    {/* Header: Name + Badge + Time */}
                     <div className='flex items-start justify-between mb-3'>
                       <div className='flex items-center gap-3'>
-                        {/* Avatar */}
                         <div className='w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 flex items-center justify-center text-white font-semibold text-sm shadow-sm'>
                           {wish.guestName.charAt(0).toUpperCase()}
                         </div>
@@ -472,7 +432,6 @@ const RSVP = () => {
                           <h5 className='font-semibold text-pink-800 text-sm md:text-base'>
                             {wish.guestName}
                           </h5>
-                          {/* Attendance Badge */}
                           <div className='flex items-center gap-2 flex-wrap'>
                             <span
                               className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
@@ -494,12 +453,10 @@ const RSVP = () => {
                           </div>
                         </div>
                       </div>
-                      {/* Timestamp */}
                       <span className='text-pink-400 text-xs whitespace-nowrap'>
                         {formatTimestamp(wish.timestamp)}
                       </span>
                     </div>
-                    {/* Message */}
                     <p className='text-pink-700 text-sm leading-relaxed pl-13'>
                       {wish.wishMessage}
                     </p>
@@ -510,7 +467,7 @@ const RSVP = () => {
 
             {/* Wishes Count */}
             {wishes.length > 0 && (
-              <div className='text-center mt-6'>
+              <div data-reveal='fade' className='text-center mt-6'>
                 <p className='text-pink-500 text-sm'>
                   💕 {wishes.length} ucapan dari tamu undangan
                 </p>

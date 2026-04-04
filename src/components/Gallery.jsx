@@ -1,87 +1,27 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
 const Gallery = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
-  // Gallery images - 12 photos
   const galleryImages = [
-    {
-      id: 1,
-      src: './photo/1.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 1',
-      category: 'prewedding',
-    },
-    {
-      id: 2,
-      src: './photo/2.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 2',
-      category: 'prewedding',
-    },
-    {
-      id: 3,
-      src: './photo/3.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 3',
-      category: 'prewedding',
-    },
-    {
-      id: 4,
-      src: './photo/4.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 4',
-      category: 'prewedding',
-    },
-    {
-      id: 5,
-      src: './photo/5.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 5',
-      category: 'prewedding',
-    },
-    {
-      id: 6,
-      src: './photo/6.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 6',
-      category: 'prewedding',
-    },
-    {
-      id: 7,
-      src: './photo/7.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 7',
-      category: 'engagement',
-    },
-    {
-      id: 8,
-      src: './photo/8.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 8',
-      category: 'engagement',
-    },
-    {
-      id: 9,
-      src: './photo/9.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 9',
-      category: 'engagement',
-    },
-    {
-      id: 10,
-      src: './photo/10.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 10',
-      category: 'engagement',
-    },
-    {
-      id: 11,
-      src: './photo/11.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 11',
-      category: 'engagement',
-    },
-    {
-      id: 12,
-      src: './photo/12.jpeg',
-      alt: 'Foto Nurul dan Ardhi - 12',
-      category: 'engagement',
-    },
+    { id: 1, src: './photo/1.jpeg', alt: 'Foto Nurul dan Ardhi - 1', category: 'prewedding' },
+    { id: 2, src: './photo/2.jpeg', alt: 'Foto Nurul dan Ardhi - 2', category: 'prewedding' },
+    { id: 3, src: './photo/3.jpeg', alt: 'Foto Nurul dan Ardhi - 3', category: 'prewedding' },
+    { id: 4, src: './photo/4.jpeg', alt: 'Foto Nurul dan Ardhi - 4', category: 'prewedding' },
+    { id: 5, src: './photo/5.jpeg', alt: 'Foto Nurul dan Ardhi - 5', category: 'prewedding' },
+    { id: 6, src: './photo/6.jpeg', alt: 'Foto Nurul dan Ardhi - 6', category: 'prewedding' },
+    { id: 7, src: './photo/7.jpeg', alt: 'Foto Nurul dan Ardhi - 7', category: 'engagement' },
+    { id: 8, src: './photo/8.jpeg', alt: 'Foto Nurul dan Ardhi - 8', category: 'engagement' },
+    { id: 9, src: './photo/9.jpeg', alt: 'Foto Nurul dan Ardhi - 9', category: 'engagement' },
+    { id: 10, src: './photo/10.jpeg', alt: 'Foto Nurul dan Ardhi - 10', category: 'engagement' },
+    { id: 11, src: './photo/11.jpeg', alt: 'Foto Nurul dan Ardhi - 11', category: 'engagement' },
+    { id: 12, src: './photo/12.jpeg', alt: 'Foto Nurul dan Ardhi - 12', category: 'engagement' },
   ];
 
   const handleImageError = useCallback((imageId) => {
@@ -98,6 +38,14 @@ const Gallery = () => {
     document.body.style.overflow = 'unset';
   };
 
+  // Alternate reveal directions for gallery grid items
+  const getRevealDirection = (index) => {
+    const col = index % 3; // 3 columns on md+
+    if (col === 0) return 'fade-left';
+    if (col === 2) return 'fade-right';
+    return 'fade-up';
+  };
+
   return (
     <section
       id='gallery'
@@ -105,18 +53,8 @@ const Gallery = () => {
       className='py-16 md:py-24 bg-gradient-to-br from-pink-100 via-white to-pink-50 relative overflow-hidden'
     >
       {/* Floral SVG Decorations */}
-      <FloralDecoration
-        position='top-left'
-        variant='pink'
-        size='sm'
-        opacity='opacity-35'
-      />
-      <FloralDecoration
-        position='bottom-right'
-        variant='pink'
-        size='md'
-        opacity='opacity-40'
-      />
+      <FloralDecoration position='top-left' variant='pink' size='sm' opacity='opacity-35' />
+      <FloralDecoration position='bottom-right' variant='pink' size='md' opacity='opacity-40' />
 
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
@@ -127,19 +65,15 @@ const Gallery = () => {
 
       <div className='section-container relative z-10'>
         {/* Section Header */}
-        <div
-          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <p className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
+        <div className='text-center mb-16'>
+          <p data-reveal='fade-up' className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
             Our Moments
           </p>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
+          <h2 data-reveal='fade-up' data-delay='1' className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             Our Gallery
           </h2>
-          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
-          <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
+          <div data-reveal='zoom' data-delay='2' className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
+          <p data-reveal='fade-up' data-delay='3' className='text-pink-600 text-lg max-w-2xl mx-auto'>
             Momen-momen indah yang telah kami lalui bersama, menuju hari yang
             paling berkesan
           </p>
@@ -155,14 +89,10 @@ const Gallery = () => {
             <div
               key={image.id}
               role='listitem'
-              className={`scroll-reveal-zoom scroll-reveal-delay-${Math.min(
-                index + 1,
-                5,
-              )} ${
-                isVisible ? 'is-visible' : ''
-              } group cursor-pointer relative overflow-hidden rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2`}
+              data-reveal={getRevealDirection(index)}
+              data-delay={String(Math.min((index % 3) + 1, 3))}
+              className='group cursor-pointer relative overflow-hidden rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2'
             >
-              {/* Image Container */}
               <button
                 onClick={() => !imageErrors[image.id] && openLightbox(image)}
                 className='relative overflow-hidden bg-pink-50 aspect-square w-full focus:outline-none'
@@ -170,13 +100,10 @@ const Gallery = () => {
                 disabled={imageErrors[image.id]}
               >
                 {imageErrors[image.id] ? (
-                  /* Error Placeholder */
                   <div className='absolute inset-0 flex items-center justify-center bg-pink-50'>
                     <div className='text-center p-4'>
                       <span className='text-3xl block mb-2'>🖼️</span>
-                      <p className='text-pink-400 text-xs'>
-                        Foto tidak tersedia
-                      </p>
+                      <p className='text-pink-400 text-xs'>Foto tidak tersedia</p>
                     </div>
                   </div>
                 ) : (
@@ -190,30 +117,16 @@ const Gallery = () => {
                   />
                 )}
 
-                {/* Overlay */}
                 {!imageErrors[image.id] && (
                   <div className='absolute inset-0 bg-gradient-to-t from-pink-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300'>
                     <div className='absolute bottom-0 left-0 right-0 p-3 md:p-4'>
                       <div className='flex items-center justify-between'>
                         <span className='text-white font-medium text-xs md:text-sm'>
-                          {image.category === 'prewedding'
-                            ? 'Pre-Wedding'
-                            : 'Engagement'}
+                          {image.category === 'prewedding' ? 'Pre-Wedding' : 'Engagement'}
                         </span>
                         <div className='w-8 h-8 md:w-10 md:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center'>
-                          <svg
-                            className='w-4 h-4 md:w-5 md:h-5 text-white'
-                            fill='none'
-                            stroke='currentColor'
-                            viewBox='0 0 24 24'
-                            aria-hidden='true'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7'
-                            />
+                          <svg className='w-4 h-4 md:w-5 md:h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
+                            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7' />
                           </svg>
                         </div>
                       </div>
@@ -226,20 +139,16 @@ const Gallery = () => {
         </div>
 
         {/* View More Button */}
-        <div
-          className={`text-center mt-12 scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-7' : ''
-          }`}
-        >
+        <div data-reveal='zoom-up' data-duration='slow' className='text-center mt-12'>
           <div className='bg-white rounded-2xl p-8 max-w-md mx-auto border border-pink-200 shadow-lg'>
-            <div className='text-4xl mb-4'>📸</div>
-            <h4 className='font-serif text-xl text-pink-700 mb-3'>
+            <div data-reveal='zoom' data-delay='1' className='text-4xl mb-4'>📸</div>
+            <h4 data-reveal='fade-up' data-delay='2' className='font-serif text-xl text-pink-700 mb-3'>
               Lebih Banyak Foto
             </h4>
-            <p className='text-pink-500 text-sm mb-4'>
+            <p data-reveal='fade-up' data-delay='3' className='text-pink-500 text-sm mb-4'>
               Ikuti media sosial kami untuk melihat foto-foto lainnya
             </p>
-            <div className='flex justify-center space-x-4'>
+            <div data-reveal='fade-up' data-delay='4' className='flex justify-center space-x-4'>
               <a
                 href='https://www.instagram.com/ardhi_sasongko/'
                 target='_blank'
@@ -274,29 +183,16 @@ const Gallery = () => {
           aria-label='Lightbox galeri foto'
         >
           <div className='relative max-w-4xl max-h-full'>
-            {/* Close Button */}
             <button
               onClick={closeLightbox}
               className='absolute -top-12 right-0 text-white hover:text-pink-400 transition-colors duration-300 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-full'
               aria-label='Tutup lightbox'
             >
-              <svg
-                className='w-8 h-8'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                aria-hidden='true'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
+              <svg className='w-8 h-8' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
               </svg>
             </button>
 
-            {/* Image */}
             <div className='relative'>
               <img
                 src={selectedImage.src}
@@ -304,17 +200,11 @@ const Gallery = () => {
                 className='max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl'
                 onClick={(e) => e.stopPropagation()}
               />
-
-              {/* Image Info */}
               <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-pink-900/80 to-transparent p-4 md:p-6 rounded-b-lg'>
                 <p className='text-white font-medium text-base md:text-lg'>
-                  {selectedImage.category === 'prewedding'
-                    ? 'Pre-Wedding Session'
-                    : 'Engagement Session'}
+                  {selectedImage.category === 'prewedding' ? 'Pre-Wedding Session' : 'Engagement Session'}
                 </p>
-                <p className='text-pink-200 text-sm mt-1'>
-                  {selectedImage.alt}
-                </p>
+                <p className='text-pink-200 text-sm mt-1'>{selectedImage.alt}</p>
               </div>
             </div>
           </div>

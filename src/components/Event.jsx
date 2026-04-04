@@ -1,9 +1,10 @@
-import React, { useCallback, memo } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useCallback, memo, useRef } from 'react';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
 const Event = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
 
   // Google Maps embed URL for Villa AJ Puncak
   const mapsEmbedUrl =
@@ -21,7 +22,6 @@ const Event = () => {
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
       icon: '🕌',
       color: 'gold',
-      // For calendar
       startDateTime: '2026-04-11T09:00:00',
       endDateTime: '2026-04-11T10:00:00',
     },
@@ -35,7 +35,6 @@ const Event = () => {
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
       icon: '🎉',
       color: 'maroon',
-      // For calendar
       startDateTime: '2026-04-11T10:00:00',
       endDateTime: '2026-04-11T15:00:00',
     },
@@ -50,7 +49,6 @@ const Event = () => {
     );
   }, []);
 
-  // Add to Google Calendar
   const addToGoogleCalendar = useCallback((event) => {
     const startDate = event.startDateTime
       .replace(/[-:]/g, '')
@@ -66,7 +64,6 @@ const Event = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   }, []);
 
-  // Download ICS file for other calendars
   const downloadICS = useCallback((event) => {
     const formatDateForICS = (dateStr) => {
       return dateStr.replace(/[-:]/g, '');
@@ -125,19 +122,15 @@ END:VCALENDAR`;
 
       <div className='section-container relative z-10'>
         {/* Section Header */}
-        <div
-          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <p className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
+        <div className='text-center mb-16'>
+          <p data-reveal='fade-up' className='text-pink-500 text-sm font-medium tracking-widest uppercase mb-2'>
             Save The Date
           </p>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
+          <h2 data-reveal='fade-up' data-delay='1' className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             Wedding Events
           </h2>
-          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
-          <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
+          <div data-reveal='zoom' data-delay='2' className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
+          <p data-reveal='fade-up' data-delay='3' className='text-pink-600 text-lg max-w-2xl mx-auto'>
             Kami dengan senang hati mengundang Anda untuk hadir dalam momen
             bahagia kami
           </p>
@@ -147,11 +140,9 @@ END:VCALENDAR`;
           {events.map((event, index) => (
             <div
               key={index}
-              className={`scroll-reveal-fade-up-zoom scroll-reveal-delay-${
-                index + 1
-              } ${
-                isVisible ? 'is-visible' : ''
-              } bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-pink-200`}
+              data-reveal={index === 0 ? 'fade-left' : 'fade-right'}
+              data-delay={String(index * 2 + 1)}
+              className='bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-pink-200'
             >
               {/* Event Header */}
               <div
@@ -177,7 +168,7 @@ END:VCALENDAR`;
               {/* Event Details */}
               <div className='p-6 md:p-8'>
                 {/* Date & Time */}
-                <div className='mb-6'>
+                <div data-reveal='fade-up' data-delay={String(index * 2 + 2)} className='mb-6'>
                   <div
                     className={`inline-flex items-center px-4 py-2 rounded-full mb-3 ${
                       event.color === 'gold'
@@ -217,7 +208,7 @@ END:VCALENDAR`;
                 </div>
 
                 {/* Location */}
-                <div className='mb-6'>
+                <div data-reveal='fade-up' data-delay={String(index * 2 + 3)} className='mb-6'>
                   <div className='flex items-start space-x-3 mb-3'>
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
@@ -294,13 +285,9 @@ END:VCALENDAR`;
         </div>
 
         {/* Google Maps Embed */}
-        <div
-          className={`mt-12 scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-3' : ''
-          }`}
-        >
+        <div data-reveal='zoom-up' data-duration='slow' className='mt-12'>
           <div className='bg-white rounded-2xl p-4 shadow-lg border border-pink-200 max-w-4xl mx-auto'>
-            <h4 className='font-serif text-xl text-pink-700 mb-4 text-center'>
+            <h4 data-reveal='fade-up' className='font-serif text-xl text-pink-700 mb-4 text-center'>
               📍 Lokasi Acara
             </h4>
             <div className='relative w-full h-64 md:h-80 rounded-xl overflow-hidden'>
@@ -313,7 +300,7 @@ END:VCALENDAR`;
                 title='Lokasi Villa AJ Puncak Bogor'
               ></iframe>
             </div>
-            <div className='mt-4 text-center'>
+            <div data-reveal='fade-up' data-delay='2' className='mt-4 text-center'>
               <a
                 href='https://maps.app.goo.gl/ro5G1QCaC35yLDCz6'
                 target='_blank'
@@ -341,13 +328,9 @@ END:VCALENDAR`;
         </div>
 
         {/* Important Notes */}
-        <div
-          className={`mt-16 scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-4' : ''
-          }`}
-        >
+        <div data-reveal='fade-up' data-duration='slow' className='mt-16'>
           <div className='bg-gradient-to-br from-pink-50 to-blue-50 rounded-3xl p-8 md:p-10 shadow-lg border border-pink-200 max-w-3xl mx-auto'>
-            <div className='text-center mb-8'>
+            <div data-reveal='zoom' className='text-center mb-8'>
               <span className='inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full mb-4 shadow-lg'>
                 <svg
                   className='w-8 h-8 text-white'
@@ -368,20 +351,10 @@ END:VCALENDAR`;
               </h4>
             </div>
             <div className='grid md:grid-cols-3 gap-4 md:gap-6'>
-              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
+              <div data-reveal='fade-up' data-delay='1' className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
                 <span className='w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
-                  <svg
-                    className='w-7 h-7 text-white'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
+                  <svg className='w-7 h-7 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' />
                   </svg>
                 </span>
                 <p className='text-pink-700 text-sm md:text-base font-medium'>
@@ -389,20 +362,10 @@ END:VCALENDAR`;
                 </p>
               </div>
 
-              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
+              <div data-reveal='fade-up' data-delay='2' className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow'>
                 <span className='w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
-                  <svg
-                    className='w-7 h-7 text-white'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'
-                    />
+                  <svg className='w-7 h-7 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7' />
                   </svg>
                 </span>
                 <p className='text-pink-700 text-sm md:text-base font-medium'>
@@ -410,20 +373,10 @@ END:VCALENDAR`;
                 </p>
               </div>
 
-              <div className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow md:col-span-1 col-span-full md:mx-0 mx-auto md:w-full w-full max-w-xs'>
+              <div data-reveal='fade-up' data-delay='3' className='flex flex-col items-center text-center bg-white rounded-2xl p-5 shadow-sm border border-pink-100 hover:shadow-md transition-shadow md:col-span-1 col-span-full md:mx-0 mx-auto md:w-full w-full max-w-xs'>
                 <span className='w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center mb-4 shadow-md'>
-                  <svg
-                    className='w-7 h-7 text-white'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
+                  <svg className='w-7 h-7 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' />
                   </svg>
                 </span>
                 <p className='text-pink-700 text-sm md:text-base font-medium'>

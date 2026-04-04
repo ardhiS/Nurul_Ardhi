@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useState, useEffect, useRef } from 'react';
+import { useAutoReveal } from '../hooks/useScrollReveal';
 import FloralDecoration from './FloralDecoration';
 
 const Countdown = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+  useAutoReveal(sectionRef);
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -37,12 +39,8 @@ const Countdown = () => {
       }
     };
 
-    // Initial calculation
     calculateTimeLeft();
-
-    // Only set interval if event hasn't ended
     const timer = setInterval(calculateTimeLeft, 1000);
-
     return () => clearInterval(timer);
   }, [weddingDate]);
 
@@ -83,19 +81,9 @@ const Countdown = () => {
       ref={sectionRef}
       className='py-16 md:py-24 bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 relative overflow-hidden'
     >
-      {/* Floral SVG Decorations - White variant for dark background */}
-      <FloralDecoration
-        position='top-left'
-        variant='white'
-        size='md'
-        opacity='opacity-30'
-      />
-      <FloralDecoration
-        position='bottom-right'
-        variant='white'
-        size='md'
-        opacity='opacity-30'
-      />
+      {/* Floral SVG Decorations */}
+      <FloralDecoration position='top-left' variant='white' size='md' opacity='opacity-30' />
+      <FloralDecoration position='bottom-right' variant='white' size='md' opacity='opacity-30' />
 
       {/* Background decorative elements */}
       <div className='absolute inset-0 opacity-20'>
@@ -106,16 +94,12 @@ const Countdown = () => {
 
       <div className='section-container relative z-10'>
         {/* Section Header */}
-        <div
-          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
-            isVisible ? 'is-visible' : ''
-          }`}
-        >
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white mb-4'>
+        <div className='text-center mb-16'>
+          <h2 data-reveal='fade-up' className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white mb-4'>
             Countdown to Our Special Day
           </h2>
-          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-white to-transparent mx-auto mb-4'></div>
-          <p className='text-pink-100 text-lg max-w-2xl mx-auto'>
+          <div data-reveal='zoom' data-delay='1' className='w-24 h-0.5 bg-linear-to-r from-transparent via-white to-transparent mx-auto mb-4'></div>
+          <p data-reveal='fade-up' data-delay='2' className='text-pink-100 text-lg max-w-2xl mx-auto'>
             Setiap detik yang berlalu membawa kami lebih dekat pada momen indah
             ini
           </p>
@@ -123,8 +107,7 @@ const Countdown = () => {
 
         {/* Countdown Timer */}
         {isEnded ? (
-          /* Event Has Started Message */
-          <div className='text-center scroll-reveal-zoom is-visible'>
+          <div data-reveal='zoom-up' className='text-center'>
             <div className='bg-white/20 backdrop-blur-sm rounded-3xl p-8 md:p-12 max-w-2xl mx-auto border border-white/30'>
               <div className='text-6xl md:text-7xl mb-6'>🎉</div>
               <h3 className='font-serif text-3xl md:text-4xl text-white mb-4'>
@@ -143,14 +126,13 @@ const Countdown = () => {
               return (
                 <div
                   key={unit.key}
-                  className={`text-center relative scroll-reveal-zoom scroll-reveal-delay-${
-                    index + 1
-                  } ${isVisible ? 'is-visible' : ''}`}
+                  data-reveal='zoom-up'
+                  data-delay={String(index + 1)}
+                  className='text-center relative'
                 >
                   <div
                     className={`${unit.bgColor} rounded-3xl shadow-2xl p-6 md:p-8 mb-4 transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
                   >
-                    {/* Decorative corner elements */}
                     <div className='absolute top-0 right-0 w-16 h-16 bg-white/20 rounded-full -translate-y-8 translate-x-8'></div>
                     <div className='absolute bottom-0 left-0 w-12 h-12 bg-white/20 rounded-full translate-y-6 -translate-x-6'></div>
 
@@ -180,17 +162,13 @@ const Countdown = () => {
         )}
 
         {/* Wedding Date Reminder */}
-        <div
-          className={`text-center mt-16 scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-5' : ''
-          }`}
-        >
+        <div data-reveal='fade-up' data-duration='slow' className='text-center mt-16'>
           <div className='bg-white/20 backdrop-blur-sm rounded-2xl p-8 md:p-12 max-w-2xl mx-auto border border-white/30'>
-            <div className='text-6xl md:text-7xl mb-6'>💍</div>
-            <h3 className='font-script text-3xl md:text-4xl text-white mb-4'>
+            <div data-reveal='zoom' data-delay='1' className='text-6xl md:text-7xl mb-6'>💍</div>
+            <h3 data-reveal='fade-up' data-delay='2' className='font-script text-3xl md:text-4xl text-white mb-4'>
               Save The Date
             </h3>
-            <div className='text-white mb-4'>
+            <div data-reveal='fade-up' data-delay='3' className='text-white mb-4'>
               <p className='text-xl md:text-2xl font-semibold mb-2'>
                 11 April 2026
               </p>
@@ -198,16 +176,12 @@ const Countdown = () => {
                 Sabtu • 08:00 WIB
               </p>
             </div>
-            <div className='w-20 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent mx-auto'></div>
+            <div data-reveal='zoom' data-delay='4' className='w-20 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent mx-auto'></div>
           </div>
         </div>
 
         {/* Call to Action */}
-        <div
-          className={`text-center mt-12 scroll-reveal ${
-            isVisible ? 'is-visible reveal-delay-6' : ''
-          }`}
-        >
+        <div data-reveal='fade-up' data-delay='5' className='text-center mt-12'>
           <p className='text-pink-100 text-lg md:text-xl mb-6'>
             Jangan sampai terlewatkan momen bahagia kami
           </p>
