@@ -1,5 +1,6 @@
 import React, { useCallback, memo, useRef } from 'react';
 import { useAutoReveal } from '../hooks/useScrollReveal';
+import { FaBuilding, FaRing } from 'react-icons/fa6';
 import FloralDecoration from './FloralDecoration';
 
 const Event = () => {
@@ -20,7 +21,7 @@ const Event = () => {
       address: 'Villa AJ by Arkadia',
       description:
         'Akad nikah akan dilaksanakan dalam suasana khidmat bersama keluarga terdekat',
-      icon: '🕌',
+      icon: 'mosque',
       color: 'gold',
       startDateTime: '2026-04-11T09:00:00',
       endDateTime: '2026-04-11T10:00:00',
@@ -33,7 +34,7 @@ const Event = () => {
       address: 'Villa AJ by Arkadia',
       description:
         'Resepsi pernikahan dengan makan bersama dan hiburan untuk tamu undangan',
-      icon: '🎉',
+      icon: 'cheers',
       color: 'maroon',
       startDateTime: '2026-04-11T10:00:00',
       endDateTime: '2026-04-11T15:00:00',
@@ -146,16 +147,21 @@ END:VCALENDAR`;
             >
               {/* Event Header */}
               <div
-                className={`bg-gradient-to-r ${
-                  event.color === 'gold'
-                    ? 'from-accent-500 to-accent-600'
-                    : 'from-pink-500 to-pink-600'
-                } p-6 text-white text-center relative overflow-hidden`}
+                className={`bg-gradient-to-r ${event.color === 'gold'
+                  ? 'from-accent-500 to-accent-600'
+                  : 'from-pink-500 to-pink-600'
+                  } p-6 text-white text-center relative overflow-hidden`}
               >
                 <div className='absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16'></div>
                 <div className='absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12'></div>
                 <div className='relative z-10'>
-                  <div className='text-4xl mb-3'>{event.icon}</div>
+                  <div className='mb-3 flex justify-center'>
+                    {event.icon === 'mosque' ? (
+                      <FaBuilding className='w-10 h-10 text-white/90' />
+                    ) : (
+                      <FaRing className='w-10 h-10 text-white/90' />
+                    )}
+                  </div>
                   <h3 className='font-serif text-2xl md:text-3xl font-semibold mb-2'>
                     {event.title}
                   </h3>
@@ -170,37 +176,33 @@ END:VCALENDAR`;
                 {/* Date & Time */}
                 <div data-reveal='fade-up' data-delay={String(index * 2 + 2)} className='mb-6'>
                   <div
-                    className={`inline-flex items-center px-4 py-2 rounded-full mb-3 ${
-                      event.color === 'gold'
-                        ? 'bg-accent-50 border border-accent-200'
-                        : 'bg-pink-50 border border-pink-200'
-                    }`}
+                    className={`inline-flex items-center px-4 py-2 rounded-full mb-3 ${event.color === 'gold'
+                      ? 'bg-accent-50 border border-accent-200'
+                      : 'bg-pink-50 border border-pink-200'
+                      }`}
                   >
                     <span className='text-lg mr-2'>📅</span>
                     <span
-                      className={`font-medium text-sm md:text-base ${
-                        event.color === 'gold'
-                          ? 'text-accent-700'
-                          : 'text-pink-700'
-                      }`}
+                      className={`font-medium text-sm md:text-base ${event.color === 'gold'
+                        ? 'text-accent-700'
+                        : 'text-pink-700'
+                        }`}
                     >
                       {event.date}
                     </span>
                   </div>
                   <div
-                    className={`inline-flex items-center px-4 py-2 rounded-full ml-2 ${
-                      event.color === 'gold'
-                        ? 'bg-accent-50 border border-accent-200'
-                        : 'bg-pink-50 border border-pink-200'
-                    }`}
+                    className={`inline-flex items-center px-4 py-2 rounded-full ml-2 ${event.color === 'gold'
+                      ? 'bg-accent-50 border border-accent-200'
+                      : 'bg-pink-50 border border-pink-200'
+                      }`}
                   >
                     <span className='text-lg mr-2'>⏰</span>
                     <span
-                      className={`font-medium text-sm md:text-base ${
-                        event.color === 'gold'
-                          ? 'text-accent-700'
-                          : 'text-pink-700'
-                      }`}
+                      className={`font-medium text-sm md:text-base ${event.color === 'gold'
+                        ? 'text-accent-700'
+                        : 'text-pink-700'
+                        }`}
                     >
                       {event.time}
                     </span>
@@ -211,9 +213,8 @@ END:VCALENDAR`;
                 <div data-reveal='fade-up' data-delay={String(index * 2 + 3)} className='mb-6'>
                   <div className='flex items-start space-x-3 mb-3'>
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        event.color === 'gold' ? 'bg-accent-100' : 'bg-pink-100'
-                      }`}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${event.color === 'gold' ? 'bg-accent-100' : 'bg-pink-100'
+                        }`}
                     >
                       <span className='text-lg'>📍</span>
                     </div>
@@ -229,11 +230,10 @@ END:VCALENDAR`;
 
                   <button
                     onClick={() => openMaps(event.address)}
-                    className={`w-full mt-4 py-3.5 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                      event.color === 'gold'
-                        ? 'bg-accent-500 hover:bg-accent-600 text-white focus:ring-accent-400'
-                        : 'bg-pink-500 hover:bg-pink-600 text-white focus:ring-pink-400'
-                    }`}
+                    className={`w-full mt-4 py-3.5 px-6 rounded-xl font-medium transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-offset-2 ${event.color === 'gold'
+                      ? 'bg-accent-500 hover:bg-accent-600 text-white focus:ring-accent-400'
+                      : 'bg-pink-500 hover:bg-pink-600 text-white focus:ring-pink-400'
+                      }`}
                     aria-label={`Buka lokasi ${event.location} di Google Maps`}
                   >
                     <svg
