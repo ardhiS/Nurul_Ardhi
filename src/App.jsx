@@ -30,12 +30,16 @@ function App() {
   const [guestName, setGuestName] = useState('');
 
   // Get guest name from URL parameter
+  // Note: URLSearchParams treats '&' as param separator,
+  // so we parse the raw query string to support names like "Pahmi & Istri"
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const toParam = urlParams.get('to');
-    if (toParam) {
-      // Decode and format the guest name
-      setGuestName(decodeURIComponent(toParam.replace(/\+/g, ' ')));
+    const search = window.location.search;
+    const match = search.match(/[?&]to=([^#]*)/);
+    if (match) {
+      const rawValue = match[1];
+      // Decode %20, %26, + etc. to proper characters
+      const decoded = decodeURIComponent(rawValue.replace(/\+/g, ' '));
+      setGuestName(decoded.trim());
     }
   }, []);
 

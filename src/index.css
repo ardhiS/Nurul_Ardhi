@@ -1032,7 +1032,7 @@ a:focus-visible {
   will-change: opacity, transform;
   transition-property: opacity, transform;
   transition-timing-function: var(--ease-reveal);
-  transition-duration: 1.2s;
+  transition-duration: 1.6s;
 }
 
 /* ---- Direction variants (initial state) ---- */
@@ -1074,26 +1074,26 @@ a:focus-visible {
 
 /* ---- Duration variants ---- */
 [data-reveal][data-duration="fast"] {
-  transition-duration: 0.8s;
+  transition-duration: 1s;
 }
 [data-reveal][data-duration="slow"] {
-  transition-duration: 1.6s;
+  transition-duration: 2s;
 }
 [data-reveal][data-duration="slower"] {
-  transition-duration: 2s;
+  transition-duration: 2.5s;
 }
 
 /* ---- Stagger delay via data-delay attribute ---- */
-[data-reveal][data-delay="1"] { transition-delay: 150ms; }
-[data-reveal][data-delay="2"] { transition-delay: 300ms; }
-[data-reveal][data-delay="3"] { transition-delay: 450ms; }
-[data-reveal][data-delay="4"] { transition-delay: 600ms; }
-[data-reveal][data-delay="5"] { transition-delay: 750ms; }
-[data-reveal][data-delay="6"] { transition-delay: 900ms; }
-[data-reveal][data-delay="7"] { transition-delay: 1050ms; }
-[data-reveal][data-delay="8"] { transition-delay: 1200ms; }
-[data-reveal][data-delay="9"] { transition-delay: 1350ms; }
-[data-reveal][data-delay="10"] { transition-delay: 1500ms; }
+[data-reveal][data-delay="1"] { transition-delay: 200ms; }
+[data-reveal][data-delay="2"] { transition-delay: 400ms; }
+[data-reveal][data-delay="3"] { transition-delay: 600ms; }
+[data-reveal][data-delay="4"] { transition-delay: 800ms; }
+[data-reveal][data-delay="5"] { transition-delay: 1000ms; }
+[data-reveal][data-delay="6"] { transition-delay: 1200ms; }
+[data-reveal][data-delay="7"] { transition-delay: 1400ms; }
+[data-reveal][data-delay="8"] { transition-delay: 1600ms; }
+[data-reveal][data-delay="9"] { transition-delay: 1800ms; }
+[data-reveal][data-delay="10"] { transition-delay: 2000ms; }
 
 /* ---- Reduced motion: instant show ---- */
 @media (prefers-reduced-motion: reduce) {
