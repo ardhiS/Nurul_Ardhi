@@ -126,7 +126,7 @@ END:VCALENDAR`;
       <div className='section-container relative z-10'>
         {/* Section Header */}
         <div
-          className={`text-center mb-16 scroll-reveal ${
+          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
             isVisible ? 'is-visible' : ''
           }`}
         >
@@ -136,7 +136,7 @@ END:VCALENDAR`;
           <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             Wedding Events
           </h2>
-          <div className='w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
+          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
           <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
             Kami dengan senang hati mengundang Anda untuk hadir dalam momen
             bahagia kami
@@ -147,10 +147,10 @@ END:VCALENDAR`;
           {events.map((event, index) => (
             <div
               key={index}
-              className={`${
-                index === 0 ? 'scroll-reveal-left' : 'scroll-reveal-right'
+              className={`scroll-reveal-fade-up-zoom scroll-reveal-delay-${
+                index + 1
               } ${
-                isVisible ? `is-visible reveal-delay-${index + 2}` : ''
+                isVisible ? 'is-visible' : ''
               } bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-pink-200`}
             >
               {/* Event Header */}

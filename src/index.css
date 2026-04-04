@@ -1013,3 +1013,107 @@ a:focus-visible {
     min-height: 44px;
   }
 }
+
+/* ========================================
+   SCROLL REVEAL ANIMATIONS
+   Smooth animations for cards/text on scroll
+   Duration: 800-1000ms (slower for elegant feel)
+   ======================================== */
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomInSmooth {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Combined animations for multiple effects */
+@keyframes fadeInUpZoom {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Scroll reveal utility classes - slower duration for elegant feel */
+.scroll-reveal-fade-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scroll-reveal-slide-left {
+  animation: slideInLeft 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scroll-reveal-slide-right {
+  animation: slideInRight 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scroll-reveal-zoom {
+  animation: zoomInSmooth 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.scroll-reveal-fade-up-zoom {
+  animation: fadeInUpZoom 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger animation delays for multiple elements */
+.scroll-reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.scroll-reveal-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.scroll-reveal-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.scroll-reveal-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.scroll-reveal-delay-5 {
+  animation-delay: 0.5s;
+}

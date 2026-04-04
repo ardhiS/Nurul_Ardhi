@@ -74,7 +74,7 @@ const LoveStory = () => {
       <div className='section-container relative z-10'>
         {/* Section Header */}
         <div
-          className={`text-center mb-10 sm:mb-12 lg:mb-16 scroll-reveal px-4 sm:px-0 ${
+          className={`text-center mb-10 sm:mb-12 lg:mb-16 scroll-reveal-fade-up-zoom px-4 sm:px-0 ${
             isVisible ? 'is-visible' : ''
           }`}
         >
@@ -99,10 +99,13 @@ const LoveStory = () => {
             {loveStoryTimeline.map((story, index) => (
               <div
                 key={story.id}
-                className={`relative flex flex-col lg:flex-row items-start lg:items-center mb-8 sm:mb-12 last:mb-0 scroll-reveal ${
+                className={`relative flex flex-col lg:flex-row items-start lg:items-center mb-8 sm:mb-12 last:mb-0 scroll-reveal-fade-up ${
+                  index % 2 === 0
+                    ? 'scroll-reveal-slide-left'
+                    : 'scroll-reveal-slide-right'
+                } scroll-reveal-delay-${Math.min(index + 1, 5)} ${
                   isVisible ? 'is-visible' : ''
                 }`}
-                style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Timeline Dot */}
                 <div className='absolute left-0 sm:left-1 lg:left-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg border-4 border-pink-300 flex items-center justify-center transform -translate-x-1/2 z-10 transition-all duration-300 hover:scale-110 hover:border-pink-500 shrink-0'>
@@ -157,8 +160,8 @@ const LoveStory = () => {
 
         {/* Closing Quote */}
         <div
-          className={`text-center mt-10 sm:mt-12 lg:mt-16 scroll-reveal px-4 sm:px-0 ${
-            isVisible ? 'is-visible reveal-delay-4' : ''
+          className={`text-center mt-10 sm:mt-12 lg:mt-16 scroll-reveal-fade-up-zoom px-4 sm:px-0 ${
+            isVisible ? 'is-visible' : ''
           }`}
         >
           <div className='bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto shadow-lg border border-pink-100'>

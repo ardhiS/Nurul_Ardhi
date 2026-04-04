@@ -81,7 +81,7 @@ const Couple = () => {
 
         {/* Section Header */}
         <div
-          className={`text-center mb-12 md:mb-16 scroll-reveal ${
+          className={`text-center mb-12 md:mb-16 scroll-reveal-fade-up-zoom ${
             isVisible ? 'is-visible' : ''
           }`}
         >
@@ -91,7 +91,7 @@ const Couple = () => {
           <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             The Happy Couple
           </h2>
-          <div className='w-24 h-1 bg-gradient-to-r from-pink-300 via-pink-500 to-pink-300 mx-auto mb-4 rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-pink-300 via-pink-500 to-pink-300 mx-auto mb-4 rounded-full'></div>
           <p className='text-pink-600 text-base md:text-lg max-w-2xl mx-auto'>
             Dua hati yang bersatu dalam cinta, siap memulai perjalanan hidup
             bersama
@@ -100,10 +100,10 @@ const Couple = () => {
 
         {/* Couple Cards Grid */}
         <div className='flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch'>
-          {/* Bride Card - Entrance from Left */}
+          {/* Bride Card - Slide in from Left */}
           <div
-            className={`w-full md:w-1/2 scroll-reveal-scale ${
-              isVisible ? 'is-visible reveal-delay-2 animate-entrance-left' : ''
+            className={`w-full md:w-1/2 scroll-reveal-slide-left scroll-reveal-delay-1 ${
+              isVisible ? 'is-visible' : ''
             } group relative bg-gradient-to-b from-white via-white to-pink-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(183,58,96,0.15)] border border-pink-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(183,58,96,0.25)] hover:border-pink-200`}
           >
             {/* Subtle glow effect */}
@@ -169,13 +169,11 @@ const Couple = () => {
             </div>
           </div>
 
-          {/* Groom Card - Entrance from Right */}
+          {/* Groom Card - Slide in from Right */}
           <div
-            className={`w-full md:w-1/2 scroll-reveal-scale ${
-              isVisible
-                ? 'is-visible reveal-delay-3 animate-entrance-right'
-                : ''
-            } group relative bg-gradient-to-b from-white via-white to-accent-50/50 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(24,144,255,0.15)] border border-accent-100/80 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(24,144,255,0.25)] hover:border-accent-200`}
+            className={`w-full md:w-1/2 scroll-reveal-slide-right scroll-reveal-delay-2 ${
+              isVisible ? 'is-visible' : ''
+            } group relative bg-gradient-to-b from-white via-white to-accent-50/30 rounded-2xl md:rounded-[2rem] shadow-[0_8px_40px_-12px_rgba(10,122,230,0.1)] border border-accent-100/50 overflow-hidden transition-all duration-400 ease-luxury hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(10,122,230,0.15)] hover:border-accent-200`}
           >
             {/* Subtle glow effect */}
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none'>

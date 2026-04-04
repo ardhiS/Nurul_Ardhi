@@ -197,8 +197,8 @@ const RSVP = () => {
       <div className='section-container relative z-10'>
         <div className='max-w-2xl mx-auto'>
           <div
-            className={`mt-16 scroll-reveal ${
-              isVisible ? 'is-visible reveal-delay-4' : ''
+            className={`mt-16 scroll-reveal-fade-up-zoom ${
+              isVisible ? 'is-visible' : ''
             }`}
           >
             {/* Section Header */}
@@ -206,7 +206,7 @@ const RSVP = () => {
               <h3 className='text-2xl md:text-3xl font-serif font-semibold text-pink-800 mb-2'>
                 Ucapan & Doa
               </h3>
-              <div className='w-16 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-3'></div>
+              <div className='w-16 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-3'></div>
               <p className='text-pink-600 text-sm md:text-base'>
                 Berikan ucapan dan doa terbaik untuk kedua mempelai
               </p>

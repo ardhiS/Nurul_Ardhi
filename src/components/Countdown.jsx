@@ -107,14 +107,14 @@ const Countdown = () => {
       <div className='section-container relative z-10'>
         {/* Section Header */}
         <div
-          className={`text-center mb-16 scroll-reveal ${
+          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
             isVisible ? 'is-visible' : ''
           }`}
         >
           <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white mb-4'>
             Countdown to Our Special Day
           </h2>
-          <div className='w-24 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent mx-auto mb-4'></div>
+          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-white to-transparent mx-auto mb-4'></div>
           <p className='text-pink-100 text-lg max-w-2xl mx-auto'>
             Setiap detik yang berlalu membawa kami lebih dekat pada momen indah
             ini
@@ -124,7 +124,7 @@ const Countdown = () => {
         {/* Countdown Timer */}
         {isEnded ? (
           /* Event Has Started Message */
-          <div className='text-center scroll-reveal is-visible'>
+          <div className='text-center scroll-reveal-zoom is-visible'>
             <div className='bg-white/20 backdrop-blur-sm rounded-3xl p-8 md:p-12 max-w-2xl mx-auto border border-white/30'>
               <div className='text-6xl md:text-7xl mb-6'>🎉</div>
               <h3 className='font-serif text-3xl md:text-4xl text-white mb-4'>
@@ -143,9 +143,9 @@ const Countdown = () => {
               return (
                 <div
                   key={unit.key}
-                  className={`text-center relative scroll-reveal-scale ${
-                    isVisible ? `is-visible reveal-delay-${index + 1}` : ''
-                  }`}
+                  className={`text-center relative scroll-reveal-zoom scroll-reveal-delay-${
+                    index + 1
+                  } ${isVisible ? 'is-visible' : ''}`}
                 >
                   <div
                     className={`${unit.bgColor} rounded-3xl shadow-2xl p-6 md:p-8 mb-4 transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}

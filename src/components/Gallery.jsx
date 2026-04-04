@@ -127,7 +127,7 @@ const Gallery = () => {
       <div className='section-container relative z-10'>
         {/* Section Header */}
         <div
-          className={`text-center mb-16 scroll-reveal ${
+          className={`text-center mb-16 scroll-reveal-fade-up-zoom ${
             isVisible ? 'is-visible' : ''
           }`}
         >
@@ -137,7 +137,7 @@ const Gallery = () => {
           <h2 className='text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-pink-800 mb-4'>
             Our Gallery
           </h2>
-          <div className='w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
+          <div className='w-24 h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent mx-auto mb-4'></div>
           <p className='text-pink-600 text-lg max-w-2xl mx-auto'>
             Momen-momen indah yang telah kami lalui bersama, menuju hari yang
             paling berkesan
@@ -154,10 +154,11 @@ const Gallery = () => {
             <div
               key={image.id}
               role='listitem'
-              className={`scroll-reveal-scale ${
-                isVisible
-                  ? `is-visible reveal-delay-${Math.min(index + 1, 6)}`
-                  : ''
+              className={`scroll-reveal-zoom scroll-reveal-delay-${Math.min(
+                index + 1,
+                5,
+              )} ${
+                isVisible ? 'is-visible' : ''
               } group cursor-pointer relative overflow-hidden rounded-xl md:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-pink-100 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2`}
             >
               {/* Image Container */}
